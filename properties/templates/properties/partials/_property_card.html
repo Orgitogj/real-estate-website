@@ -1,0 +1,86 @@
+{% load static %}
+
+<div class="ve-card"
+     data-type="{{ property.type }}"
+     data-transaction="{{ property.transaction }}"
+     data-aos="fade-up">
+
+  <div class="ve-card__img-wrap">
+    <a href="{% url 'property_detail' property.slug %}">
+      {% if property.image %}
+        <img src="{{ property.image.url }}" alt="{{ property.title }}"
+             class="ve-card__img" loading="lazy">
+      {% else %}
+        <img src="{% static 'properties/img/no-photo.jpg' %}"
+             alt="No photo" class="ve-card__img">
+      {% endif %}
+    </a>
+
+    <div class="ve-card__badges">
+      {% if property.transaction == "sale" %}
+        <span class="ve-badge ve-badge--sale">Shitje</span>
+      {% elif property.transaction == "rent" %}
+        <span class="ve-badge ve-badge--rent">Qira</span>
+      {% endif %}
+      {% if property.is_new %}
+        <span class="ve-badge ve-badge--new">I Ri</span>
+      {% endif %}
+      {% if property.is_featured %}
+        <span class="ve-badge ve-badge--featured">Featured</span>
+      {% endif %}
+    </div>
+
+    <button class="ve-card__wish" data-id="{{ property.pk }}" aria-label="Ruaj">
+      <i class="far fa-heart"></i>
+    </button>
+  </div>
+
+  <div class="ve-card__body">
+
+    <div class="ve-card__price-row">
+      <span class="ve-card__price">
+        €{{ property.price|floatformat:0 }}
+        {% if property.transaction == "rent" %}<small>/ muaj</small>{% endif %}
+      </span>
+      <span class="ve-card__type-icon">
+        {% if property.type == "apartment" %}
+        {% elif property.type == "house" %}
+        {% elif property.type == "land" %}
+        {% elif property.type == "commercial" %}
+        {% endif %}
+      </span>
+    </div>
+
+    <h3 class="ve-card__title">
+      <a href="{% url 'property_detail' property.slug %}">{{ property.title }}</a>
+    </h3>
+
+    <p class="ve-card__location">
+      <i class="fas fa-map-marker-alt"></i>
+      {{ property.location }}, {{ property.city }}
+    </p>
+
+    <div class="ve-card__specs">
+      <span class="ve-card__spec">
+        <i class="fas fa-ruler-combined"></i> {{ property.area_m2 }} m²
+      </span>
+      {% if property.bedrooms %}
+      <span class="ve-card__spec">
+        <i class="fas fa-bed"></i> {{ property.bedrooms }}
+      </span>
+      {% endif %}
+      {% if property.bathrooms %}
+      <span class="ve-card__spec">
+        <i class="fas fa-bath"></i> {{ property.bathrooms }}
+      </span>
+      {% endif %}
+    </div>
+
+    <div class="ve-card__footer">
+      <a href="{% url 'property_detail' property.slug %}" class="ve-card__cta">
+        Shiko <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+
+  </div>
+</div>

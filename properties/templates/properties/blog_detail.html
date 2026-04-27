@@ -1,0 +1,270 @@
+{% extends "properties/base.html" %}
+{% load static i18n %}
+
+{% block title %}{{ post.title }} — ValorEstate{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link rel="stylesheet" href="{% static 'properties/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ══ HERO ══ -->
+<section class="bd-hero">
+  {% if post.image %}
+  <div class="bd-hero__bg">
+    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="bd-hero__img">
+    <div class="bd-hero__overlay"></div>
+  </div>
+  {% else %}
+  <div class="bd-hero__bg bd-hero__bg--plain"></div>
+  {% endif %}
+  <div class="container bd-hero__inner">
+    <nav class="bl-breadcrumb" data-aos="fade-down">
+      <a href="{% url 'home' %}">{% trans "Kryefaqja" %}</a>
+      <span>/</span>
+      <a href="{% url 'blog' %}">{% trans "Blog" %}</a>
+      <span>/</span>
+      <span>{{ post.title|truncatewords:6 }}</span>
+    </nav>
+    {% if post.category %}
+    <a href="{% url 'blog' %}?category={{ post.category.slug }}" class="bd-hero__cat">
+      {{ post.category.name }}
+    </a>
+    {% endif %}
+    <h1 class="bd-hero__title" data-aos="fade-up" data-aos-delay="100">{{ post.title }}</h1>
+    <div class="bd-hero__meta" data-aos="fade-up" data-aos-delay="200">
+      {% if post.author %}
+      <div class="bd-hero__author">
+        {% if post.author.photo %}
+        <img src="{{ post.author.photo.url }}" alt="{{ post.author.full_name }}" class="bd-hero__author-img">
+        {% else %}
+        <div class="bd-hero__author-ph"><i class="fas fa-user"></i></div>
+        {% endif %}
+        <span>{{ post.author.full_name }}</span>
+      </div>
+      <span class="bd-hero__sep">·</span>
+      {% endif %}
+      <span><i class="fas fa-calendar-alt"></i> {{ post.created_at|date:"d M Y" }}</span>
+      <span class="bd-hero__sep">·</span>
+      <span><i class="fas fa-eye"></i> {{ post.views }} {% trans "shikime" %}</span>
+      <span class="bd-hero__sep">·</span>
+      <span><i class="fas fa-comments"></i> {{ comments_count }} {% trans "komente" %}</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTENT ══ -->
+<section class="bd-section">
+  <div class="container">
+    <div class="bl-layout">
+
+      <!-- ════ ARTICLE ════ -->
+      <article class="bd-article" data-aos="fade-up">
+
+        {% if post.excerpt %}
+        <p class="bd-excerpt">{{ post.excerpt }}</p>
+        {% endif %}
+
+        <div class="bd-body">
+          {{ post.body|linebreaks }}
+        </div>
+
+        <!-- Footer: tags dhe share -->
+        <div class="bd-footer">
+          {% if post.category %}
+          <div class="bd-tags">
+            <span>{% trans "Kategoria:" %}</span>
+            <a href="{% url 'blog' %}?category={{ post.category.slug }}" class="bd-tag">
+              {{ post.category.name }}
+            </a>
+          </div>
+          {% endif %}
+          <div class="bd-share">
+            <span>{% trans "Shpërndaje:" %}</span>
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+               target="_blank" class="bd-share-btn bd-share-btn--fb" title="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://wa.me/?text={{ post.title|urlencode }}%20{{ request.build_absolute_uri }}"
+               target="_blank" class="bd-share-btn bd-share-btn--wa" title="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}"
+               target="_blank" class="bd-share-btn bd-share-btn--li" title="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <button class="bd-share-btn bd-share-btn--copy" onclick="copyLink()" title="{% trans 'Kopjo linkun' %}">
+              <i class="fas fa-link"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Author card -->
+        {% if post.author %}
+        <div class="bd-author-card" data-aos="fade-up">
+          {% if post.author.photo %}
+          <img src="{{ post.author.photo.url }}" alt="{{ post.author.full_name }}" class="bd-author-card__img">
+          {% else %}
+          <div class="bd-author-card__ph"><i class="fas fa-user"></i></div>
+          {% endif %}
+          <div class="bd-author-card__info">
+            <span class="bd-author-card__eyebrow">{% trans "Autori" %}</span>
+            <h3 class="bd-author-card__name">{{ post.author.full_name }}</h3>
+            {% if post.author.bio %}
+            <p class="bd-author-card__bio">{{ post.author.bio|truncatewords:25 }}</p>
+            {% endif %}
+            {% if post.author.phone %}
+            <a href="tel:{{ post.author.phone }}" class="bd-author-card__contact">
+              <i class="fas fa-phone"></i> {{ post.author.phone }}
+            </a>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+
+        <!-- Seksioni i komenteve -->
+        <div class="bd-comments" id="comments">
+          <h3 class="bd-comments__title">
+            {% trans "Komente" %} <span class="bd-comments__count">{{ comments_count }}</span>
+          </h3>
+
+          {% if comment_success %}
+          <div class="bd-comment-alert bd-comment-alert--success">
+            <i class="fas fa-check-circle"></i>
+            <div>
+              <strong>{% trans "Komenti u dërgua!" %}</strong>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if comment_errors and not comment_success %}
+          <div class="bd-comment-alert bd-comment-alert--error">
+            <i class="fas fa-exclamation-circle"></i>
+            <div>
+              <strong>{% trans "Ju lutem korrigjoni gabimet:" %}</strong>
+              <ul>
+                {% for f, err in comment_errors.items %}
+                <li>{{ err }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if comments %}
+          <div class="bd-comments__list">
+            {% for comment in comments %}
+            <div class="bd-comment" data-aos="fade-up">
+              <div class="bd-comment__avatar">{{ comment.name|first|upper }}</div>
+              <div class="bd-comment__body">
+                <div class="bd-comment__header">
+                  <strong class="bd-comment__name">{{ comment.name }}</strong>
+                  <span class="bd-comment__date">{{ comment.created_at|date:"d M Y, H:i" }}</span>
+                </div>
+                <p class="bd-comment__text">{{ comment.body }}</p>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% else %}
+          <p class="bd-comments__empty">{% trans "Nuk ka komente ende." %}</p>
+          {% endif %}
+
+          {% if not comment_success %}
+          <div class="bd-comment-form">
+            <h4 class="bd-comment-form__title">{% trans "Lini një Koment" %}</h4>
+            <form method="POST" action="{{ request.path }}#comments" id="commentForm" novalidate>
+              {% csrf_token %}
+              <input type="text" name="website" value="" tabindex="-1"
+                     autocomplete="off" style="position:absolute;left:-9999px;opacity:0;">
+
+              <div class="bd-cf__row">
+                <div class="bd-cf__field {% if comment_errors.name %}bd-cf__field--error{% endif %}">
+                  <label>{% trans "Emri" %} <span>*</span></label>
+                  <input type="text" name="name" value="{{ form_data.name|default:'' }}"
+                         placeholder="{% trans 'Emri juaj' %}" maxlength="100" required>
+                  {% if comment_errors.name %}
+                  <span class="bd-cf__error"><i class="fas fa-times-circle"></i> {{ comment_errors.name }}</span>
+                  {% endif %}
+                </div>
+                <div class="bd-cf__field {% if comment_errors.email %}bd-cf__field--error{% endif %}">
+                  <label>{% trans "Email" %} <span>*</span></label>
+                  <input type="email" name="email" value="{{ form_data.email|default:'' }}"
+                         placeholder="x@email.com" maxlength="254" required>
+                  {% if comment_errors.email %}
+                  <span class="bd-cf__error"><i class="fas fa-times-circle"></i> {{ comment_errors.email }}</span>
+                  {% endif %}
+                </div>
+              </div>
+
+              <div class="bd-cf__field {% if comment_errors.body %}bd-cf__field--error{% endif %}">
+                <label>{% trans "Komenti" %} <span>*</span></label>
+                <textarea name="body" rows="4" maxlength="1000"
+                          placeholder="{% trans 'Shkruani komentin tuaj...' %}"
+                          required>{{ form_data.body|default:'' }}</textarea>
+                {% if comment_errors.body %}
+                <span class="bd-cf__error"><i class="fas fa-times-circle"></i> {{ comment_errors.body }}</span>
+                {% endif %}
+                <span class="bd-cf__char" id="commentChar">0 / 1000</span>
+              </div>
+
+              <button type="submit" class="bd-cf__submit">
+                <i class="fas fa-paper-plane"></i> {% trans "Dërgo Komentin" %}
+              </button>
+            </form>
+          </div>
+          {% endif %}
+        </div>
+
+      </article>
+
+      <!-- ════ SIDEBAR ════ -->
+      <aside class="bl-sidebar">
+
+        {% if related %}
+        <div class="bl-widget" data-aos="fade-left">
+          <h3 class="bl-widget__title">{% trans "Artikuj të Ngjashëm" %}</h3>
+          {% for p in related %}
+          <a href="{% url 'blog_detail' p.slug %}" class="bl-recent">
+            {% if p.image %}
+            <img src="{{ p.image.url }}" alt="{{ p.title }}" class="bl-recent__img">
+            {% else %}
+            <div class="bl-recent__img bl-recent__img--ph"><i class="fas fa-newspaper"></i></div>
+            {% endif %}
+            <div class="bl-recent__info">
+              <span class="bl-recent__title">{{ p.title|truncatewords:8 }}</span>
+              <span class="bl-recent__date">{{ p.created_at|date:"d M Y" }}</span>
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="bl-widget bl-widget--cta" data-aos="fade-left" data-aos-delay="100">
+          <h3>{% trans "Keni pyetje?" %}</h3>
+          <p>{% trans "Agjentët tanë janë të disponueshëm për ju çdo ditë." %}</p>
+          <a href="{% url 'contact' %}" class="bl-cta-btn">{% trans "Na Kontaktoni" %}</a>
+        </div>
+
+        <a href="{% url 'blog' %}" class="bl-back-btn">
+          <i class="fas fa-arrow-left"></i> {% trans "Kthehu te Blogu" %}
+        </a>
+
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+<div id="blogMeta"
+     data-scroll="{% if comment_success or comment_errors %}true{% else %}false{% endif %}">
+</div>
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="{% static 'properties/js/main.js' %}"></script>
+{% endblock %}

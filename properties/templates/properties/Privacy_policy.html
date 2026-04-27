@@ -1,0 +1,109 @@
+{% extends "properties/base.html" %}
+{% load static i18n %}
+
+{% block title %}{% trans "Politika e Privatësisë" %} — ValorEstate{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'properties/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ══ HERO ══ -->
+<section class="ve-page-hero ve-page-hero--short ve-page-hero--solid">
+  <div class="ve-page-hero__inner">
+    <div class="container">
+      
+<nav class="ve-breadcrumb">
+  <a href="{% url 'home' %}">{% trans "Kryefaqja" %}</a>
+  <span class="ve-breadcrumb__sep">/</span>
+  <span>{% trans "Politika e Privatësisë" %}</span>
+</nav>
+      <h1 class="ve-page-hero__title" style="font-size:clamp(2.2rem,5vw,4rem);">
+        {% trans "Politika e" %} <em class="ve-page-hero__accent">{% trans "Privatësisë" %}</em>
+      </h1>
+      <p class="ve-page-hero__sub">
+        {% trans "Si mbledhim, përdorim dhe mbrojmë të dhënat tuaja personale." %}
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTENT ══ -->
+<section class="pp-section">
+  <div class="container">
+    <div class="pp-wrap">
+      <div class="pp-block">
+        <h2 class="pp-block__title">
+          <span class="pp-block__num">01</span>
+          {% trans "Hyrje" %}
+        </h2>
+        <p>{% trans "ValorEstate është e përkushtuar në mbrojtjen e privatësisë dhe të dhënave personale të përdoruesve të saj. Kjo politikë privatësie përshkruan mënyrën se si mbledhim, përdorim dhe mbrojmë informacionin tuaj kur vizitoni faqen tonë të internetit dhe përdorni shërbimet tona." %}</p>
+      </div>
+      <div class="pp-block">
+        <h2 class="pp-block__title">
+          <span class="pp-block__num">02</span>
+          {% trans "Të dhënat që mbledhim" %}
+        </h2>
+        <p>{% trans "Mbledhim të dhënat e mëposhtme kur ndërveproni me faqen tonë:" %}</p>
+        <ul class="pp-list">
+          <li><i class="fas fa-check"></i> {% trans "Informacione personale si emër, mbiemër, numër telefoni ose adresë email-i — vetëm nëse i jepni vetë." %}</li>
+          <li><i class="fas fa-check"></i> {% trans "Aktiviteti dhe veprimtaritë e përdoruesit gjatë vizitës në faqe." %}</li>
+          <li><i class="fas fa-check"></i> {% trans "Adresa IP dhe të dhëna teknike të pajisjes suaj." %}</li>
+          <li><i class="fas fa-check"></i> {% trans "Të dhëna nga cookies dhe teknologji të ngjashme për qëllime statistikore." %}</li>
+        </ul>
+      </div>
+      <div class="pp-block">
+        <h2 class="pp-block__title">
+          <span class="pp-block__num">03</span>
+          {% trans "Cookies" %}
+        </h2>
+        <p>{% trans "Faqja jonë përdor cookies për të përmirësuar përvojën tuaj. Cookies janë skedarë të vegjël që ruhen në pajisjen tuaj dhe na ndihmojnë të kuptojmë si e përdorni faqen tonë. Mund të kontrolloni ose çaktivizoni cookies nga cilësimet e shfletuesit tuaj." %}</p>
+      </div>
+
+      <div class="pp-block">
+        <h2 class="pp-block__title">
+          <span class="pp-block__num">04</span>
+          {% trans "Si i përdorim të dhënat" %}
+        </h2>
+        <p>{% trans "ValorEstate kryen përpunimin e ligjshëm të të dhënave personale duke respektuar të drejtat dhe liritë themelore të individit. Të dhënat tuaja përdoren për:" %}</p>
+        <ul class="pp-list">
+          <li><i class="fas fa-check"></i> {% trans "Ofrimin e shërbimeve të kërkuara dhe komunikimin me ju." %}</li>
+          <li><i class="fas fa-check"></i> {% trans "Përmirësimin e faqes dhe shërbimeve tona." %}</li>
+          <li><i class="fas fa-check"></i> {% trans "Qëllime statistikore dhe studimore të brendshme." %}</li>
+          <li><i class="fas fa-check"></i> {% trans "Respektimin e detyrimeve ligjore." %}</li>
+        </ul>
+      </div>
+
+      <div class="pp-block">
+        <h2 class="pp-block__title">
+          <span class="pp-block__num">05</span>
+          {% trans "Ndarja me palë të treta" %}
+        </h2>
+        <p>{% trans "ValorEstate garanton mos-shpërndarjen e të dhënave tuaja personale tek palë të treta, me përjashtim të rasteve kur kjo kërkohet me ligj ose kur ju keni dhënë pëlqimin tuaj shprehimisht." %}</p>
+      </div>
+
+      <div class="pp-block">
+        <h2 class="pp-block__title">
+          <span class="pp-block__num">06</span>
+          {% trans "Të drejtat tuaja" %}
+        </h2>
+        <p>{% trans "Çdo individ rezervon të drejtat e mëposhtme pa pagesë:" %}</p>
+        <ul class="pp-list">
+          <li><i class="fas fa-check"></i> {% trans "E drejta e aksesit — të dini çfarë të dhënash mbajmë për ju." %}</li>
+          <li><i class="fas fa-check"></i> {% trans "E drejta e korrigjimit — të korrigjoni të dhëna të pasakta." %}</li>
+          <li><i class="fas fa-check"></i> {% trans "E drejta e fshirjes — të kërkoni fshirjen e të dhënave tuaja." %}</li>
+          <li><i class="fas fa-check"></i> {% trans "E drejta e kundërshtimit — të kundërshtoni përpunimin e të dhënave." %}</li>
+        </ul>
+        <p style="margin-top:16px">
+          {% trans "Për të ushtruar këto të drejta, dërgoni email tek:" %}
+          <a href="mailto:info@valorestate.com" class="pp-link">info@valorestate.com</a>
+        </p>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,368 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if action == 'edit' %}Edito Pronën{% else %}Shto Pronë të Re{% endif %} — ValorEstate</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'properties/css/style.css' %}">
+
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="pf-topbar">
+  <div class="container pf-topbar__inner">
+    <div class="pf-topbar__title">
+      <i class="fas fa-{% if action == 'edit' %}edit{% else %}plus{% endif %}" style="color:var(--gold);margin-right:8px;"></i>
+      {% if action == 'edit' %}Edito Pronën{% else %}Shto Pronë të Re{% endif %}
+    </div>
+    <a href="{% url 'agent_dashboard' %}" class="pf-topbar__back">
+      <i class="fas fa-arrow-left"></i> Kthehu te Dashboard
+    </a>
+  </div>
+</div>
+
+<div class="pf-body">
+  <div class="container">
+
+    {% if errors %}
+    <div class="pf-error">
+      <i class="fas fa-exclamation-circle"></i>
+      Ju lutem korrigjoni gabimet dhe provoni përsëri.
+    </div>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data" id="propertyForm">
+      {% csrf_token %}
+
+      <div class="row g-4">
+
+        <!-- LEFT COLUMN -->
+        <div class="col-lg-8">
+
+          <!-- Informacioni bazë -->
+          <div class="pf-card">
+            <div class="pf-card__title">
+              <i class="fas fa-info-circle"></i> Informacioni Bazë
+            </div>
+
+            <div class="pf-field">
+              <label class="pf-label">Titulli <span>*</span></label>
+              <input type="text" name="title" class="pf-input"
+                     placeholder="p.sh. Apartament 2+1 në Bllok"
+                     value="{{ property.title|default:'' }}" required>
+            </div>
+
+            <div class="pf-row pf-row--2">
+              <div class="pf-field">
+                <label class="pf-label">Tipi Transaksionit <span>*</span></label>
+                <select name="transaction" class="pf-input" required>
+                  <option value="sale"  {% if property.transaction == 'sale' %}selected{% endif %}>Shitje</option>
+                  <option value="rent"  {% if property.transaction == 'rent' %}selected{% endif %}>Qira</option>
+                </select>
+              </div>
+              <div class="pf-field">
+                <label class="pf-label">Lloji i Pronës <span>*</span></label>
+                <select name="type" class="pf-input" required>
+                  <option value="apartment" {% if property.type == 'apartment' %}selected{% endif %}>Apartament</option>
+                  <option value="house"     {% if property.type == 'house'     %}selected{% endif %}>Shtëpi</option>
+                  <option value="land"      {% if property.type == 'land'      %}selected{% endif %}>Tokë</option>
+                  <option value="commercial"{% if property.type == 'commercial'%}selected{% endif %}>Komerciale</option>
+                  <option value="Villa"     {% if property.type == 'Villa'     %}selected{% endif %}>Vilë</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="pf-row pf-row--2">
+              <div class="pf-field">
+                <label class="pf-label">Statusi</label>
+                <select name="status" class="pf-input">
+                  <option value="available" {% if property.status == 'available' %}selected{% endif %}>E disponueshme</option>
+                  <option value="sold"      {% if property.status == 'sold'      %}selected{% endif %}>Shitur</option>
+                  <option value="rented"    {% if property.status == 'rented'    %}selected{% endif %}>Dhënë me qira</option>
+                  <option value="reserved"  {% if property.status == 'reserved'  %}selected{% endif %}>Rezervuar</option>
+                </select>
+              </div>
+              <div class="pf-field">
+                <label class="pf-label">Mobilimi</label>
+                <select name="furnishing" class="pf-input">
+                  <option value="">— Zgjidhni —</option>
+                  <option value="furnished"   {% if property.furnishing == 'furnished'   %}selected{% endif %}>E Mobiluar</option>
+                  <option value="unfurnished" {% if property.furnishing == 'unfurnished' %}selected{% endif %}>Pa Mobilje</option>
+                  <option value="partial"     {% if property.furnishing == 'partial'     %}selected{% endif %}>Pjesërisht</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="pf-field">
+              <label class="pf-label">Përshkrimi</label>
+              <textarea name="description" class="pf-input pf-input--textarea"
+                        placeholder="Përshkruani pronën në detaje...">{{ property.description|default:'' }}</textarea>
+            </div>
+          </div>
+
+          <!-- Çmimi -->
+          <div class="pf-card">
+            <div class="pf-card__title">
+              <i class="fas fa-euro-sign"></i> Çmimi
+            </div>
+            <div class="pf-row pf-row--2">
+              <div class="pf-field">
+                <label class="pf-label">Çmimi (€) <span>*</span></label>
+                <input type="number" name="price" class="pf-input"
+                       placeholder="p.sh. 150000"
+                       value="{{ property.price|default:'' }}" min="0" step="0.01" required>
+              </div>
+              <div class="pf-field" style="display:flex;align-items:flex-end;padding-bottom:2px;">
+                <label class="pf-check" style="width:100%">
+                  <input type="checkbox" name="is_negotiable"
+                         {% if property.is_negotiable %}checked{% endif %}>
+                  <span class="pf-check__box"><i class="fas fa-check"></i></span>
+                  Çmim i negociueshëm
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lokacioni -->
+          <div class="pf-card">
+            <div class="pf-card__title">
+              <i class="fas fa-map-marker-alt"></i> Lokacioni
+            </div>
+            <div class="pf-row pf-row--2">
+              <div class="pf-field">
+                <label class="pf-label">Adresa <span>*</span></label>
+                <input type="text" name="location" class="pf-input"
+                       placeholder="p.sh. Rruga Myslym Shyri"
+                       value="{{ property.location|default:'' }}" required>
+              </div>
+              <div class="pf-field">
+                <label class="pf-label">Qyteti <span>*</span></label>
+                <input type="text" name="city" class="pf-input"
+                       placeholder="p.sh. Tiranë"
+                       value="{{ property.city|default:'Tiranë' }}" required>
+              </div>
+            </div>
+            <div class="pf-field">
+              <label class="pf-label">Lagja / Zona</label>
+              <input type="text" name="neighborhood" class="pf-input"
+                     placeholder="p.sh. Blloku, Kombinat..."
+                     value="{{ property.neighborhood|default:'' }}">
+            </div>
+            
+          </div>
+
+          <!-- Karakteristikat -->
+          <div class="pf-card">
+            <div class="pf-card__title">
+              <i class="fas fa-ruler-combined"></i> Karakteristikat
+            </div>
+            <div class="pf-row pf-row--3">
+              <div class="pf-field">
+                <label class="pf-label">Sipërfaqe (m²) <span>*</span></label>
+                <input type="number" name="area_m2" class="pf-input"
+                       placeholder="85" min="0"
+                       value="{{ property.area_m2|default:'' }}" required>
+              </div>
+              <div class="pf-field">
+                <label class="pf-label">Dhoma Gjumi</label>
+                <input type="number" name="bedrooms" class="pf-input"
+                       placeholder="2" min="0"
+                       value="{{ property.bedrooms|default:'' }}">
+              </div>
+              <div class="pf-field">
+                <label class="pf-label">Banjo</label>
+                <input type="number" name="bathrooms" class="pf-input"
+                       placeholder="1" min="0"
+                       value="{{ property.bathrooms|default:'' }}">
+              </div>
+            </div>
+            <div class="pf-row pf-row--3">
+              <div class="pf-field">
+                <label class="pf-label">Kati</label>
+                <input type="number" name="floor" class="pf-input"
+                       placeholder="3"
+                       value="{{ property.floor|default:'' }}">
+              </div>
+              <div class="pf-field">
+                <label class="pf-label">Katet Totale</label>
+                <input type="number" name="total_floors" class="pf-input"
+                       placeholder="8" min="0"
+                       value="{{ property.total_floors|default:'' }}">
+              </div>
+              <div class="pf-field">
+                <label class="pf-label">Viti Ndërtimit</label>
+                <input type="number" name="year_built" class="pf-input"
+                       placeholder="2020" min="1900" max="2030"
+                       value="{{ property.year_built|default:'' }}">
+              </div>
+            </div>
+          </div>
+
+          <!-- Veçoritë -->
+          <div class="pf-card">
+            <div class="pf-card__title">
+              <i class="fas fa-star"></i> Veçoritë
+            </div>
+            <div class="pf-checks">
+              <label class="pf-check">
+                <input type="checkbox" name="parking" {% if property.parking %}checked{% endif %}>
+                <span class="pf-check__box"><i class="fas fa-check"></i></span>
+                <i class="fas fa-car" style="color:var(--gold)"></i> Parking
+              </label>
+              <label class="pf-check">
+                <input type="checkbox" name="balcony" {% if property.balcony %}checked{% endif %}>
+                <span class="pf-check__box"><i class="fas fa-check"></i></span>
+                <i class="fas fa-door-open" style="color:var(--gold)"></i> Ballkon
+              </label>
+              <label class="pf-check">
+                <input type="checkbox" name="elevator" {% if property.elevator %}checked{% endif %}>
+                <span class="pf-check__box"><i class="fas fa-check"></i></span>
+                <i class="fas fa-arrow-up" style="color:var(--gold)"></i> Ashensor
+              </label>
+              <label class="pf-check">
+                <input type="checkbox" name="pool" {% if property.pool %}checked{% endif %}>
+                <span class="pf-check__box"><i class="fas fa-check"></i></span>
+                <i class="fas fa-swimming-pool" style="color:var(--gold)"></i> Pishinë
+              </label>
+              <label class="pf-check">
+                <input type="checkbox" name="garden" {% if property.garden %}checked{% endif %}>
+                <span class="pf-check__box"><i class="fas fa-check"></i></span>
+                <i class="fas fa-leaf" style="color:var(--gold)"></i> Kopsht
+              </label>
+              <label class="pf-check">
+                <input type="checkbox" name="storage" {% if property.storage %}checked{% endif %}>
+                <span class="pf-check__box"><i class="fas fa-check"></i></span>
+                <i class="fas fa-box" style="color:var(--gold)"></i> Depo
+              </label>
+              <label class="pf-check">
+                <input type="checkbox" name="air_conditioning" {% if property.air_conditioning %}checked{% endif %}>
+                <span class="pf-check__box"><i class="fas fa-check"></i></span>
+                <i class="fas fa-snowflake" style="color:var(--gold)"></i> Kondicionim
+              </label>
+              <label class="pf-check">
+                <input type="checkbox" name="heating" {% if property.heating %}checked{% endif %}>
+                <span class="pf-check__box"><i class="fas fa-check"></i></span>
+                <i class="fas fa-fire" style="color:var(--gold)"></i> Ngrohje
+              </label>
+              <label class="pf-check">
+                <input type="checkbox" name="sea_view" {% if property.sea_view %}checked{% endif %}>
+                <span class="pf-check__box"><i class="fas fa-check"></i></span>
+                <i class="fas fa-water" style="color:var(--gold)"></i> Pamje Deti
+              </label>
+              <label class="pf-check">
+                <input type="checkbox" name="mountain_view" {% if property.mountain_view %}checked{% endif %}>
+                <span class="pf-check__box"><i class="fas fa-check"></i></span>
+                <i class="fas fa-mountain" style="color:var(--gold)"></i> Pamje Mali
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="col-lg-4">
+
+          <!-- Foto kryesore -->
+          <div class="pf-card">
+            <div class="pf-card__title">
+              <i class="fas fa-image"></i> Foto Kryesore
+            </div>
+            {% if property.image %}
+            <div class="pf-img-preview" style="margin-bottom:12px;">
+              <img src="{{ property.image.url }}" alt="Foto kryesore">
+              <div style="font-size:0.8rem;color:var(--gray);align-self:center;">
+                Foto aktuale<br>
+                <label style="cursor:pointer;color:var(--gold);font-weight:700;">
+                  <input type="checkbox" name="clear_image" style="display:none;">
+                  Hiq foton
+                </label>
+              </div>
+            </div>
+            {% endif %}
+            <div class="pf-upload" id="mainImgUpload">
+              <input type="file" name="image" accept="image/*" onchange="previewMainImg(this)">
+              <div class="pf-upload__icon"><i class="fas fa-cloud-upload-alt"></i></div>
+              <p class="pf-upload__text">
+                <strong>Kliko për të ngarkuar</strong><br>
+                <small>PNG, JPG (max 5MB)</small>
+              </p>
+            </div>
+            <img id="mainImgPreview" src="" style="display:none;width:100%;border-radius:10px;margin-top:10px;object-fit:cover;height:160px;">
+          </div>
+
+          <!-- Foto shtesë -->
+          <div class="pf-card">
+            <div class="pf-card__title">
+              <i class="fas fa-images"></i> Foto Shtesë
+            </div>
+            {% if property.images.all %}
+            <div class="pf-img-preview" style="margin-bottom:12px;">
+              {% for img in property.images.all %}
+              <img src="{{ img.image.url }}" alt="Foto {{ forloop.counter }}">
+              {% endfor %}
+            </div>
+            {% endif %}
+            <div class="pf-upload">
+              <input type="file" name="extra_images" accept="image/*" multiple onchange="previewExtraImgs(this)">
+              <div class="pf-upload__icon"><i class="fas fa-images"></i></div>
+              <p class="pf-upload__text">
+                <strong>Ngarko foto shtesë</strong><br>
+                <small>Mund të zgjidhni disa foto</small>
+              </p>
+            </div>
+            <div id="extraImgsPreview" class="pf-img-preview" style="margin-top:10px;"></div>
+          </div>
+
+          <!-- Flags -->
+          <div class="pf-card">
+            <div class="pf-card__title">
+              <i class="fas fa-flag"></i> Opsione
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <label class="pf-check">
+                <input type="checkbox" name="available" {% if property.available or action == 'add' %}checked{% endif %}>
+                <span class="pf-check__box"><i class="fas fa-check"></i></span>
+                <i class="fas fa-check-circle" style="color:#10b981"></i> E disponueshme
+              </label>
+              <label class="pf-check">
+                <input type="checkbox" name="is_featured" {% if property.is_featured %}checked{% endif %}>
+                <span class="pf-check__box"><i class="fas fa-check"></i></span>
+                <i class="fas fa-star" style="color:var(--gold)"></i> Featured
+              </label>
+              <label class="pf-check">
+                <input type="checkbox" name="is_new" {% if property.is_new %}checked{% endif %}>
+                <span class="pf-check__box"><i class="fas fa-check"></i></span>
+                <i class="fas fa-sparkles" style="color:#f59e0b"></i> I Ri
+              </label>
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="pf-submit">
+            <i class="fas fa-save"></i>
+            {% if action == 'edit' %}Ruaj Ndryshimet{% else %}Shto Pronën{% endif %}
+          </button>
+
+          {% if action == 'edit' %}
+          <a href="{% url 'property_detail' property.slug %}" target="_blank"
+             style="display:block;text-align:center;margin-top:12px;color:var(--gray);font-size:0.85rem;text-decoration:none;">
+            <i class="fas fa-eye"></i> Shiko si duket në faqe
+          </a>
+          {% endif %}
+
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

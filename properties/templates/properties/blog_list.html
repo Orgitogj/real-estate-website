@@ -1,0 +1,221 @@
+{% extends "properties/base.html" %}
+{% load static i18n %}
+
+{% block title %}{% trans "Blog" %} — ValorEstate{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link rel="stylesheet" href="{% static 'properties/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ══ HERO ══ -->
+<section class="bl-hero">
+  <div class="bl-hero__bg">
+    <img src="{% static 'properties/img/ekipi.jpg' %}" alt="" class="bl-hero__img">
+    <div class="bl-hero__overlay"></div>
+  </div>
+  <div class="container bl-hero__inner">
+    <nav class="bl-breadcrumb" data-aos="fade-down">
+      <a href="{% url 'home' %}">{% trans "Kryefaqja" %}</a>
+      <span>/</span>
+      <span>{% trans "Blog" %}</span>
+    </nav>
+    <h1 class="bl-hero__title" data-aos="fade-up" data-aos-delay="100">
+      {% trans "Lajme &" %} <em class="bl-hero__accent">{% trans "Këshilla" %}</em>
+    </h1>
+    <p class="bl-hero__sub" data-aos="fade-up" data-aos-delay="200">
+      {% trans "Tregu i pronave, këshilla investimi dhe lajme nga ekipi ValorEstate." %}
+    </p>
+  </div>
+</section>
+
+<!-- ══ CONTENT ══ -->
+<section class="bl-section">
+  <div class="container">
+    <div class="bl-layout">
+
+      <!-- ════ MAIN ════ -->
+      <div class="bl-main">
+
+        <!-- Categories filter -->
+        <div class="bl-cats" data-aos="fade-up">
+          <a href="{% url 'blog' %}" class="bl-cat {% if not active_cat %}bl-cat--active{% endif %}">
+            {% trans "Të gjitha" %}
+          </a>
+          {% for cat in categories %}
+          <a href="{% url 'blog' %}?category={{ cat.slug }}"
+             class="bl-cat {% if active_cat == cat.slug %}bl-cat--active{% endif %}">
+            {{ cat.name }}
+          </a>
+          {% endfor %}
+        </div>
+
+        <!-- Search -->
+        <form method="GET" action="{% url 'blog' %}" class="bl-search" data-aos="fade-up">
+          {% if active_cat %}<input type="hidden" name="category" value="{{ active_cat }}">{% endif %}
+          <div class="bl-search__wrap">
+            <i class="fas fa-search bl-search__icon"></i>
+            <input type="text" name="q" value="{{ q|default:'' }}"
+                   placeholder="{% trans 'Kërko artikuj...' %}" class="bl-search__input">
+            {% if q %}
+            <a href="{% url 'blog' %}{% if active_cat %}?category={{ active_cat }}{% endif %}"
+               class="bl-search__clear"><i class="fas fa-times"></i></a>
+            {% endif %}
+          </div>
+          <button type="submit" class="bl-search__btn">{% trans "Kërko" %}</button>
+        </form>
+
+        <!-- Results count -->
+        {% if q or active_cat %}
+        <p class="bl-results-count" data-aos="fade-up">
+          <strong>{{ total }}</strong> {% trans "artikuj" %}
+          {% if q %}{% trans "për" %} "<em>{{ q }}</em>"{% endif %}
+          {% if active_cat %}{% trans "në kategorinë" %} <em>{{ active_cat }}</em>{% endif %}
+        </p>
+        {% endif %}
+
+        <!-- Posts grid -->
+        {% if posts %}
+        <div class="bl-grid">
+          {% for post in posts %}
+          <article class="bl-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}00">
+            <div class="bl-card__img-wrap">
+              <a href="{% url 'blog_detail' post.slug %}">
+                {% if post.image %}
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="bl-card__img" loading="lazy">
+                {% else %}
+                <img src="{% static 'properties/img/blog-placeholder.jpg' %}" alt="{{ post.title }}" class="bl-card__img">
+                {% endif %}
+              </a>
+              {% if post.category %}
+              <a href="{% url 'blog' %}?category={{ post.category.slug }}" class="bl-card__cat">
+                {{ post.category.name }}
+              </a>
+              {% endif %}
+            </div>
+            <div class="bl-card__body">
+              <div class="bl-card__meta">
+                <span><i class="fas fa-calendar-alt"></i> {{ post.created_at|date:"d M Y" }}</span>
+                <span><i class="fas fa-eye"></i> {{ post.views }}</span>
+                <span><i class="fas fa-comments"></i> {{ post.comments.count }}</span>
+              </div>
+              <h2 class="bl-card__title">
+                <a href="{% url 'blog_detail' post.slug %}">{{ post.title }}</a>
+              </h2>
+              <p class="bl-card__excerpt">{{ post.excerpt|truncatewords:20 }}</p>
+              <div class="bl-card__footer">
+                {% if post.author %}
+                <div class="bl-card__author">
+                  {% if post.author.photo %}
+                  <img src="{{ post.author.photo.url }}" alt="{{ post.author.full_name }}" class="bl-card__author-img">
+                  {% else %}
+                  <div class="bl-card__author-ph"><i class="fas fa-user"></i></div>
+                  {% endif %}
+                  <span>{{ post.author.full_name }}</span>
+                </div>
+                {% endif %}
+                <a href="{% url 'blog_detail' post.slug %}" class="bl-card__link">
+                  {% trans "Lexo" %} <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if posts.has_other_pages %}
+        <div class="bl-pagination">
+          <div class="bl-pag__inner">
+            <div class="bl-pag__info">
+              <span>{% trans "Faqja" %}</span>
+              <input type="number" class="bl-pag__input" id="blPageInput"
+                     value="{{ posts.number }}" min="1" max="{{ posts.paginator.num_pages }}">
+              <span>{% trans "nga" %} {{ posts.paginator.num_pages }}</span>
+            </div>
+            <div class="bl-pag__arrows">
+              {% if posts.has_previous %}
+              <a href="?page={{ posts.previous_page_number }}{% if active_cat %}&category={{ active_cat }}{% endif %}{% if q %}&q={{ q }}{% endif %}"
+                 class="bl-pag__arrow"><i class="fas fa-arrow-left"></i></a>
+              {% else %}
+              <span class="bl-pag__arrow bl-pag__arrow--disabled"><i class="fas fa-arrow-left"></i></span>
+              {% endif %}
+              {% if posts.has_next %}
+              <a href="?page={{ posts.next_page_number }}{% if active_cat %}&category={{ active_cat }}{% endif %}{% if q %}&q={{ q }}{% endif %}"
+                 class="bl-pag__arrow"><i class="fas fa-arrow-right"></i></a>
+              {% else %}
+              <span class="bl-pag__arrow bl-pag__arrow--disabled"><i class="fas fa-arrow-right"></i></span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        {% else %}
+        <div class="bl-empty">
+          <h3>{% trans "Nuk u gjetën artikuj" %}</h3>
+          <p>{% trans "Provoni të ndryshoni filtrat ose fjalën kyçe." %}</p>
+          <a href="{% url 'blog' %}" class="ve-btn-primary">{% trans "Shiko të gjitha" %}</a>
+        </div>
+        {% endif %}
+
+      </div>
+
+      <!-- ════ SIDEBAR ════ -->
+      <aside class="bl-sidebar">
+
+        <div class="bl-widget" data-aos="fade-left">
+          <h3 class="bl-widget__title">{% trans "Artikujt e Fundit" %}</h3>
+          {% with recent=posts.object_list|slice:":3" %}
+          {% for p in recent %}
+          <a href="{% url 'blog_detail' p.slug %}" class="bl-recent">
+            {% if p.image %}
+            <img src="{{ p.image.url }}" alt="{{ p.title }}" class="bl-recent__img">
+            {% else %}
+            <div class="bl-recent__img bl-recent__img--ph"><i class="fas fa-newspaper"></i></div>
+            {% endif %}
+            <div class="bl-recent__info">
+              <span class="bl-recent__title">{{ p.title|truncatewords:8 }}</span>
+              <span class="bl-recent__date">{{ p.created_at|date:"d M Y" }}</span>
+            </div>
+          </a>
+          {% endfor %}
+          {% endwith %}
+        </div>
+
+        <div class="bl-widget" data-aos="fade-left" data-aos-delay="100">
+          <h3 class="bl-widget__title">{% trans "Kategoritë" %}</h3>
+          {% for cat in categories %}
+          <a href="{% url 'blog' %}?category={{ cat.slug }}"
+             class="bl-cat-item {% if active_cat == cat.slug %}bl-cat-item--active{% endif %}">
+            <span>{{ cat.name }}</span>
+            <span class="bl-cat-item__count">{{ cat.posts.count }}</span>
+          </a>
+          {% endfor %}
+        </div>
+
+        <div class="bl-widget bl-widget--cta" data-aos="fade-left" data-aos-delay="200">
+          <h3>{% trans "Keni pyetje?" %}</h3>
+          <p>{% trans "Agjentët tanë janë të disponueshëm për ju çdo ditë." %}</p>
+          <a href="{% url 'contact' %}" class="bl-cta-btn">{% trans "Na Kontaktoni" %}</a>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="{% static 'properties/js/main.js' %}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    AOS.init({ once: true, offset: 60, easing: 'ease-out-cubic' });
+  });
+</script>
+{% endblock %}

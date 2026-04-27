@@ -1,0 +1,412 @@
+{% extends "properties/base.html" %}
+{% load static i18n %}
+
+{% block title %}ValorEstate — {% trans "Gjej Pronën e Ëndrrave" %}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link rel="stylesheet" href="{% static 'properties/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ===================== HERO ===================== -->
+<section class="ve-hero">
+  <div class="ve-hero__bg">
+    <video class="ve-hero__video" autoplay muted loop playsinline>
+      <source src="{% static 'properties/video/video.mp4' %}" type="video/mp4">
+      <source src="{% static 'properties/video/hero-video.webm' %}" type="video/webm">
+      <img src="{% static 'properties/img/hero-bg.jpg' %}" alt="hero" class="ve-hero__bgimg">
+    </video>
+    <div class="ve-hero__overlay"></div>
+    <div class="ve-hero__grain"></div>
+  </div>
+
+  <div class="container ve-hero__inner">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 text-center">
+
+        <p class="ve-hero__sub" data-aos="fade-up" data-aos-delay="200">
+          {% trans "Apartamente, shtëpi, toka dhe hapësira komerciale në të gjithë Shqipërinë." %}
+        </p>
+
+        <div class="ve-search" data-aos="fade-up" data-aos-delay="320">
+          <form class="ve-search__form" method="GET" action="{% url 'property_list' %}">
+            <div class="ve-search__grid">
+
+              <div class="ve-search__field">
+                <label class="ve-search__label">
+                  <i class="fas fa-home"></i> {% trans "Lloji" %}
+                </label>
+                <select name="type" class="ve-search__select">
+                  <option value="">{% trans "Të gjitha" %}</option>
+                  <option value="apartment">{% trans "Apartament" %}</option>
+                  <option value="house">{% trans "Shtëpi" %}</option>
+                  <option value="land">{% trans "Tokë" %}</option>
+                  <option value="commercial">{% trans "Komerciale" %}</option>
+                </select>
+              </div>
+
+              <div class="ve-search__sep"></div>
+
+              <div class="ve-search__field">
+                <label class="ve-search__label">
+                  <i class="fas fa-map-marker-alt"></i> {% trans "Qyteti" %}
+                </label>
+                <div class="ve-select-wrapper">
+                  <select name="city" class="ve-search__select">
+                    <option value="">{% trans "Të gjitha" %}</option>
+                    {% for city in cities %}
+                      <option value="{{ city }}">{{ city }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              <div class="ve-search__sep"></div>
+
+              <div class="ve-search__field">
+                <label class="ve-search__label">
+                  <i class="fas fa-tag"></i> {% trans "Tipi" %}
+                </label>
+                <select name="transaction" class="ve-search__select">
+                  <option value="">{% trans "Të gjitha" %}</option>
+                  <option value="sale">{% trans "Shitje" %}</option>
+                  <option value="rent">{% trans "Qira" %}</option>
+                </select>
+              </div>
+
+              <button type="submit" class="ve-search__btn">
+                <i class="fas fa-search"></i> {% trans "Kërko" %}
+              </button>
+
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STATS ===================== -->
+<section class="ve-stats">
+  <div class="container">
+    <div class="ve-stats__bar" data-aos="fade-up">
+
+      <div class="ve-stats__item">
+        <div class="ve-stats__num-wrapper">
+          <span class="ve-stats__num" data-count="120">0</span>
+          <span class="ve-stats__suf">+</span>
+        </div>
+        <span class="ve-stats__lbl">{% trans "Prona Aktive" %}</span>
+      </div>
+
+      <div class="ve-stats__div"></div>
+
+      <div class="ve-stats__item">
+        <div class="ve-stats__num-wrapper">
+          <span class="ve-stats__num" data-count="45">0</span>
+          <span class="ve-stats__suf">+</span>
+        </div>
+        <span class="ve-stats__lbl">{% trans "Agjentë" %}</span>
+      </div>
+
+      <div class="ve-stats__div"></div>
+
+      <div class="ve-stats__item">
+        <div class="ve-stats__num-wrapper">
+          <span class="ve-stats__num" data-count="800">0</span>
+          <span class="ve-stats__suf">+</span>
+        </div>
+        <span class="ve-stats__lbl">{% trans "Klientë të Kënaqur" %}</span>
+      </div>
+
+      <div class="ve-stats__div"></div>
+
+      <div class="ve-stats__item">
+        <div class="ve-stats__num-wrapper">
+          <span class="ve-stats__num" data-count="15">0</span>
+          <span class="ve-stats__suf">{% trans "Vjet" %}</span>
+        </div>
+        <span class="ve-stats__lbl">{% trans "Eksperiencë" %}</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEATURED PROPERTIES ===================== -->
+<section class="ve-section ve-props">
+  <div class="container">
+
+    <div class="ve-section__head" data-aos="fade-up">
+      <span class="ve-eyebrow">{% trans "Portofolio" %}</span>
+      <h2 class="ve-section__title">{% trans "Pronat e Fundit" %}</h2>
+      <p class="ve-section__sub">{% trans "Zgjidh nga koleksioni ynë i pronave premium" %}</p>
+    </div>
+
+    <div class="ve-filters" data-aos="fade-up" data-aos-delay="80">
+      <button class="ve-filter active" data-filter="all">{% trans "Të gjitha" %}</button>
+      <button class="ve-filter" data-filter="sale">{% trans "Shitje" %}</button>
+      <button class="ve-filter" data-filter="rent">{% trans "Qira" %}</button>
+      <button class="ve-filter" data-filter="apartment">{% trans "Apartamente" %}</button>
+      <button class="ve-filter" data-filter="house">{% trans "Shtëpi" %}</button>
+      <button class="ve-filter" data-filter="land">{% trans "Toka" %}</button>
+    </div>
+
+    <div class="ve-props__grid" id="propsGrid">
+      {% if featured_properties %}
+        {% for property in featured_properties %}
+          {% include 'properties/partials/_property_card.html' with property=property %}
+        {% endfor %}
+      {% else %}
+        {% for i in "123456" %}
+        <div class="ve-card ve-card--skeleton">
+          <div class="ve-card__skel-img"></div>
+          <div class="ve-card__body p-3">
+            <div class="ve-skel-line" style="width:70%;height:16px;margin-bottom:8px;"></div>
+            <div class="ve-skel-line" style="width:45%;height:12px;margin-bottom:12px;"></div>
+            <div class="ve-skel-line" style="width:30%;height:14px;"></div>
+          </div>
+        </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <div class="text-center mt-5" data-aos="fade-up">
+      <a href="{% url 'property_list' %}" class="ve-btn-primary">
+        {% trans "Shiko të Gjitha Pronat" %} <i class="fas fa-arrow-right ms-2"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CATEGORIES ===================== -->
+<section class="categories-strip">
+  <div class="container">
+    <div class="cat-header">
+      <h2>{% trans "Kategoritë e Pronave" %}</h2>
+      <p>{% trans "Zgjidh shpejt atë që kërkon" %}</p>
+    </div>
+    <div class="cat-list">
+      <a href="{% url 'property_list' %}?type=house" class="cat-item">
+        <div class="icon"><i class="fas fa-home"></i></div>
+        <div class="content">
+          <span class="title">{% trans "Shtëpi" %}</span>
+          <span class="count">{{ house_count|default:"0" }} {% trans "prona" %}</span>
+        </div>
+      </a>
+      <a href="{% url 'property_list' %}?type=apartment" class="cat-item">
+        <div class="icon"><i class="fas fa-building"></i></div>
+        <div class="content">
+          <span class="title">{% trans "Apartamente" %}</span>
+          <span class="count">{{ apartment_count|default:"0" }} {% trans "prona" %}</span>
+        </div>
+      </a>
+      <a href="{% url 'property_list' %}?type=land" class="cat-item">
+        <div class="icon"><i class="fas fa-tree"></i></div>
+        <div class="content">
+          <span class="title">{% trans "Toka" %}</span>
+          <span class="count">{{ land_count|default:"0" }} {% trans "prona" %}</span>
+        </div>
+      </a>
+      <a href="{% url 'property_list' %}?type=commercial" class="cat-item">
+        <div class="icon"><i class="fas fa-store"></i></div>
+        <div class="content">
+          <span class="title">{% trans "Komerciale" %}</span>
+          <span class="count">{{ commercial_count|default:"0" }} {% trans "prona" %}</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHY US ===================== -->
+<section class="ve-section ve-why">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5" data-aos="fade-right">
+        <span class="ve-eyebrow">{% trans "Pse ValorEstate" %}</span>
+        <h2 class="ve-section__title">{% trans "Besimi i Ndërtuar" %}<br>{% trans "Mbi Rezultate" %}</h2>
+        <p class="ve-section__sub mt-3">
+          {% trans "Për 15 vjet kemi ndihmuar mijëra familje dhe investitorë të gjejnë pronën e duhur, me transparencë dhe profesionalizëm të plotë." %}
+        </p>
+        <a href="{% url 'about' %}" class="ve-btn-outline mt-4">
+          {% trans "Mëso Më Shumë" %} <i class="fas fa-arrow-right ms-2"></i>
+        </a>
+      </div>
+      <div class="col-lg-7">
+        <div class="ve-why__grid">
+          <div class="ve-why__card" data-aos="fade-up" data-aos-delay="0">
+            <div class="ve-why__icon"><i class="fas fa-shield-alt"></i></div>
+            <h4>{% trans "Garanci Ligjore" %}</h4>
+            <p>{% trans "Çdo transaksion i verifikuar dhe i siguruar plotësisht nga ekipi ynë juridik." %}</p>
+          </div>
+          <div class="ve-why__card" data-aos="fade-up" data-aos-delay="100">
+            <div class="ve-why__icon"><i class="fas fa-clock"></i></div>
+            <h4>{% trans "Shërbim 24/7" %}</h4>
+            <p>{% trans "Ekipi ynë është gjithmonë i disponueshëm për çdo pyetje ose vizitë." %}</p>
+          </div>
+          <div class="ve-why__card" data-aos="fade-up" data-aos-delay="200">
+            <div class="ve-why__icon"><i class="fas fa-chart-line"></i></div>
+            <h4>{% trans "Vlerësim Falas" %}</h4>
+            <p>{% trans "Vlerësojmë pronën tuaj pa asnjë kosto shtesë, me ekspertizë tregu." %}</p>
+          </div>
+          <div class="ve-why__card" data-aos="fade-up" data-aos-delay="300">
+            <div class="ve-why__icon"><i class="fas fa-handshake"></i></div>
+            <h4>{% trans "Negocim Ekspert" %}</h4>
+            <p>{% trans "Agjentët tanë negociojnë çmimin më të mirë për ju gjithmonë." %}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== AGENTS ===================== -->
+<section class="ve-section ve-agents">
+  <div class="container">
+    <div class="ve-section__head" data-aos="fade-up">
+      <span class="ve-eyebrow">{% trans "Ekipi" %}</span>
+      <h2 class="ve-section__title">{% trans "Agjentët Tanë" %}</h2>
+      <p class="ve-section__sub">{% trans "Profesionistë me eksperiencë dhe dedikrim të plotë" %}</p>
+    </div>
+    <div class="ve-agents__grid">
+      {% for agent in featured_agents %}
+      <div class="ve-agent" data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}00">
+        <div class="ve-agent__photo-wrap">
+          {% if agent.photo %}
+            <img src="{{ agent.photo.url }}" alt="{{ agent.full_name }}" class="ve-agent__photo">
+          {% else %}
+            <div class="ve-agent__photo ve-agent__photo--ph"><i class="fas fa-user"></i></div>
+          {% endif %}
+          <span class="ve-agent__rating">
+            <i class="fas fa-star"></i> {{ agent.rating|default:"4.9" }}
+          </span>
+        </div>
+        <div class="ve-agent__info">
+          <h4 class="ve-agent__name">{{ agent.full_name }}</h4>
+          <span class="ve-agent__role">{{ agent.specialization|default:_("Agjent Imobiliar") }}</span>
+          <div class="ve-agent__stats">
+            <span><i class="fas fa-home"></i> {{ agent.property_set.count }} {% trans "prona" %}</span>
+            <span><i class="fas fa-check-circle"></i> {{ agent.sold_count|default:"0" }} {% trans "shitur" %}</span>
+          </div>
+          <div class="ve-agent__actions">
+            <a href="tel:{{ agent.phone }}" class="ve-agent__btn" title="{% trans 'Telefono' %}"><i class="fas fa-phone"></i></a>
+            <a href="mailto:{{ agent.email }}" class="ve-agent__btn" title="{% trans 'Email' %}"><i class="fas fa-envelope"></i></a>
+            <a href="{% url 'agent_detail' agent.pk %}" class="ve-agent__btn ve-agent__btn--main">{% trans "Profili" %}</a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      {% for i in "1234" %}
+      <div class="ve-agent placeholder-glow">
+        <div class="ve-agent__photo-wrap">
+          <div class="placeholder" style="width:90px;height:90px;border-radius:50%;"></div>
+        </div>
+        <div class="ve-agent__info p-3">
+          <div class="placeholder col-8 mb-2" style="height:14px;border-radius:4px;"></div>
+          <div class="placeholder col-5" style="height:11px;border-radius:4px;"></div>
+        </div>
+      </div>
+      {% endfor %}
+      {% endfor %}
+    </div>
+    <div class="text-center mt-5" data-aos="fade-up">
+      <a href="{% url 'team' %}" class="ve-btn-outline">
+        {% trans "Shiko Gjithë Ekipin" %} <i class="fas fa-arrow-right ms-2"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% if testimonials %}
+<!-- ===================== TESTIMONIALS ===================== -->
+<section class="ve-testi-section" id="pershtypje">
+  <div class="ve-testi-main">
+    <div class="ve-testi-img-col">
+      <img src="{% static 'properties/img/prona.webp' %}" alt="ValorEstate" class="ve-testi-photo">
+    </div>
+    <div class="ve-testi-content-col">
+      <span class="ve-testi-quote-dec" aria-hidden="true">"</span>
+      <span class="ve-eyebrow">{% trans "Çfarë thonë klientët tanë" %}</span>
+      <h2 class="ve-testi-heading">{% trans "Përshtypje" %}</h2>
+      <div class="ve-testi-slides" id="vestiSlides">
+        {% for t in testimonials %}
+        <div class="ve-testi-slide {% if forloop.first %}active{% endif %}" data-index="{{ forloop.counter0 }}">
+          <span class="ve-testi-stars" aria-label="{{ t.rating }} yje nga 5">
+            {% for star in t.stars_range %}★{% endfor %}{% for star in t.empty_stars_range %}☆{% endfor %}
+          </span>
+          <p class="ve-testi-text">{{ t.preview }}</p>
+          {% if t.has_more %}
+          <div class="ve-testi-extra" id="extra-{{ forloop.counter0 }}">{{ t.remainder }}</div>
+          <button class="ve-testi-read-more" onclick="toggleExtra({{ forloop.counter0 }}, this)" type="button">
+            {% trans "Lexo më shumë" %} <i class="fas fa-chevron-down" style="font-size:0.7rem"></i>
+          </button>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      <div class="ve-testi-arrows">
+        <button class="ve-testi-arrow" id="vestiPrev" type="button" aria-label="{% trans 'Testimoniali i mëparshëm' %}">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <button class="ve-testi-arrow" id="vestiNext" type="button" aria-label="{% trans 'Testimoniali tjetër' %}">
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="ve-testi-nav" id="vestiNav" role="tablist">
+    {% for t in testimonials %}
+    <button class="ve-testi-nav-btn {% if forloop.first %}active{% endif %}"
+            data-slide="{{ forloop.counter0 }}" role="tab"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" type="button">
+      <span class="ve-testi-nav-btn__label">
+        {% trans "Për" %} {% if t.agent %}{{ t.agent.full_name }}{% else %}{{ t.agent_label }}{% endif %}
+      </span>
+      <span class="ve-testi-nav-btn__name">{{ t.client_name }}{% if t.client_city %}, {{ t.client_city }}{% endif %}</span>
+    </button>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- ===================== CTA ===================== -->
+<section class="ve-cta">
+  <div class="container ve-cta__inner" data-aos="fade-up">
+    <div class="ve-cta__card">
+      <div class="ve-cta__icon"><i class="fas fa-building"></i></div>
+      <div class="ve-cta__text">
+        <span class="ve-cta__label">{% trans "Për Pronarët" %}</span>
+        <h2>{% trans "Dëshironi të Shisni ose Jepni me Qira Pronën Tuaj?" %}</h2>
+        <p>{% trans "Ekipi ynë ju ndihmon të gjeni blerësin ose qiramarrësin e duhur — shpejt dhe me çmim maksimal." %}</p>
+      </div>
+      <div class="ve-cta__btns">
+        <a href="{% url 'contact' %}" class="ve-cta__btn-gold">{% trans "Na Kontaktoni" %}</a>
+        <a href="tel:+355690000000" class="ve-cta__btn-gold"><i class="fas fa-phone"></i> +355 69 2963205</a>
+      </div>
+    </div>
+    <div class="ve-cta__divider"><span>{% trans "ose" %}</span></div>
+    <div class="ve-cta__card ve-cta__card--light">
+      <div class="ve-cta__icon"><i class="fas fa-search-location"></i></div>
+      <div class="ve-cta__text">
+        <span class="ve-cta__label ve-cta__label--gold">{% trans "Për Blerësit" %}</span>
+        <h2>{% trans "Kërkoni të Blini ose të Merrni me Qira?" %}</h2>
+        <p>{% trans "Shfletoni mbi 120 prona premium dhe gjeni atë që i përshtatet buxhetit dhe stilit tuaj të jetesës." %}</p>
+      </div>
+      <div class="ve-cta__btns">
+        <a href="{% url 'property_list' %}" class="ve-cta__btn-gold"><i class="fas fa-search"></i> {% trans "Shfleto Pronat" %}</a>
+        <a href="{% url 'property_list' %}?transaction=rent" class="ve-cta__btn-gold"><i class="fas fa-key"></i> {% trans "Prona me Qira" %}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="{% static 'properties/js/main.js' %}"></script>
+{% endblock %}

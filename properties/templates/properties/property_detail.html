@@ -1,0 +1,593 @@
+{% extends "properties/base.html" %}
+{% load static i18n %}
+
+{% block title %}{{ property.title }} — ValorEstate{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link rel="stylesheet" href="{% static 'properties/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ══ BREADCRUMB ══ -->
+<div class="pd-breadcrumb-bar">
+  <div class="container">
+    <nav class="pd-breadcrumb">
+      <a href="{% url 'home' %}">{% trans "Kryefaqja" %}</a>
+      <span>/</span>
+      <a href="{% url 'property_list' %}">{% trans "Prona" %}</a>
+      <span>/</span>
+      <span>{{ property.title }}</span>
+    </nav>
+  </div>
+</div>
+
+<!-- ══ FOTOT ══ -->
+<section class="pd-gallery">
+  <div class="container">
+    <div class="pd-gallery__grid">
+
+      <div class="pd-gallery__main" id="mainPhoto">
+        {% with property.get_main_image as main_img %}
+          {% if main_img %}
+            <img src="{{ main_img.image.url }}" alt="{{ property.title }}" class="pd-gallery__main-img" id="mainImg">
+          {% elif property.image %}
+            <img src="{{ property.image.url }}" alt="{{ property.title }}" class="pd-gallery__main-img" id="mainImg">
+          {% else %}
+            <img src="{% static 'properties/img/no-photo.jpg' %}" alt="{% trans 'Pa foto' %}" class="pd-gallery__main-img" id="mainImg">
+          {% endif %}
+        {% endwith %}
+
+        <div class="pd-gallery__badges">
+          {% if property.transaction == 'sale' %}
+            <span class="ve-badge ve-badge--sale">{% trans "Shitje" %}</span>
+          {% else %}
+            <span class="ve-badge ve-badge--rent">{% trans "Qira" %}</span>
+          {% endif %}
+          {% if property.is_new %}
+            <span class="ve-badge ve-badge--new">{% trans "I ri" %}</span>
+          {% endif %}
+          {% if property.is_featured %}
+            <span class="ve-badge ve-badge--featured">Featured</span>
+          {% endif %}
+          {% if property.status != 'available' %}
+            <span class="ve-badge ve-badge--status">{{ property.get_status_display }}</span>
+          {% endif %}
+        </div>
+
+        <button class="pd-gallery__fullscreen" onclick="openLightbox(0)">
+          <i class="fas fa-expand"></i>
+        </button>
+      </div>
+
+      {% if images %}
+      <div class="pd-gallery__thumbs">
+        {% for img in images %}
+        <div class="pd-gallery__thumb {% if forloop.first %}active{% endif %}"
+             onclick="changeMain('{{ img.image.url }}', this)">
+          <img src="{{ img.image.url }}" alt="{{ img.caption|default:property.title }}" loading="lazy">
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTENT ══ -->
+<section class="pd-section">
+  <div class="container">
+    <div class="pd-layout">
+
+      <!-- ════ LEFT — Info ════ -->
+      <div class="pd-main">
+
+        <div class="pd-header" data-aos="fade-up">
+          <div class="pd-header__top">
+            <span class="ve-eyebrow">
+              {{ property.get_type_display }}
+              {% if property.neighborhood %} · {{ property.neighborhood }}{% endif %}
+            </span>
+            <div class="pd-header__actions">
+              <button class="pd-action-btn ve-card__wish" data-id="{{ property.pk }}" title="{% trans 'Ruaj' %}">
+                <i class="far fa-heart"></i>
+              </button>
+              <button class="pd-action-btn" title="{% trans 'Shpërnda' %}" onclick="shareProperty()">
+                <i class="fas fa-share-alt"></i>
+              </button>
+            </div>
+          </div>
+          <h1 class="pd-header__title">{{ property.title }}</h1>
+          <p class="pd-header__location">
+            <i class="fas fa-map-marker-alt"></i>
+            {{ property.location }}, {{ property.city }}
+          </p>
+        </div>
+
+        <!-- Specs kryesore -->
+        <div class="pd-specs-bar" data-aos="fade-up" data-aos-delay="50">
+          <div class="pd-spec">
+            <i class="fas fa-ruler-combined"></i>
+            <div>
+              <span class="pd-spec__val">{{ property.area_m2 }} m²</span>
+              <span class="pd-spec__lbl">{% trans "Sipërfaqe" %}</span>
+            </div>
+          </div>
+          {% if property.bedrooms %}
+          <div class="pd-spec">
+            <i class="fas fa-bed"></i>
+            <div>
+              <span class="pd-spec__val">{{ property.bedrooms }}</span>
+              <span class="pd-spec__lbl">{% trans "Dhoma Gjumi" %}</span>
+            </div>
+          </div>
+          {% endif %}
+          {% if property.bathrooms %}
+          <div class="pd-spec">
+            <i class="fas fa-bath"></i>
+            <div>
+              <span class="pd-spec__val">{{ property.bathrooms }}</span>
+              <span class="pd-spec__lbl">{% trans "Banjo" %}</span>
+            </div>
+          </div>
+          {% endif %}
+          {% if property.floor %}
+          <div class="pd-spec">
+            <i class="fas fa-building"></i>
+            <div>
+              <span class="pd-spec__val">{% trans "Kati" %} {{ property.floor }}{% if property.total_floors %}/{{ property.total_floors }}{% endif %}</span>
+              <span class="pd-spec__lbl">{% trans "Kati" %}</span>
+            </div>
+          </div>
+          {% endif %}
+          {% if property.year_built %}
+          <div class="pd-spec">
+            <i class="fas fa-calendar-alt"></i>
+            <div>
+              <span class="pd-spec__val">{{ property.year_built }}</span>
+              <span class="pd-spec__lbl">{% trans "Viti Ndërtimit" %}</span>
+            </div>
+          </div>
+          {% endif %}
+          {% if property.furnishing %}
+          <div class="pd-spec">
+            <i class="fas fa-couch"></i>
+            <div>
+              <span class="pd-spec__val">{{ property.get_furnishing_display }}</span>
+              <span class="pd-spec__lbl">{% trans "Mobilimi" %}</span>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+
+        <!-- Përshkrimi -->
+        {% if property.description %}
+        <div class="pd-block" data-aos="fade-up">
+          <h2 class="pd-block__title">{% trans "Përshkrimi" %}</h2>
+          <div class="pd-description">
+            {{ property.description|linebreaks }}
+          </div>
+        </div>
+        {% endif %}
+
+        <!-- Veçoritë -->
+        <div class="pd-block" data-aos="fade-up">
+          <h2 class="pd-block__title">{% trans "Veçoritë" %}</h2>
+          <div class="pd-features">
+            {% if property.parking %}
+            <div class="pd-feature pd-feature--yes"><i class="fas fa-car"></i> {% trans "Parking" %}</div>
+            {% endif %}
+            {% if property.balcony %}
+            <div class="pd-feature pd-feature--yes"><i class="fas fa-door-open"></i> {% trans "Ballkon" %}</div>
+            {% endif %}
+            {% if property.elevator %}
+            <div class="pd-feature pd-feature--yes"><i class="fas fa-arrow-up"></i> {% trans "Ashensor" %}</div>
+            {% endif %}
+            {% if property.pool %}
+            <div class="pd-feature pd-feature--yes"><i class="fas fa-swimming-pool"></i> {% trans "Pishinë" %}</div>
+            {% endif %}
+            {% if property.garden %}
+            <div class="pd-feature pd-feature--yes"><i class="fas fa-leaf"></i> {% trans "Kopesht" %}</div>
+            {% endif %}
+            {% if property.storage %}
+            <div class="pd-feature pd-feature--yes"><i class="fas fa-box"></i> {% trans "Depo" %}</div>
+            {% endif %}
+            {% if property.air_conditioning %}
+            <div class="pd-feature pd-feature--yes"><i class="fas fa-snowflake"></i> {% trans "Kondicionim" %}</div>
+            {% endif %}
+            {% if property.heating %}
+            <div class="pd-feature pd-feature--yes"><i class="fas fa-fire"></i> {% trans "Ngrohje Qendrore" %}</div>
+            {% endif %}
+            {% if property.sea_view %}
+            <div class="pd-feature pd-feature--yes"><i class="fas fa-water"></i> {% trans "Pamje Deti" %}</div>
+            {% endif %}
+            {% if property.mountain_view %}
+            <div class="pd-feature pd-feature--yes"><i class="fas fa-mountain"></i> {% trans "Pamje Mali" %}</div>
+            {% endif %}
+            {% if not property.parking %}
+            <div class="pd-feature pd-feature--no"><i class="fas fa-car"></i> {% trans "Parking" %}</div>
+            {% endif %}
+            {% if not property.elevator %}
+            <div class="pd-feature pd-feature--no"><i class="fas fa-arrow-up"></i> {% trans "Ashensor" %}</div>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Info shtesë -->
+        <div class="pd-block" data-aos="fade-up">
+          <h2 class="pd-block__title">{% trans "Detajet e Pronës" %}</h2>
+          <div class="pd-details-grid">
+            <div class="pd-detail">
+              <span class="pd-detail__lbl">{% trans "Lloji" %}</span>
+              <span class="pd-detail__val">{{ property.get_type_display }}</span>
+            </div>
+            <div class="pd-detail">
+              <span class="pd-detail__lbl">{% trans "Transaksioni" %}</span>
+              <span class="pd-detail__val">{{ property.get_transaction_display }}</span>
+            </div>
+            <div class="pd-detail">
+              <span class="pd-detail__lbl">{% trans "Statusi" %}</span>
+              <span class="pd-detail__val">{{ property.get_status_display }}</span>
+            </div>
+            <div class="pd-detail">
+              <span class="pd-detail__lbl">{% trans "Qyteti" %}</span>
+              <span class="pd-detail__val">{{ property.city }}</span>
+            </div>
+            {% if property.neighborhood %}
+            <div class="pd-detail">
+              <span class="pd-detail__lbl">{% trans "Zona/Lagja" %}</span>
+              <span class="pd-detail__val">{{ property.neighborhood }}</span>
+            </div>
+            {% endif %}
+            {% if property.year_built %}
+            <div class="pd-detail">
+              <span class="pd-detail__lbl">{% trans "Viti Ndërtimit" %}</span>
+              <span class="pd-detail__val">{{ property.year_built }}</span>
+            </div>
+            {% endif %}
+            <div class="pd-detail">
+              <span class="pd-detail__lbl">{% trans "Sipërfaqe" %}</span>
+              <span class="pd-detail__val">{{ property.area_m2 }} m²</span>
+            </div>
+            {% if property.is_negotiable %}
+            <div class="pd-detail">
+              <span class="pd-detail__lbl">{% trans "Çmimi" %}</span>
+              <span class="pd-detail__val pd-detail__val--gold">{% trans "Negociueshëm" %}</span>
+            </div>
+            {% endif %}
+            <div class="pd-detail">
+              <span class="pd-detail__lbl">{% trans "Ref. ID" %}</span>
+              <span class="pd-detail__val">#VE-{{ property.pk|stringformat:"04d" }}</span>
+            </div>
+            <div class="pd-detail">
+              <span class="pd-detail__lbl">{% trans "Publikuar" %}</span>
+              <span class="pd-detail__val">{{ property.created_at|date:"d M Y" }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Harta -->
+        <div class="pd-block" data-aos="fade-up">
+          <h2 class="pd-block__title">{% trans "Lokacioni" %}</h2>
+          <div class="pd-map">
+            {% if property.latitude and property.longitude %}
+            <iframe src="https://maps.google.com/maps?q={{ property.latitude }},{{ property.longitude }}&z=15&output=embed"
+              allowfullscreen loading="lazy"></iframe>
+            {% else %}
+            <iframe src="https://maps.google.com/maps?q={{ property.location|urlencode }},{{ property.city|urlencode }}&z=14&output=embed"
+              allowfullscreen loading="lazy"></iframe>
+            {% endif %}
+          </div>
+        </div>
+
+        {% if property.transaction == 'sale' %}
+        <div class="pd-block pd-mortgage" data-aos="fade-up" style="padding:0; overflow:hidden; border:none; background:transparent; box-shadow:none;">
+          <div class="pd-block pd-mortgage" data-aos="fade-up" style="padding:0; overflow:hidden; border:none; background:transparent; box-shadow:none;">
+
+            <div class="mort-header">
+              <div class="mort-header__icon">
+                <i class="fas fa-calculator"></i>
+              </div>
+              <h2 class="mort-header__title">{% trans "Kalkulatori i Kredisë" %}</h2>
+              <p class="mort-header__sub">{% trans "Llogaritni këstin mujor dhe totalin e interesit" %}</p>
+            </div>
+
+            <div class="mort-body">
+              <div class="mort-grid">
+
+                <div class="mort-field">
+                  <label class="mort-lbl">{% trans "Çmimi i Shitjes" %}</label>
+                  <div class="mort-input-wrap">
+                    <span class="mort-prefix">€</span>
+                    <input readonly type="number" id="mortPrice" class="mort-input mort-input--prefix"
+                           value="{{ property.price|floatformat:0 }}" min="0" placeholder="130 000">
+                  </div>
+                  <div class="mort-err" id="err-mortPrice" style="display:none;">
+                    <i class="fas fa-times-circle"></i> <span></span>
+                  </div>
+                </div>
+
+                <div class="mort-field">
+                  <label class="mort-lbl">{% trans "Parapagim" %}</label>
+                  <div class="mort-input-wrap">
+                    <span class="mort-prefix">€</span>
+                    <input type="number" id="mortDown" class="mort-input mort-input--prefix" min="200000">
+                  </div>
+                  <div class="mort-err" id="err-mortDown" style="display:none;">
+                    <i class="fas fa-times-circle"></i> <span></span>
+                  </div>
+                </div>
+
+                <div class="mort-field">
+                  <label class="mort-lbl">{% trans "Afati i Kredisë" %}</label>
+                  <div class="mort-input-wrap">
+                    <input type="number" id="mortYears" class="mort-input mort-input--suffix"
+                           min="1" max="40" placeholder="{% trans 'max 40 vite' %}">
+                    <span class="mort-suffix">{% trans "vite" %}</span>
+                  </div>
+                  <div class="mort-err" id="err-mortYears" style="display:none;">
+                    <i class="fas fa-times-circle"></i> <span></span>
+                  </div>
+                </div>
+
+                <div class="mort-field">
+                  <label class="mort-lbl">{% trans "Norma e Interesit" %}</label>
+                  <div class="mort-input-wrap">
+                    <input type="number" id="mortRate" class="mort-input mort-input--suffix"
+                           min="0" max="30" step="0.1" placeholder="{% trans 'sa % interes doni te paguani' %}">
+                    <span class="mort-suffix">%</span>
+                  </div>
+                  <div class="mort-err" id="err-mortRate" style="display:none;">
+                    <i class="fas fa-times-circle"></i> <span></span>
+                  </div>
+                </div>
+
+              </div>
+
+              <button class="mort-btn" onclick="calcMortgage()">
+                <i class="fas fa-calculator"></i> {% trans "Llogarit Këstin" %}
+              </button>
+
+              <div class="mort-result" id="mortResult" style="display:none;">
+                <div class="mort-result__title">{% trans "Rezultati i Llogaritjes" %}</div>
+                <div class="mort-result__rows">
+                  <div class="mort-result__item mort-result__item--main">
+                    <span class="mort-result__lbl">{% trans "Kësti Mujor" %}</span>
+                    <span class="mort-result__val" id="mortMonthly">—</span>
+                  </div>
+                  <div class="mort-result__item">
+                    <span class="mort-result__lbl">{% trans "Totali i Interesit" %}</span>
+                    <span class="mort-result__val" id="mortTotalInterest">—</span>
+                  </div>
+                  <div class="mort-result__item">
+                    <span class="mort-result__lbl">{% trans "Totali i Pagesës" %}</span>
+                    <span class="mort-result__val" id="mortTotalPayment">—</span>
+                  </div>
+                </div>
+                <div class="mort-result__note">
+                  {% trans "Llogaritja është orientuese dhe nuk përbën ofertë bankare." %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+      </div>
+
+      <!-- ════ RIGHT — Sidebar ════ -->
+      <aside class="pd-sidebar">
+
+        <div class="pd-price-card">
+          <div class="pd-price-card__price">
+            <span class="pd-price-card__num">€{{ property.price|floatformat:0 }}</span>
+            {% if property.transaction == 'rent' %}
+              <span class="pd-price-card__period">/ {% trans "muaj" %}</span>
+            {% endif %}
+          </div>
+          {% if property.is_negotiable %}
+          <span class="pd-price-card__neg">
+            <i class="fas fa-handshake"></i> {% trans "Çmim i negociueshëm" %}
+          </span>
+          {% endif %}
+          <div class="pd-price-card__btns">
+            <a href="{% url 'contact' %}?subject=Jam+i+interesuar+për+{{ property.title|urlencode }}"
+               class="ve-btn-primary" style="width:100%; justify-content:center;">
+              <i class="fas fa-phone"></i> {% trans "Na Kontaktoni" %}
+            </a>
+            <a href="https://wa.me/355690000000?text=Jam+i+interesuar+për+pronën:+{{ property.title|urlencode }}"
+               target="_blank" class="pd-price-card__whatsapp">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+          </div>
+        </div>
+
+        {% if property.agent %}
+        <div class="pd-agent-card" data-aos="fade-left" data-aos-delay="100">
+          <div class="pd-agent-card__head">
+            <span class="ve-eyebrow">{% trans "Agjenti Juaj" %}</span>
+          </div>
+          <div class="pd-agent-card__profile">
+            {% if property.agent.photo %}
+              <img src="{{ property.agent.photo.url }}" alt="{{ property.agent.full_name }}" class="pd-agent-card__photo">
+            {% else %}
+              <div class="pd-agent-card__photo pd-agent-card__photo--ph">
+                <i class="fas fa-user"></i>
+              </div>
+            {% endif %}
+            <div>
+              <h4 class="pd-agent-card__name">{{ property.agent.full_name }}</h4>
+              <span class="pd-agent-card__role">{{ property.agent.role }}</span>
+              <div class="pd-agent-card__rating">
+                <i class="fas fa-star"></i> {{ property.agent.rating }}
+              </div>
+            </div>
+          </div>
+          {% if property.agent.bio %}
+          <p class="pd-agent-card__bio">{{ property.agent.bio|truncatewords:20 }}</p>
+          {% endif %}
+          <div class="pd-agent-card__contacts">
+            {% if property.agent.phone %}
+            <a href="tel:{{ property.agent.phone }}" class="pd-agent-card__contact">
+              <i class="fas fa-phone"></i> {{ property.agent.phone }}
+            </a>
+            {% endif %}
+            {% if property.agent.email %}
+            <a href="mailto:{{ property.agent.email }}" class="pd-agent-card__contact">
+              <i class="fas fa-envelope"></i> {{ property.agent.email }}
+            </a>
+            {% endif %}
+          </div>
+          <div class="pd-agent-card__socials">
+            {% if property.agent.instagram %}
+            <a href="{{ property.agent.instagram }}" target="_blank" class="footer-social">
+              <i class="fab fa-instagram"></i>
+            </a>
+            {% endif %}
+            {% if property.agent.linkedin %}
+            <a href="{{ property.agent.linkedin }}" target="_blank" class="footer-social">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+
+        <div class="pd-visit-form" data-aos="fade-left" data-aos-delay="150">
+          <h3 class="pd-visit-form__title">
+            <i class="fas fa-calendar-check"></i> {% trans "Cakto një Vizitë" %}
+          </h3>
+
+          {% if messages %}
+            {% for msg in messages %}
+            <div class="pd-alert pd-alert--{{ msg.tags }}">
+              <i class="fas fa-{% if msg.tags == 'success' %}check-circle{% else %}exclamation-circle{% endif %}"></i>
+              {{ msg }}
+            </div>
+            {% endfor %}
+          {% endif %}
+
+          <form method="POST" action="{% url 'visit_request' property.slug %}" class="pd-visit-form__form">
+            {% csrf_token %}
+            <div class="pd-vf-field">
+              <input type="text" name="name" placeholder="{% trans 'Emri juaj *' %}" class="pd-vf-input" required>
+            </div>
+            <div class="pd-vf-field">
+              <input type="email" name="email" placeholder="{% trans 'Emaili juaj *' %}" class="pd-vf-input" required>
+            </div>
+            <div class="pd-vf-field">
+              <input type="tel" name="phone" placeholder="{% trans 'Numri i telefonit *' %}" class="pd-vf-input" required>
+            </div>
+            <div class="pd-vf-field">
+              <input type="date" name="visit_date" class="pd-vf-input">
+            </div>
+            <div class="pd-vf-field">
+              <textarea name="message" placeholder="{% trans 'Mesazhi (opsional)' %}"
+                        class="pd-vf-input pd-vf-textarea" rows="3"></textarea>
+            </div>
+            <button type="submit" class="pd-vf-btn" id="visitSubmitBtn" style="position:relative; min-width:180px;">
+              <span class="pd-vf-btn__text" style="display:inline-flex; align-items:center; gap:8px;">
+                <i class="fas fa-paper-plane"></i> {% trans "Dërgo Kërkesën" %}
+              </span>
+              <span class="pd-vf-btn__loading" style="display:none; position:absolute; inset:0; align-items:center; justify-content:center; gap:8px;">
+                <i class="fas fa-spinner fa-spin"></i> {% trans "Duke dërguar..." %}
+              </span>
+            </button>
+          </form>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRONA TË NGJASHME ══ -->
+{% if similar %}
+<section class="ve-section pd-similar" style="background: var(--cream);">
+  <div class="container">
+    <div class="ve-section__head">
+      <span class="ve-eyebrow">{% trans "Shiko edhe" %}</span>
+      <h2 class="ve-section__title">{% trans "Prona të Ngjashme" %}</h2>
+    </div>
+    <div class="pd-similar__grid">
+      {% for prop in similar %}
+      <div class="ve-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}00">
+        <div class="ve-card__img-wrap">
+          <a href="{% url 'property_detail' prop.slug %}">
+            {% with prop.get_main_image as img %}
+              {% if img %}
+                <img src="{{ img.image.url }}" alt="{{ prop.title }}" class="ve-card__img" loading="lazy">
+              {% elif prop.image %}
+                <img src="{{ prop.image.url }}" alt="{{ prop.title }}" class="ve-card__img" loading="lazy">
+              {% else %}
+                <img src="{% static 'properties/img/no-photo.jpg' %}" alt="{% trans 'Pa foto' %}" class="ve-card__img">
+              {% endif %}
+            {% endwith %}
+          </a>
+          <div class="ve-card__badges">
+            {% if prop.transaction == 'sale' %}
+              <span class="ve-badge ve-badge--sale">{% trans "Shitje" %}</span>
+            {% else %}
+              <span class="ve-badge ve-badge--rent">{% trans "Qira" %}</span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="ve-card__body">
+          <div class="ve-card__price-row">
+            <span class="ve-card__price">€{{ prop.price|floatformat:0 }}</span>
+          </div>
+          <h3 class="ve-card__title">
+            <a href="{% url 'property_detail' prop.slug %}">{{ prop.title }}</a>
+          </h3>
+          <p class="ve-card__location">
+            <i class="fas fa-map-marker-alt"></i> {{ prop.city }}
+          </p>
+          <div class="ve-card__specs">
+            <span class="ve-card__spec"><i class="fas fa-ruler-combined"></i> {{ prop.area_m2 }} m²</span>
+            {% if prop.bedrooms %}
+            <span class="ve-card__spec"><i class="fas fa-bed"></i> {{ prop.bedrooms }}</span>
+            {% endif %}
+          </div>
+          <div class="ve-card__footer">
+            <a href="{% url 'property_detail' prop.slug %}" class="ve-card__cta">
+              {% trans "Shiko" %} <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ══ LIGHTBOX ══ -->
+<div class="pd-lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="pd-lightbox__close" onclick="closeLightbox()">
+    <i class="fas fa-times"></i>
+  </button>
+  <button class="pd-lightbox__prev" onclick="event.stopPropagation(); lightboxNav(-1)">
+    <i class="fas fa-chevron-left"></i>
+  </button>
+  <img src="" alt="" class="pd-lightbox__img" id="lightboxImg" onclick="event.stopPropagation()">
+  <button class="pd-lightbox__next" onclick="event.stopPropagation(); lightboxNav(1)">
+    <i class="fas fa-chevron-right"></i>
+  </button>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="{% static 'properties/js/main.js' %}"></script>
+<script>
+  const lightboxImgs = [
+    {% for img in images %}"{{ img.image.url }}"{% if not forloop.last %},{% endif %}{% endfor %}
+  ];
+  document.addEventListener('DOMContentLoaded', function() {
+    AOS.init({ once: true, offset: 60, easing: 'ease-out-cubic' });
+  });
+</script>
+{% endblock %}

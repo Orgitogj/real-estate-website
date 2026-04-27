@@ -1,0 +1,8 @@
+# ValorEstate — Përkthimet në Anglisht
+# Copyright (C) 2026 ValorEstate
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"

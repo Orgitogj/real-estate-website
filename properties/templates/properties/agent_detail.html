@@ -1,0 +1,252 @@
+
+{% extends "properties/base.html" %}
+{% load static %}
+
+{% block title %}{{ agent.full_name }} — ValorEstate{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link rel="stylesheet" href="{% static 'properties/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ══ HERO  ══ -->
+<section class="ag-hero">
+  <div class="container">
+    <div class="ag-hero__inner">
+
+      <!-- Foto -->
+      <div class="ag-hero__photo-wrap" data-aos="fade-right">
+        {% if agent.photo %}
+          <img src="{{ agent.photo.url }}" alt="{{ agent.full_name }}" class="ag-hero__photo">
+        {% else %}
+          <div class="ag-hero__photo ag-hero__photo--ph">
+            <i class="fas fa-user"></i>
+          </div>
+        {% endif %}
+        <div class="ag-hero__rating">
+          <i class="fas fa-star"></i> {{ agent.rating }}
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="ag-hero__info" data-aos="fade-left">
+        <span class="ve-eyebrow">{{ agent.role }}</span>
+        <h1 class="ag-hero__name">{{ agent.full_name }}</h1>
+        <p class="ag-hero__spec"> Specializimi  :  {{ agent.get_specialization_display }}</p>
+
+        {% if agent.bio %}
+        <p class="ag-hero__bio">{{ agent.bio }}</p>
+        {% endif %}
+
+        <!-- Stats -->
+        <div class="ag-hero__stats">
+          <div class="ag-stat">
+            <span class="ag-stat__num">{{ agent.experience_years }}</span>
+            <span class="ag-stat__lbl">Vjet eksperiencë</span>
+          </div>
+          <div class="ag-stat">
+            <span class="ag-stat__num">{{ agent.sold_count }}</span>
+            <span class="ag-stat__lbl">Prona të shitura</span>
+          </div>
+          <div class="ag-stat">
+            <span class="ag-stat__num">{{ total }}</span>
+            <span class="ag-stat__lbl">Prona aktive</span>
+          </div>
+        </div>
+
+        <!-- Kontakt -->
+        <div class="ag-hero__contacts">
+          {% if agent.phone %}
+          <a href="tel:{{ agent.phone }}" class="ag-contact-btn">
+            <i class="fas fa-phone"></i> {{ agent.phone }}
+          </a>
+          {% endif %}
+          {% if agent.email %}
+          <a href="mailto:{{ agent.email }}" class="ag-contact-btn">
+            <i class="fas fa-envelope"></i> {{ agent.email }}
+          </a>
+          {% endif %}
+          {% if agent.instagram %}
+          <a href="{{ agent.instagram }}" target="_blank" class="ag-contact-btn ag-contact-btn--social">
+            <i class="fab fa-instagram"></i>
+          </a>
+          {% endif %}
+          {% if agent.linkedin %}
+          <a href="{{ agent.linkedin }}" target="_blank" class="ag-contact-btn ag-contact-btn--social">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRONAT E AGJENTIT ══ -->
+<section class="ag-listings ve-section">
+  <div class="container">
+
+    <div class="ve-section__head" data-aos="fade-up">
+      <span class="ve-eyebrow">Portofoli</span>
+      <h2 class="ve-section__title">Pronat e agjentit {{ agent.full_name }}</h2>
+    </div>
+
+    <!-- ── FILTER ── -->
+    <div class="ag-filter" data-aos="fade-up">
+      <form method="GET" class="ag-filter__form" id="agFilterForm">
+
+        <div class="ag-filter__field ag-filter__field--search">
+          <i class="fas fa-search"></i>
+          <input type="text" name="q" value="{{ q }}"
+                 placeholder="Kërko pronë..."
+                 class="ag-filter__input">
+        </div>
+
+        <!-- Lloji -->
+        <div class="ag-filter__field">
+          <select name="type" class="ag-filter__select" onchange="this.form.submit()">
+            <option value="">Të gjitha llojet</option>
+            <option value="apartment" {% if type_f == 'apartment' %}selected{% endif %}>Apartament</option>
+            <option value="house"     {% if type_f == 'house'     %}selected{% endif %}>Shtëpi</option>
+            <option value="Villa"     {% if type_f == 'Villa'     %}selected{% endif %}>Vilë</option>
+            <option value="land"      {% if type_f == 'land'      %}selected{% endif %}>Tokë</option>
+            <option value="commercial"{% if type_f == 'commercial'%}selected{% endif %}>Komerciale</option>
+          </select>
+        </div>
+
+        <!-- Qyteti -->
+        <div class="ag-filter__field">
+          <select name="city" class="ag-filter__select" onchange="this.form.submit()">
+            <option value="">Të gjitha qytetet</option>
+            {% for city in cities %}
+            <option value="{{ city }}" {% if city_f == city %}selected{% endif %}>{{ city }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- Zona -->
+        <div class="ag-filter__field">
+          <select name="zone" class="ag-filter__select" onchange="this.form.submit()">
+            <option value="">Të gjitha zonat</option>
+            {% for zone in zones %}
+            <option value="{{ zone }}" {% if zone_f == zone %}selected{% endif %}>{{ zone }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- Butoni kërkim -->
+        <button type="submit" class="ag-filter__btn">
+          <i class="fas fa-search"></i> Kërko
+        </button>
+
+        <!-- Reset -->
+        {% if q or type_f or city_f or zone_f %}
+        <a href="{% url 'agent_detail' agent.pk %}" class="ag-filter__reset">
+          <i class="fas fa-times"></i> Pastro
+        </a>
+        {% endif %}
+
+      </form>
+
+      <p class="ag-filter__count">
+        <strong>{{ total }}</strong> pronë{% if total != 1 %}a{% endif %} e gjetur{% if total != 1 %}a{% endif %}
+      </p>
+    </div>
+
+    <!-- ── GRID PRONASH ── -->
+    {% if properties %}
+    <div class="ag-grid">
+      {% for prop in properties %}
+      <div class="ve-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:'0' }}00">
+        <div class="ve-card__img-wrap">
+          <a href="{% url 'property_detail' prop.slug %}">
+            {% with prop.get_main_image as img %}
+              {% if img %}
+                <img src="{{ img.image.url }}" alt="{{ prop.title }}" class="ve-card__img" loading="lazy">
+              {% elif prop.image %}
+                <img src="{{ prop.image.url }}" alt="{{ prop.title }}" class="ve-card__img" loading="lazy">
+              {% else %}
+                <img src="{% static 'properties/img/no-photo.jpg' %}" alt="Pa foto" class="ve-card__img">
+              {% endif %}
+            {% endwith %}
+          </a>
+          <div class="ve-card__badges">
+            {% if prop.transaction == 'sale' %}
+              <span class="ve-badge ve-badge--sale">Shitje</span>
+            {% else %}
+              <span class="ve-badge ve-badge--rent">Qira</span>
+            {% endif %}
+            {% if prop.is_new %}
+              <span class="ve-badge ve-badge--new">I ri</span>
+            {% endif %}
+          </div>
+          <button class="ve-card__wish" data-id="{{ prop.pk }}" title="Ruaj">
+            <i class="far fa-heart"></i>
+          </button>
+        </div>
+        <div class="ve-card__body">
+          <div class="ve-card__price-row">
+            <span class="ve-card__price">€{{ prop.price|floatformat:0 }}</span>
+            {% if prop.is_negotiable %}
+              <span class="ve-card__neg"><i class="fas fa-handshake"></i></span>
+            {% endif %}
+          </div>
+          <h3 class="ve-card__title">
+            <a href="{% url 'property_detail' prop.slug %}">{{ prop.title }}</a>
+          </h3>
+          <p class="ve-card__location">
+            <i class="fas fa-map-marker-alt"></i>
+            {{ prop.city }}{% if prop.neighborhood %}, {{ prop.neighborhood }}{% endif %}
+          </p>
+          <div class="ve-card__specs">
+            <span class="ve-card__spec">
+              <i class="fas fa-ruler-combined"></i> {{ prop.area_m2 }} m²
+            </span>
+            {% if prop.bedrooms %}
+            <span class="ve-card__spec">
+              <i class="fas fa-bed"></i> {{ prop.bedrooms }}
+            </span>
+            {% endif %}
+            {% if prop.bathrooms %}
+            <span class="ve-card__spec">
+              <i class="fas fa-bath"></i> {{ prop.bathrooms }}
+            </span>
+            {% endif %}
+          </div>
+          <div class="ve-card__footer">
+            <a href="{% url 'property_detail' prop.slug %}" class="ve-card__cta">
+              Shiko <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    {% else %}
+    <!-- Nese nuk gjendet asnje prone -->
+    <div class="ag-empty" data-aos="fade-up">
+      <i class="fas fa-search"></i>
+      <h3>Asnjë pronë nuk u gjet</h3>
+      <p>Provo të ndryshosh filtrat ose <a href="{% url 'agent_detail' agent.pk %}">pastro kërkimin</a>.</p>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="{% static 'properties/js/main.js' %}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    AOS.init({ once: true, offset: 60, easing: 'ease-out-cubic' });
+  });
+</script>
+{% endblock %}
+

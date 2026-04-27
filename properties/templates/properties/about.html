@@ -1,0 +1,286 @@
+{% extends "properties/base.html" %}
+{% load static i18n %}
+
+{% block title %}ValorEstate — {% trans "Rreth Nesh" %}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link rel="stylesheet" href="{% static 'properties/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ===================== HERO ===================== -->
+<section class="ab-hero">
+  <div class="ab-hero__bg">
+    <img src="{% static 'properties/img/about-hero.jpg' %}" alt="{% trans 'Rreth Nesh' %}" class="ab-hero__img">
+    <div class="ab-hero__overlay"></div>
+    <div class="ab-hero__grain"></div>
+  </div>
+  <div class="container ab-hero__inner">
+    <div class="ab-hero__breadcrumb" data-aos="fade-down">
+      <a href="{% url 'home' %}">{% trans "Kryefaqja" %}</a>
+      <span>/</span>
+      <span>{% trans "Rreth Nesh" %}</span>
+    </div>
+    <h1 class="ab-hero__title" data-aos="fade-up" data-aos-delay="100">
+      {% trans "Kush Jemi" %} <em class="ab-hero__accent">{% trans "Ne" %}</em>
+    </h1>
+    <p class="ab-hero__sub" data-aos="fade-up" data-aos-delay="220">
+      {% trans "15 vjet eksperiencë, mbi 800 klientë të kënaqur dhe pasion të palëkundur për pronësinë e drejtë." %}
+    </p>
+    <div class="ab-hero__scroll" data-aos="fade-up" data-aos-delay="340">
+      <div class="ab-hero__scroll-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STORY DHE  IMAGE ===================== -->
+<section class="ab-section ab-story">
+  <div class="container">
+    <div class="row align-items-center g-5">
+
+      <div class="col-lg-6" data-aos="fade-right" data-aos-duration="900">
+        <div class="ab-img-block">
+          <img src="{% static 'properties/img/about-office.jpg' %}"
+               alt="{% trans 'Zyra ValorEstate' %}"
+               class="ab-img-block__main">
+          <div class="ab-img-block__frame"></div>
+        </div>
+      </div>
+
+      <div class="col-lg-6" data-aos="fade-left" data-aos-duration="900" data-aos-delay="100">
+        <span class="ve-eyebrow">{% trans "Historia Jonë" %}</span>
+        <h2 class="ab-heading">
+          {% trans "Ndërtuar mbi" %}<br>{% trans "Besim & Rezultate" %}
+        </h2>
+        <p class="ab-text">
+          {% trans "ValorEstate u themelua në vitin 2009 me një vizion të qartë: të transformojë tregun imobiliar shqiptar duke ofruar shërbime transparente, profesionale dhe të orientuara drejt klientit." %}
+        </p>
+        <p class="ab-text">
+          {% trans "Sot jemi agjencia kryesore imobiliare në vend, me ekip të specializuar agjentësh, mbi 120 prona aktive dhe prezencë në të gjithë Shqipërinë — nga Tirana deri në Sarandë." %}
+        </p>
+
+        <div class="ab-points">
+          <div class="ab-point">
+            <div class="ab-point__icon"><i class="fas fa-check"></i></div>
+            <div>
+              <strong>{% trans "Transparencë e Plotë" %}</strong>
+              <p>{% trans "Asnjë kosto të fshehur, asnjë surprizë — vetëm çmime të drejta." %}</p>
+            </div>
+          </div>
+          <div class="ab-point">
+            <div class="ab-point__icon"><i class="fas fa-check"></i></div>
+            <div>
+              <strong>{% trans "Ekip i Licensuar" %}</strong>
+              <p>{% trans "Çdo agjent i certifikuar dhe i trajnuar sipas standardeve ndërkombëtare." %}</p>
+            </div>
+          </div>
+          <div class="ab-point">
+            <div class="ab-point__icon"><i class="fas fa-check"></i></div>
+            <div>
+              <strong>{% trans "Mbulim Kombëtar" %}</strong>
+              <p>{% trans "Prona në Tiranë, Durrës, Vlorë, Shkodër, Sarandë dhe më gjerë." %}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MISSION / VISION ===================== -->
+<section class="ab-section ab-mission">
+  <div class="container">
+    <div class="ab-mission__grid">
+
+      <div class="ab-mission__card" data-aos="fade-up" data-aos-delay="0">
+        <div class="ab-mission__icon"><i class="fas fa-bullseye"></i></div>
+        <h3>{% trans "Misioni Ynë" %}</h3>
+        <p>{% trans "Të ofrojmë shërbimin më të mirë imobiliar në Shqipëri duke ndërtuar marrëdhënie afatgjata me klientët, bazuar në besim, profesionalizëm dhe njohuri të thellë të tregut." %}</p>
+      </div>
+
+      <div class="ab-mission__card ab-mission__card--center" data-aos="fade-up" data-aos-delay="120">
+        <div class="ab-mission__icon"><i class="fas fa-eye"></i></div>
+        <h3>{% trans "Vizioni Ynë" %}</h3>
+        <p>{% trans "Të bëhemi platforma imobiliare më e besueshme dhe inovative në rajonin e Ballkanit, duke lidhur klientët me pronën e ëndrrave të tyre nëpërmjet teknologjisë dhe ekspertizës njerëzore." %}</p>
+      </div>
+
+      <div class="ab-mission__card" data-aos="fade-up" data-aos-delay="240">
+        <div class="ab-mission__icon"><i class="fas fa-gem"></i></div>
+        <h3>{% trans "Vlerat Tona" %}</h3>
+        <p>{% trans "Integritet, inovacion dhe partneritet — tre shtyllat mbi të cilat ndërtojmë çdo marrëdhënie me klientët, partnerët dhe komunitetin ku operojmë çdo ditë." %}</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== VALUES ICONS ===================== -->
+<section class="ab-section ab-values">
+  <div class="container">
+    <div class="ve-section__head" data-aos="fade-up">
+      <span class="ve-eyebrow">{% trans "Parimet Tona" %}</span>
+      <h2 class="ab-heading text-center">{% trans "Çfarë Na Dallon" %}</h2>
+    </div>
+
+    <div class="ab-values__grid">
+
+      <div class="ab-value" data-aos="zoom-in" data-aos-delay="0">
+        <div class="ab-value__icon-wrap"><i class="fas fa-shield-alt"></i></div>
+        <h4>{% trans "Besueshmëri" %}</h4>
+        <p>{% trans "Çdo premtim i mbajtur, çdo transaksion i dokumentuar saktë." %}</p>
+      </div>
+
+      <div class="ab-value" data-aos="zoom-in" data-aos-delay="80">
+        <div class="ab-value__icon-wrap"><i class="fas fa-lightbulb"></i></div>
+        <h4>{% trans "Inovacion" %}</h4>
+        <p>{% trans "Teknologji moderne, platformë dixhitale dhe vizualizim 3D të pronave." %}</p>
+      </div>
+
+      <div class="ab-value" data-aos="zoom-in" data-aos-delay="160">
+        <div class="ab-value__icon-wrap"><i class="fas fa-handshake"></i></div>
+        <h4>{% trans "Partneritet" %}</h4>
+        <p>{% trans "Bashkëpunojmë ngushtë me klientin deri në mbylljen e çdo transaksioni." %}</p>
+      </div>
+
+      <div class="ab-value" data-aos="zoom-in" data-aos-delay="320">
+        <div class="ab-value__icon-wrap"><i class="fas fa-star"></i></div>
+        <h4>{% trans "Ekselencë" %}</h4>
+        <p>{% trans "Standard i lartë në çdo detaj — nga prezantimi i pronës deri te kontrata." %}</p>
+      </div>
+
+      <div class="ab-value" data-aos="zoom-in" data-aos-delay="400">
+        <div class="ab-value__icon-wrap"><i class="fas fa-leaf"></i></div>
+        <h4>{% trans "Qëndrueshmëri" %}</h4>
+        <p>{% trans "Promovim të pronave efiçente dhe ndërtimeve të gjelbra e të qëndrueshme." %}</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STATS ANIMATED ===================== -->
+<section class="ab-stats">
+  <div class="ab-stats__bg">
+    <img src="{% static 'properties/img/stats-bg.jpg' %}" alt="" class="ab-stats__bgimg">
+    <div class="ab-stats__overlay"></div>
+  </div>
+  <div class="container ab-stats__inner">
+    <div class="ab-stats__grid">
+
+      <div class="ab-stat" data-aos="fade-up" data-aos-delay="0">
+        <div class="ab-stat__num-wrapper">
+          <span class="ab-stat__num" data-count="120">0</span>
+          <span class="ab-stat__suf">+</span>
+        </div>
+        <span class="ab-stat__lbl">{% trans "Prona Aktive" %}</span>
+      </div>
+
+      <div class="ab-stat" data-aos="fade-up" data-aos-delay="100">
+        <div class="ab-stat__num-wrapper">
+          <span class="ab-stat__num" data-count="800">0</span>
+          <span class="ab-stat__suf">+</span>
+        </div>
+        <span class="ab-stat__lbl">{% trans "Klientë të Kënaqur" %}</span>
+      </div>
+
+      <div class="ab-stat" data-aos="fade-up" data-aos-delay="200">
+        <div class="ab-stat__num-wrapper">
+          <span class="ab-stat__num" data-count="45">0</span>
+          <span class="ab-stat__suf">+</span>
+        </div>
+        <span class="ab-stat__lbl">{% trans "Agjentë Profesionistë" %}</span>
+      </div>
+
+      <div class="ab-stat" data-aos="fade-up" data-aos-delay="300">
+        <div class="ab-stat__num-wrapper">
+          <span class="ab-stat__num" data-count="15">0</span>
+          <span class="ab-stat__suf">{% trans "Vjet" %}</span>
+        </div>
+        <span class="ab-stat__lbl">{% trans "Eksperiencë në Treg" %}</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TIMELINE ===================== -->
+<section class="ab-section ab-timeline-section">
+  <div class="container">
+    <div class="ve-section__head" data-aos="fade-up">
+      <span class="ve-eyebrow">{% trans "Rrugëtimi Ynë" %}</span>
+      <h2 class="ab-heading text-center">{% trans "Historia e ValorEstate" %}</h2>
+    </div>
+
+    <div class="ab-timeline">
+
+      <div class="ab-tl-item ab-tl-item--left" data-aos="fade-right">
+        <div class="ab-tl-content">
+          <span class="ab-tl-year">2009</span>
+          <h4>{% trans "Themelimi" %}</h4>
+          <p>{% trans "ValorEstate hap dyert e para në Tiranë me 3 agjentë dhe vizionin e qartë për të ndryshuar tregun imobiliar shqiptar." %}</p>
+        </div>
+        <div class="ab-tl-dot"></div>
+      </div>
+
+      <div class="ab-tl-item ab-tl-item--right" data-aos="fade-left">
+        <div class="ab-tl-dot"></div>
+        <div class="ab-tl-content">
+          <span class="ab-tl-year">2013</span>
+          <h4>{% trans "Zgjerimi Kombëtar" %}</h4>
+          <p>{% trans "Hapim zyra në Durrës dhe Vlorë, duke mbuluar tre qytetet kryesore të Shqipërisë dhe duke rritur ekipin në 20 agjentë." %}</p>
+        </div>
+      </div>
+
+      <div class="ab-tl-item ab-tl-item--left" data-aos="fade-right">
+        <div class="ab-tl-content">
+          <span class="ab-tl-year">2017</span>
+          <h4>{% trans "Platforma Dixhitale" %}</h4>
+          <p>{% trans "Lançojmë platformën tonë online me listim të pronave, kërkim të avancuar dhe vizualizim 3D — e para e tillë në Shqipëri." %}</p>
+        </div>
+        <div class="ab-tl-dot"></div>
+      </div>
+
+      <div class="ab-tl-item ab-tl-item--right" data-aos="fade-left">
+        <div class="ab-tl-dot"></div>
+        <div class="ab-tl-content">
+          <span class="ab-tl-year">2021</span>
+          <h4>{% trans "Çmimi i Industrisë" %}</h4>
+          <p>{% trans "Fitojmë çmimin 'Best Real Estate Agency Albania' nga Albanian Real Estate Association, njohje e punës sonë 12-vjeçare." %}</p>
+        </div>
+      </div>
+
+      <div class="ab-tl-item ab-tl-item--left" data-aos="fade-right">
+        <div class="ab-tl-content">
+          <span class="ab-tl-year">2026</span>
+          <h4>{% trans "Sot & Tutje" %}</h4>
+          <p>{% trans "Mbi 120 prona aktive, 45+ agjentë dhe ekspansion i ri në Sarandë e Shkodër. Vazhdojmë të rritemi me pasion dhe profesionalizëm." %}</p>
+        </div>
+        <div class="ab-tl-dot"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section class="ab-cta">
+  <div class="container ab-cta__inner" data-aos="fade-up">
+    <div class="ab-cta__text">
+      <h2>{% trans "Gati të Bashkëpunojmë?" %}</h2>
+      <p>{% trans "Na kontaktoni sot dhe ekipi ynë do t'ju ndihmojë të gjeni pronën e duhur." %}</p>
+    </div>
+    <div class="ab-cta__btns">
+      <a href="{% url 'contact' %}" class="ve-cta__btn-primary">{% trans "Na Kontaktoni" %}</a>
+      <a href="{% url 'property_list' %}" class="ve-cta__btn-primary">{% trans "Shfleto Pronat" %}</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="{% static 'properties/js/main.js' %}"></script>
+{% endblock %}

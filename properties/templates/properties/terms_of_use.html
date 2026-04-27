@@ -1,0 +1,95 @@
+{% extends "properties/base.html" %}
+{% load static i18n %}
+
+{% block title %}{% trans "Kushtet e Përdorimit" %} — ValorEstate{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'properties/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ══ HERO ══ -->
+<section class="ve-page-hero ve-page-hero--short ve-page-hero--solid">
+  <div class="ve-page-hero__inner">
+    <div class="container">
+      <nav class="ve-breadcrumb">
+        <a href="{% url 'home' %}">{% trans "Kryefaqja" %}</a>
+        <span class="ve-breadcrumb__sep">/</span>
+        <span>{% trans "Kushtet e Përdorimit" %}</span>
+      </nav>
+      <h1 class="ve-page-hero__title" style="font-size:clamp(2.2rem,5vw,4rem);">
+        {% trans "Kushtet e" %} <em class="ve-page-hero__accent">{% trans "Përdorimit" %}</em>
+      </h1>
+      <p class="ve-page-hero__sub">
+        {% trans "Kushtet dhe rregullat që rregullojnë përdorimin e shërbimeve tona." %}
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="pp-section">
+  <div class="container">
+    <div class="pp-wrap">
+      <div class="pp-block">
+        <h2 class="pp-block__title">
+          <span class="pp-block__num">01</span>
+          {% trans "Pranimi i Kushteve" %}
+        </h2>
+        <p>{% trans "Duke përdorur faqen e internetit të ValorEstate, pranoni plotësisht këto kushte përdorimi. Nëse nuk jeni dakord me to, ju lutemi mos përdorni shërbimet tona." %}</p>
+      </div>
+
+      <!-- 2 --><div class="pp-block">
+        <h2 class="pp-block__title">
+          <span class="pp-block__num">02</span>
+          {% trans "Shërbimet tona" %}
+        </h2>
+        <p>{% trans "ValorEstate ofron shërbime imobiliare duke përfshirë listimin e pronave, ndërmjetësimin në blerje/shitje dhe qira, vlerësimin e pronave dhe konsulencë. Informacioni i paraqitur është vetëm për qëllime informative dhe nuk përbën ofertë juridike të detyrueshme." %}</p>
+      </div>
+
+     
+      <div class="pp-block">
+        <h2 class="pp-block__title">
+          <span class="pp-block__num">03</span>
+          {% trans "Detyrimet e Përdoruesit" %}
+        </h2>
+        <p>{% trans "Duke përdorur faqen tonë, ju merrni përsipër:" %}</p>
+        <ul class="pp-list">
+          <li><i class="fas fa-check"></i> {% trans "Të mos përdorni faqen për qëllime të paligjshme ose të dëmshme." %}</li>
+          <li><i class="fas fa-check"></i> {% trans "Të mos ndërhyni në funksionimin normal të faqes." %}</li>
+          <li><i class="fas fa-check"></i> {% trans "Të jepni informacione të sakta dhe të vërteta gjatë kontaktit me ne." %}</li>
+          <li><i class="fas fa-check"></i> {% trans "Të respektoni të drejtat e pronësisë intelektuale të ValorEstate." %}</li>
+        </ul>
+      </div>
+
+      
+      <div class="pp-block">
+        <h2 class="pp-block__title">
+          <span class="pp-block__num">04</span>
+          {% trans "Pronësia Intelektuale" %}
+        </h2>
+        <p>{% trans "Të gjitha materialet e faqes — tekste, imazhe, logo, dizajn — janë pronë e ValorEstate dhe mbrohen nga ligjet e pronësisë intelektuale. Riprodhimi i tyre pa leje të shkruar është i ndaluar." %}</p>
+      </div>
+
+      
+      <div class="pp-block">
+        <h2 class="pp-block__title">
+          <span class="pp-block__num">05</span>
+          {% trans "Kufizimi i Përgjegjësisë" %}
+        </h2>
+        <p>{% trans "ValorEstate nuk mban përgjegjësi për dëme direkte ose indirekte që rrjedhin nga përdorimi i faqes ose besimi në informacionin e publikuar. Çdo vendim i marrë bazuar në informacionin e faqes është përgjegjësi e plotë e përdoruesit." %}</p>
+      </div>
+
+      <div class="pp-block">
+        <h2 class="pp-block__title">
+          <span class="pp-block__num">06</span>
+          {% trans "Lidhjet me Faqe të Tjera" %}
+        </h2>
+        <p>{% trans "Faqja mund të përmbajë lidhje drejt faqeve të palëve të treta. ValorEstate nuk mban përgjegjësi për përmbajtjen apo politikat e privatësisë të këtyre faqeve." %}</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

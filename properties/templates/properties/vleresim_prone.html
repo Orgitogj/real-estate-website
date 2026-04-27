@@ -1,0 +1,205 @@
+{% extends "properties/base.html" %}
+{% load static i18n %}
+
+{% block title %}{% trans "Vlerësoni Pronën Tuaj" %} — ValorEstate{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'properties/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'properties/css/vleresim_prone.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="vp-page-title">
+  <div class="container">
+    <h1>{% trans "Vlerësoni pronën tuaj" %}</h1>
+  </div>
+</div>
+
+<div class="vp-main">
+  <div class="container">
+    <div class="vp-layout">
+
+      <div class="vp-sidebar">
+        <div class="vp-sidebar__eyebrow">
+          <div class="vp-sidebar__line"></div>
+          <span class="vp-sidebar__lbl" id="sbLbl">{% trans "Vleresoni pronen tuaj ne vetem 5 hapa" %}</span>
+        </div>
+        <h2 class="vp-sidebar__title" id="sbTitle">
+          {% trans "Zbuloni vlerën e pronës tuaj duke marrë një vlerësim fillestar në pak hapa!" %}
+        </h2>
+        <p class="vp-sidebar__desc" id="sbDesc">
+          {% trans "Duke përdorur analiza tregu dhe ekspertizë industrie, ne sigurojmë një raport të detajuar të përshtatur me pronën tuaj." %}
+        </p>
+      </div>
+
+      <div class="vp-form-panel" id="vpPanel">
+        {% csrf_token %}
+
+        <div class="vp-progress" id="vpProg">
+          <div class="vp-progress__top">
+            <span class="vp-progress__lbl" id="vpProgLbl">{% trans "Hapi 1/5" %}</span>
+          </div>
+          <div class="vp-progress__track">
+            <div class="vp-progress__fill" id="vpProgFill" style="width:20%"></div>
+          </div>
+        </div>
+
+        <button class="vp-back" id="vpBack" type="button" style="display:none">
+          <i class="fas fa-arrow-left"></i> {% trans "Pas" %}
+        </button>
+
+        <!-- HAPI 1 -->
+        <div class="vp-step active" id="step1">
+          <p class="vp-q">{% trans "Cilën pronë do të dëshironit të vlerësonit?" %} <span>*</span></p>
+          <div class="vp-opts">
+            <label class="vp-opt"><input type="radio" name="prop_type" value="vila"><div class="vp-opt__box"><span class="vp-opt__ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></span><span class="vp-opt__lbl">{% trans "Vile" %}</span></div></label>
+            <label class="vp-opt"><input type="radio" name="prop_type" value="apartment"><div class="vp-opt__box"><span class="vp-opt__ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="2" width="20" height="20" rx="1"/><path d="M8 2v20M16 2v20M2 8h20M2 14h20"/></svg></span><span class="vp-opt__lbl">{% trans "Apartament" %}</span></div></label>
+            <label class="vp-opt"><input type="radio" name="prop_type" value="land"><div class="vp-opt__box"><span class="vp-opt__ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 18l4-9 3 5 3-7 4 11H3z"/></svg></span><span class="vp-opt__lbl">{% trans "Tokë" %}</span></div></label>
+            <label class="vp-opt"><input type="radio" name="prop_type" value="commercial"><div class="vp-opt__box"><span class="vp-opt__ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 7h20v14H2z"/><path d="M2 7l4-4h12l4 4"/><line x1="12" y1="7" x2="12" y2="21"/></svg></span><span class="vp-opt__lbl">{% trans "Komerciale" %}</span></div></label>
+          </div>
+          <button class="vp-btn" id="n1" type="button" disabled>{% trans "Vazhdo" %} <i class="fas fa-arrow-right"></i></button>
+          <p class="vp-note">{% trans "Fushat e shënuara me * të detyrueshme për t'u plotësuar." %}</p>
+        </div>
+
+        <!-- HAPI 2 -->
+        <div class="vp-step" id="step2">
+          <div id="roomsWrap">
+            <p class="vp-q">{% trans "Sa dhoma ka?" %} <span>*</span></p>
+            <div class="vp-nums" style="margin-bottom:24px">
+              <label class="vp-num"><input type="radio" name="rooms" value="1"><span class="vp-num__lbl">1</span></label>
+              <label class="vp-num"><input type="radio" name="rooms" value="2"><span class="vp-num__lbl">2</span></label>
+              <label class="vp-num"><input type="radio" name="rooms" value="3"><span class="vp-num__lbl">3</span></label>
+              <label class="vp-num"><input type="radio" name="rooms" value="4"><span class="vp-num__lbl">4</span></label>
+              <label class="vp-num"><input type="radio" name="rooms" value="5"><span class="vp-num__lbl">5</span></label>
+            </div>
+          </div>
+          <p class="vp-q">{% trans "Sa është sipërfaqja e pronës suaj?" %} <span>*</span></p>
+          <div class="vp-area-row">
+            <input type="number" class="vp-area-inp" id="vpArea" placeholder="100" min="5">
+            <span class="vp-area-unit">m2</span>
+          </div>
+          <button class="vp-btn" id="n2" type="button">{% trans "Vazhdo" %} <i class="fas fa-arrow-right"></i></button>
+          <p class="vp-note">{% trans "Fushat e shënuara me * të detyrueshme për t'u plotësuar." %}</p>
+        </div>
+
+        <!-- HAPI 3 -->
+        <div class="vp-step" id="step3">
+          <p class="vp-q">{% trans "Cila është periudha e ndërtimit të pronës?" %} <span>*</span></p>
+          <div class="vp-opts" style="margin-bottom:24px">
+            <label class="vp-opt"><input type="radio" name="period" value="para_1970"><div class="vp-opt__box"><span class="vp-opt__lbl">{% trans "Para vitit 1970" %}</span></div></label>
+            <label class="vp-opt"><input type="radio" name="period" value="1971_1990"><div class="vp-opt__box"><span class="vp-opt__lbl">{% trans "Midis 1971 dhe 1990" %}</span></div></label>
+            <label class="vp-opt"><input type="radio" name="period" value="1991_2010"><div class="vp-opt__box"><span class="vp-opt__lbl">{% trans "Midis 1991 dhe 2010" %}</span></div></label>
+            <label class="vp-opt"><input type="radio" name="period" value="pas_2010"><div class="vp-opt__box"><span class="vp-opt__lbl">{% trans "Pas vitit 2010" %}</span></div></label>
+          </div>
+          <p class="vp-q">{% trans "Cila është gjendja e pronës suaj?" %} <span>*</span></p>
+          <div class="vp-opts" style="margin-bottom:24px">
+            <label class="vp-opt"><input type="radio" name="condition" value="rinovim"><div class="vp-opt__box"><span class="vp-opt__lbl">{% trans "Për të rinovuar" %}</span></div></label>
+            <label class="vp-opt"><input type="radio" name="condition" value="mesatare"><div class="vp-opt__box"><span class="vp-opt__lbl">{% trans "Gjendje mesatare" %}</span></div></label>
+            <label class="vp-opt"><input type="radio" name="condition" value="mire"><div class="vp-opt__box"><span class="vp-opt__lbl">{% trans "Gjendje e mirë" %}</span></div></label>
+            <label class="vp-opt"><input type="radio" name="condition" value="perfekte"><div class="vp-opt__box"><span class="vp-opt__lbl">{% trans "Në gjendje perfekte" %}</span></div></label>
+          </div>
+          <button class="vp-btn" id="n3" type="button">{% trans "Vazhdo" %} <i class="fas fa-arrow-right"></i></button>
+          <p class="vp-note">{% trans "Fushat e shënuara me * të detyrueshme për t'u plotësuar." %}</p>
+        </div>
+
+        <!-- HAPI 4 -->
+        <div class="vp-step" id="step4">
+          <p class="vp-q">{% trans "Çfarë lloje parkimi janë në dispozicion?" %} <span>*</span></p>
+          <div class="vp-opts" style="margin-bottom:24px">
+            <label class="vp-opt"><input type="radio" name="parking" value="asnje"><div class="vp-opt__box"><span class="vp-opt__lbl">{% trans "Nuk ka parkim" %}</span></div></label>
+            <label class="vp-opt"><input type="radio" name="parking" value="garazh"><div class="vp-opt__box"><span class="vp-opt__lbl">{% trans "Garazh" %}</span></div></label>
+            <label class="vp-opt"><input type="radio" name="parking" value="parku"><div class="vp-opt__box"><span class="vp-opt__lbl">{% trans "Parking publik" %}</span></div></label>
+          </div>
+          <p class="vp-q">{% trans "Adresa e pronës suaj" %} <span>*</span></p>
+          <div class="vp-addr-wrap">
+            <input type="text" class="vp-inp-full" id="vpAddr"
+                   placeholder="{% trans 'Eg. Rruga e Durrësit, Apt 13, Tiranë' %}">
+            <span class="vp-err" id="addrErr"><i class="fas fa-exclamation-circle"></i> {% trans "Ju lutem shkruani adresën" %}</span>
+          </div>
+          <button class="vp-btn" id="n4" type="button">{% trans "Vazhdo" %} <i class="fas fa-arrow-right"></i></button>
+          <p class="vp-note">{% trans "Fushat e shënuara me * të detyrueshme për t'u plotësuar." %}</p>
+        </div>
+
+        <!-- HAPI 5 -->
+        <div class="vp-step" id="step5">
+          <div class="vp-row">
+            <div class="vp-field">
+              <label class="vp-lbl" for="vpFn">{% trans "Emri" %} <span>*</span></label>
+              <input type="text" class="vp-inp" id="vpFn" placeholder="{% trans 'Emri juaj' %}">
+              <span class="vp-err" id="fnErr"><i class="fas fa-exclamation-circle"></i> {% trans "E detyrueshme" %}</span>
+            </div>
+            <div class="vp-field">
+              <label class="vp-lbl" for="vpLn">{% trans "Mbiemri" %} <span>*</span></label>
+              <input type="text" class="vp-inp" id="vpLn" placeholder="{% trans 'Mbiemri juaj' %}">
+              <span class="vp-err" id="lnErr"><i class="fas fa-exclamation-circle"></i> {% trans "E detyrueshme" %}</span>
+            </div>
+          </div>
+          <div class="vp-row">
+            <div class="vp-field">
+              <label class="vp-lbl" for="vpEm">{% trans "Adresë Email" %} <span>*</span></label>
+              <input type="email" class="vp-inp" id="vpEm" placeholder="email@juaj.com">
+              <span class="vp-err" id="emErr"><i class="fas fa-exclamation-circle"></i> {% trans "Email i pavlefshëm" %}</span>
+            </div>
+            <div class="vp-field">
+              <label class="vp-lbl" for="vpPh">{% trans "Numër Telefoni" %} <span>*</span></label>
+              <input type="tel" class="vp-inp" id="vpPh" placeholder="+355 6X XXX XXXX">
+              <span class="vp-err" id="phErr"><i class="fas fa-exclamation-circle"></i> {% trans "E detyrueshme" %}</span>
+            </div>
+          </div>
+          <div style="margin-top:10px">
+            <button class="vp-btn" id="vpSub" type="button">
+              <i class="fas fa-paper-plane"></i> {% trans "Dërgoni Mesazhin Tuaj" %}
+            </button>
+          </div>
+          <p class="vp-note">{% trans "Fushat e shënuara me * të detyrueshme për t'u plotësuar." %}</p>
+        </div>
+
+        <!-- Sukses -->
+        <div class="vp-ok" id="vpOk">
+          <div class="vp-ok__ico"><i class="fas fa-check"></i></div>
+          <h3>{% trans "Faleminderit!" %}</h3>
+          <p>{% trans "Kërkesa juaj u dërgua me sukses. Do ju kontaktojmë brenda 24 orëve." %}</p>
+          <a href="{% url 'home' %}"><i class="fas fa-home"></i> {% trans "Kthehu në faqen kryesore" %}</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="vp-info">
+  <div class="container">
+    <div class="vp-why-hd">
+      <span class="ve-eyebrow">{% trans "Vlerësimi i Pasurisë" %}</span>
+      <h2>{% trans "Pse një vlerësim i pronës?" %}</h2>
+      <p>{% trans "Për të kuptuar çmimin e vertete te prones tuaj, është e rëndësishme të bëni një analizë gjithëpërfshirëse të vlerës së tregut. Na kontaktoni te zbuloni vleren e prones tuaj!" %}</p>
+    </div>
+    <div class="vp-why-cards">
+      <div class="vp-why-card">
+        <h4><i class="fas fa-chart-bar" style="color:var(--gold);margin-right:8px"></i>{% trans "Analizë e Tregut Aktual" %}</h4>
+        <p>{% trans "Duke përdorur të dhëna të tregut në kohë reale, analizojmë çmimet e pronave të ngjashme në zonën tuaj." %}</p>
+      </div>
+      <div class="vp-why-card">
+        <h4><i class="fas fa-award" style="color:var(--gold);margin-right:8px"></i>{% trans "15 Vjet Eksperiencë" %}</h4>
+        <p>{% trans "Ekipi ynë ka mbi 15 vjet eksperiencë në tregun imobiliar shqiptar dhe njeh çdo zonë." %}</p>
+      </div>
+      <div class="vp-why-card">
+        <h4><i class="fas fa-shield-alt" style="color:var(--gold);margin-right:8px"></i>{% trans "Pa Asnjë Detyrim" %}</h4>
+        <p>{% trans "Vlerësimi është plotësisht falas. Vendimi përfundimtar është gjithmonë i juaji." %}</p>
+      </div>
+      <div class="vp-why-card">
+        <h4><i class="fas fa-file-alt" style="color:var(--gold);margin-right:8px"></i>{% trans "Raport i Personalizuar" %}</h4>
+        <p>{% trans "Merrni raport të detajuar të përshtatur me karakteristikat unike të pronës tuaj." %}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'properties/js/main.js' %}"></script>
+<script>window.VP_SUBMIT_URL = "{% url 'vleresim_submit' %}";</script>
+<script src="{% static 'properties/js/vleresim_prone.js' %}"></script>
+{% endblock %}

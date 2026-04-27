@@ -1,0 +1,329 @@
+{% extends "properties/base.html" %}
+{% load static i18n %}
+
+{% block title %}{% trans "Karriera" %} — ValorEstate{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link rel="stylesheet" href="{% static 'properties/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="kr-hero">
+  <div class="kr-hero__bg">
+    <img src="{% static 'properties/img/karriera-hero.jpg' %}" alt="{% trans 'Karriera' %}" class="kr-hero__img">
+    <div class="kr-hero__overlay"></div>
+    <div class="kr-hero__grain"></div>
+  </div>
+  <div class="container">
+    <div class="kr-hero__inner">
+      <nav class="kr-breadcrumb" data-aos="fade-down">
+        <a href="{% url 'home' %}">{% trans "Kreu" %}</a>
+        <span>/</span>
+        <span>{% trans "Karriera" %}</span>
+      </nav>
+      <h1 class="kr-hero__title" data-aos="fade-up" data-aos-delay="100">
+        {% trans "Filloni Karrierën" %}<br>
+        <em class="kr-hero__accent">{% trans "tuaj të vërtetë!" %}</em>
+      </h1>
+      <p class="kr-hero__sub" data-aos="fade-up" data-aos-delay="200">
+        {% trans "Bashkohuni me ekipin tonë dhe ndërtoni të ardhmen tuaj profesionale në industrinë më dinamike të tregut shqiptar." %}
+      </p>
+      <div style="display:flex; justify-content:flex-end;">
+        <a href="#aplikim" class="kr-hero__cta" data-aos="fade-up" data-aos-delay="300">
+          {% trans "Apliko Tani" %} <i class="fas fa-arrow-down"></i>
+        </a>
+      </div>
+    </div>
+    <div class="kr-hero__scroll">
+      <div class="kr-hero__scroll-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="kr-stats-bar">
+  <div class="container kr-stats-bar__inner">
+    <div class="kr-stat">
+      <span class="kr-stat__num">51+</span>
+      <span class="kr-stat__lbl">{% trans "Vite Eksperiencë" %}</span>
+    </div>
+    <div class="kr-stat__divider"></div>
+    <div class="kr-stat">
+      <span class="kr-stat__num">12,600</span>
+      <span class="kr-stat__lbl">{% trans "Zyra Globale" %}</span>
+    </div>
+    <div class="kr-stat__divider"></div>
+    <div class="kr-stat">
+      <span class="kr-stat__num">47</span>
+      <span class="kr-stat__lbl">{% trans "Zyra në Ballkan" %}</span>
+    </div>
+    <div class="kr-stat__divider"></div>
+    <div class="kr-stat">
+      <span class="kr-stat__num">6</span>
+      <span class="kr-stat__lbl">{% trans "Qytete në Shqipëri" %}</span>
+    </div>
+  </div>
+</div>
+
+<!-- PSE TË NA BASHKOHENI -->
+<section class="kr-why">
+  <div class="container">
+    <div class="kr-why__head" data-aos="fade-up">
+      <span class="ve-eyebrow">{% trans "Pse të na bashkoheni" %}</span>
+      <h2 class="kr-section-title">{% trans "APLIKONI SOT PËR TË FILLUAR NJË PUNË TË RE!" %}</h2>
+    </div>
+    <div class="kr-why__grid">
+      <div class="kr-why-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="kr-why-card__num">01</div>
+        <div class="kr-why-card__icon"><i class="fas fa-globe"></i></div>
+        <h3 class="kr-why-card__title">{% trans "Bashkohu ValorEstate" %}</h3>
+        <p class="kr-why-card__text">{% trans "Bashkohuni me ValorEstate e cila është pjesë e rrjetit global prej 12,600 zyrash imobiliare që kanë një eksperiencë prej 51 vitesh në industrinë e pasurive të paluajtshme dhe për 23 vite me radhë është njohur si marka më e respektuar dhe më e njohur në këtë industri." %}</p>
+      </div>
+      <div class="kr-why-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="kr-why-card__num">02</div>
+        <div class="kr-why-card__icon"><i class="fas fa-trophy"></i></div>
+        <h3 class="kr-why-card__title">{% trans "Lider në Ballkan" %}</h3>
+        <p class="kr-why-card__text">{% trans "Si lider në Ballkan me një rrjet prej 47 zyrash në 6 qytete: Tiranë, Sarandë, Vlorë, Shkodër, Pogradec & Durrës. Ju do të dalloheni përmes standardit tonë të artë duke zhvilluar më tej aftësitë tuaja profesionale në një nga industritë më fitimprurëse." %}</p>
+      </div>
+      <div class="kr-why-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="kr-why-card__num">03</div>
+        <div class="kr-why-card__icon"><i class="fas fa-rocket"></i></div>
+        <h3 class="kr-why-card__title">{% trans "E ardhmja është me ne" %}</h3>
+        <p class="kr-why-card__text">{% trans "Nëse ëndrra juaj është të jeni pronar biznesi, atëherë e ardhmja juaj është me ValorEstate. Investoni kohën dhe ambicien tuaj në ekspertizën tonë dhe aplikoni sot për t'u bërë Agjent imobiliar." %}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FRANCHISE BANNER -->
+<section class="kr-franchise">
+  <div class="kr-franchise__bg">
+    <img src="{% static 'properties/img/franchise-bg.jpg' %}" alt="{% trans 'Franshizë' %}" class="kr-franchise__img">
+    <div class="kr-franchise__overlay"></div>
+  </div>
+  <div class="container kr-franchise__inner">
+    <div class="kr-franchise__content" data-aos="fade-right">
+      <span class="ve-eyebrow ve-eyebrow--light">{% trans "Franshizë" %}</span>
+      <h2 class="kr-franchise__title">{% trans "Mundësitë e" %}<br>{% trans "ekskluzivitetit" %}</h2>
+      <p class="kr-franchise__text">{% trans "Eksploroni mundësi të pafundme për shtëpinë tuaj të ëndrrave. Nëse ëndrra juaj është të jeni pronar biznesi, atëherë e ardhmja juaj është me ValorEstate. Investoni kohën dhe ambicien tuaj në ekspertizën tonë dhe aplikoni sot për t'u bërë Agjent imobiliar." %}</p>
+      <a href="#aplikim" class="kr-franchise__btn">
+        {% trans "Apliko Tani" %} <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+    <div class="kr-franchise__cards" data-aos="fade-left" data-aos-delay="100">
+      <div class="kr-fr-card">
+        <i class="fas fa-handshake kr-fr-card__icon"></i>
+        <h4>{% trans "Partneritet Ekskluziv" %}</h4>
+        <p>{% trans "Zonë ekskluzive operative pa konkurrencë brenda rrjetit." %}</p>
+      </div>
+      <div class="kr-fr-card">
+        <i class="fas fa-graduation-cap kr-fr-card__icon"></i>
+        <h4>{% trans "Trajnim i Plotë" %}</h4>
+        <p>{% trans "Program trajnimi ndërkombëtar me certifikim zyrtar." %}</p>
+      </div>
+      <div class="kr-fr-card">
+        <i class="fas fa-chart-line kr-fr-card__icon"></i>
+        <h4>{% trans "Mbështetje Marketing" %}</h4>
+        <p>{% trans "Akses në platformat dhe materialet globale të marketingut." %}</p>
+      </div>
+      <div class="kr-fr-card">
+        <i class="fas fa-users kr-fr-card__icon"></i>
+        <h4>{% trans "Komunitet Global" %}</h4>
+        <p>{% trans "Rrjet i 12,600 zyrash dhe mijëra profesionistësh botërorë." %}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMA E APLIKIMIT -->
+<section class="kr-apply" id="aplikim">
+  <div class="container">
+    <div class="kr-apply__layout">
+
+      <div class="kr-apply__info" data-aos="fade-right">
+        <span class="ve-eyebrow">{% trans "Ekipi ValorEstate" %}</span>
+        <h2 class="kr-section-title">{% trans "Aplikoni Tani" %}</h2>
+        <p class="kr-apply__desc">{% trans "Gati për të ecur përpara drejt ëndrrës tuaj? Plotësoni formularin dhe ekipi ynë do t'ju kontaktojë brenda 48 orëve." %}</p>
+        <div class="kr-apply__steps">
+          <div class="kr-step">
+            <div class="kr-step__num">1</div>
+            <div>
+              <strong>{% trans "Plotësoni formularin" %}</strong>
+              <p>{% trans "Dërgoni të dhënat dhe CV-në tuaj" %}</p>
+            </div>
+          </div>
+          <div class="kr-step">
+            <div class="kr-step__num">2</div>
+            <div>
+              <strong>{% trans "Intervista" %}</strong>
+              <p>{% trans "Takohemi dhe diskutojmë mundësitë" %}</p>
+            </div>
+          </div>
+          <div class="kr-step">
+            <div class="kr-step__num">3</div>
+            <div>
+              <strong>{% trans "Filloni karrierën tuaj" %}</strong>
+              <p>{% trans "Bashkohuni me ekipin tonë fitues" %}</p>
+            </div>
+          </div>
+        </div>
+        <div class="kr-apply__contact">
+          <a href="mailto:karriera@valorestate.com" class="kr-apply__contact-item">
+            <i class="fas fa-envelope"></i> karriera@valorestate.com
+          </a>
+          <a href="tel:+355690000000" class="kr-apply__contact-item">
+            <i class="fas fa-phone"></i> +355 69 000 0000
+          </a>
+        </div>
+      </div>
+
+      <div class="kr-apply__form-wrap" data-aos="fade-left" data-aos-delay="100">
+
+        <div class="kr-alert kr-alert--success" id="successAlert" style="display:none;">
+          <i class="fas fa-check-circle"></i>
+          <div>
+            <strong>{% trans "Aplikimi u dërgua me sukses!" %}</strong>
+            <p>{% trans "Faleminderit! Do ju kontaktojmë brenda 48 orëve." %}</p>
+          </div>
+        </div>
+
+        {% if apply_errors and not apply_success %}
+        <div class="kr-alert kr-alert--error">
+          <i class="fas fa-exclamation-circle"></i>
+          <div>
+            <strong>{% trans "Ju lutem korrigjoni gabimet:" %}</strong>
+            <ul>{% for f, err in apply_errors.items %}<li>{{ err }}</li>{% endfor %}</ul>
+          </div>
+        </div>
+        {% endif %}
+
+        <form class="kr-form" method="POST" action="{% url 'karriera' %}#aplikim"
+              enctype="multipart/form-data" novalidate id="applyForm">
+          {% csrf_token %}
+          <input type="text" name="website" value="" tabindex="-1"
+                 autocomplete="off" style="position:absolute;left:-9999px;opacity:0;">
+
+          <div class="kr-form__row">
+            <div class="kr-field {% if apply_errors.first_name %}kr-field--error{% endif %}">
+              <label class="kr-label">{% trans "Emri" %} <span>*</span></label>
+              <input type="text" name="first_name" class="kr-input"
+                     placeholder="{% trans 'Emri juaj' %}"
+                     value="{{ apply_data.first_name|default:'' }}" maxlength="100" required>
+              {% if apply_errors.first_name %}<span class="kr-field-error"><i class="fas fa-times-circle"></i> {{ apply_errors.first_name }}</span>{% endif %}
+            </div>
+            <div class="kr-field {% if apply_errors.last_name %}kr-field--error{% endif %}">
+              <label class="kr-label">{% trans "Mbiemri" %} <span>*</span></label>
+              <input type="text" name="last_name" class="kr-input"
+                     placeholder="{% trans 'Mbiemri juaj' %}"
+                     value="{{ apply_data.last_name|default:'' }}" maxlength="100" required>
+              {% if apply_errors.last_name %}<span class="kr-field-error"><i class="fas fa-times-circle"></i> {{ apply_errors.last_name }}</span>{% endif %}
+            </div>
+          </div>
+
+          <div class="kr-form__row">
+            <div class="kr-field {% if apply_errors.email %}kr-field--error{% endif %}">
+              <label class="kr-label">{% trans "Email" %} <span>*</span></label>
+              <input type="email" name="email" class="kr-input" placeholder="x@email.com"
+                     value="{{ apply_data.email|default:'' }}" maxlength="254" required>
+              {% if apply_errors.email %}<span class="kr-field-error"><i class="fas fa-times-circle"></i> {{ apply_errors.email }}</span>{% endif %}
+            </div>
+            <div class="kr-field {% if apply_errors.phone %}kr-field--error{% endif %}">
+              <label class="kr-label">{% trans "Telefoni" %} <span>*</span></label>
+              <input type="tel" name="phone" class="kr-input" placeholder="+355 69 000 0000"
+                     value="{{ apply_data.phone|default:'' }}" maxlength="20" required>
+              {% if apply_errors.phone %}<span class="kr-field-error"><i class="fas fa-times-circle"></i> {{ apply_errors.phone }}</span>{% endif %}
+            </div>
+          </div>
+
+          <div class="kr-field {% if apply_errors.position %}kr-field--error{% endif %}">
+            <label class="kr-label">{% trans "Pozicioni për të cilin dëshironi të aplikoni" %} <span>*</span></label>
+            <div class="kr-select-wrap">
+              <select name="position" class="kr-input kr-select" id="positionSelect" required>
+                <option value="">{% trans "Zgjidhni pozicionin" %}</option>
+                <option value="Office manager"          {% if apply_data.position == 'Office manager' %}selected{% endif %}>{% trans "Office Manager" %}</option>
+                <option value="Office asistant"         {% if apply_data.position == 'Office asistant' %}selected{% endif %}>{% trans "Office Assistant" %}</option>
+                <option value="Real Estate consultant"  {% if apply_data.position == 'Real Estate consultant' %}selected{% endif %}>{% trans "Real Estate Consultant" %}</option>
+                <option value="Graphic Designer"        {% if apply_data.position == 'Graphic Designer' %}selected{% endif %}>{% trans "Graphic Designer" %}</option>
+                <option value="Marketing Specialist"    {% if apply_data.position == 'Marketing Specialist' %}selected{% endif %}>{% trans "Marketing Specialist" %}</option>
+                <option value="Social media specialist" {% if apply_data.position == 'Social media specialist' %}selected{% endif %}>{% trans "Social Media Specialist" %}</option>
+              </select>
+              <i class="fas fa-chevron-down kr-select-arrow"></i>
+            </div>
+            {% if apply_errors.position %}<span class="kr-field-error"><i class="fas fa-times-circle"></i> {{ apply_errors.position }}</span>{% endif %}
+          </div>
+
+          <div class="kr-field {% if apply_errors.cv %}kr-field--error{% endif %}">
+            <label class="kr-label">{% trans "CV / Dokumenti" %} <span>*</span></label>
+            <div class="kr-upload" id="uploadArea">
+              <input type="file" name="cv" id="cvInput"
+                     accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" class="kr-upload__input">
+              <div class="kr-upload__content" id="uploadContent">
+                <div class="kr-upload__icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                <p class="kr-upload__text"><strong>{% trans "Click to upload" %}</strong> {% trans "or drag and drop" %}</p>
+                <p class="kr-upload__hint">{% trans "PNG, JPG, PDF ose DOC (max. 5MB)" %}</p>
+              </div>
+              <div class="kr-upload__selected" id="uploadSelected" style="display:none;">
+                <i class="fas fa-file-check"></i>
+                <span id="uploadFileName"></span>
+                <button type="button" class="kr-upload__remove" onclick="removeFile()">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            {% if apply_errors.cv %}<span class="kr-field-error"><i class="fas fa-times-circle"></i> {{ apply_errors.cv }}</span>{% endif %}
+          </div>
+
+          <div class="kr-field kr-field--check {% if apply_errors.privacy %}kr-field--error{% endif %}">
+            <label class="kr-checkbox">
+              <input type="checkbox" name="privacy" required>
+              <span class="kr-checkbox__box"></span>
+              <span class="kr-checkbox__lbl">
+                {% trans "Jam dakord me Kushtet e Përdorimit dhe Politikën e Privatësisë." %}
+              </span>
+            </label>
+            {% if apply_errors.privacy %}<span class="kr-field-error"><i class="fas fa-times-circle"></i> {{ apply_errors.privacy }}</span>{% endif %}
+          </div>
+
+          <button type="submit" class="kr-submit" id="applySubmit">
+            <span class="kr-submit__text">
+              <i class="fas fa-paper-plane"></i> {% trans "Dërgoni Mesazhin Tuaj" %}
+            </span>
+            <span class="kr-submit__loading" style="display:none;">
+              <i class="fas fa-spinner fa-spin"></i> {% trans "Duke dërguar..." %}
+            </span>
+          </button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="kr-bottom-cta">
+  <div class="container">
+    <div class="kr-bottom-cta__inner" data-aos="fade-up">
+      <h2 class="kr-bottom-cta__title">
+        {% trans "Gati për të ecur përpara drejt ëndrrës tuaj?" %}
+      </h2>
+      <a href="#aplikim" class="kr-bottom-cta__btn">
+        {% trans "Apliko Tani" %} <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div id="karrieraMeta"
+     data-success="{% if apply_success %}true{% else %}false{% endif %}"
+     data-errors="{% if apply_errors and not apply_success %}true{% else %}false{% endif %}"
+     style="display:none;"></div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="{% static 'properties/js/main.js' %}"></script>
+{% endblock %}

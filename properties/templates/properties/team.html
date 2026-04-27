@@ -1,0 +1,194 @@
+{% extends "properties/base.html" %}
+{% load static i18n l10n %}
+
+{% block title %}{% trans "Ekipi Ynë" %} — ValorEstate{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link rel="stylesheet" href="{% static 'properties/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ══ HERO ══ -->
+<section class="tm-hero">
+  <div class="tm-hero__bg">
+    <img src="{% static 'properties/img/ekipi.jpg' %}" alt="" class="tm-hero__img">
+    <div class="tm-hero__overlay"></div>
+  </div>
+  <div class="container tm-hero__inner">
+    <nav class="tm-breadcrumb" data-aos="fade-down">
+      <a href="{% url 'home' %}">{% trans "Kryefaqja" %}</a>
+      <span>/</span>
+      <span>{% trans "Ekipi yne" %}</span>
+    </nav>
+    <h1 class="tm-hero__title" data-aos="fade-up" data-aos-delay="100">
+      {% trans "Njerëzit Pas" %}<br>
+      <em class="tm-hero__accent">ValorEstate</em>
+    </h1>
+    <p class="tm-hero__sub" data-aos="fade-up" data-aos-delay="200">
+      {% trans "Ekipi ynë i dedikuar punon çdo ditë për të gjetur pronën perfekte për ju." %}
+    </p>
+  </div>
+</section>
+
+<!-- ══ STATS BAR ══ -->
+<div class="tm-stats">
+  <div class="container tm-stats__inner">
+    <div class="tm-stat">
+      <span class="tm-stat__num">{{ agents_count }}</span>
+      <span class="tm-stat__lbl">{% trans "Agjentë Aktivë" %}</span>
+    </div>
+    <div class="tm-stat">
+      <span class="tm-stat__num">15+</span>
+      <span class="tm-stat__lbl">{% trans "Vjet Eksperiencë" %}</span>
+    </div>
+    <div class="tm-stat">
+      <span class="tm-stat__num">1,200+</span>
+      <span class="tm-stat__lbl">{% trans "Prona të Shitura" %}</span>
+    </div>
+    <div class="tm-stat">
+      <span class="tm-stat__num">2000+</span>
+      <span class="tm-stat__lbl">{% trans "Klientë të kënaqur" %}</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ GRID AGJENTËSH ══ -->
+<section class="tm-section">
+  <div class="container">
+
+    {% if agents %}
+    <div class="tm-grid">
+      {% for agent in agents %}
+      <div class="tm-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:'0' }}0"
+           onclick="window.location='{% url 'agent_detail' agent.pk %}'"
+           style="cursor:pointer;">
+
+        <div class="tm-card__photo-wrap">
+          {% if agent.photo %}
+            <img src="{{ agent.photo.url }}" alt="{{ agent.full_name }}" class="tm-card__photo">
+          {% else %}
+            <div class="tm-card__photo tm-card__photo--ph">
+              <i class="fas fa-user"></i>
+            </div>
+          {% endif %}
+
+          {% if agent.is_featured %}
+          <span class="tm-card__badge">
+            <i class="fas fa-star"></i> Featured
+          </span>
+          {% endif %}
+
+          <div class="tm-card__rating">
+    <i class="fas fa-star"></i> {{ agent.rating_display }}
+          </div>
+        </div>
+
+        <div class="tm-card__body">
+          <h3 class="tm-card__name">{{ agent.full_name }}</h3>
+          <span class="tm-card__role">{{ agent.role }}</span>
+          <span class="tm-card__spec">{{ agent.get_specialization_display }}</span>
+
+          <div class="tm-card__stats">
+            <div class="tm-card__stat">
+              <span class="tm-card__stat-num">{{ agent.sold_count }}</span>
+              <span class="tm-card__stat-lbl">{% trans "Prona" %}</span>
+            </div>
+            <div class="tm-card__stat-sep"></div>
+            <div class="tm-card__stat">
+              <span class="tm-card__stat-num">{{ agent.experience_years }}</span>
+              <span class="tm-card__stat-lbl">{% trans "Vjet" %}</span>
+            </div>
+            <div class="tm-card__stat-sep"></div>
+            <div class="tm-card__stat">
+  <span class="tm-card__stat-num" style="color:var(--gold)">{{ agent.rating_display }}</span>
+  <span class="tm-card__stat-lbl">{% trans "Rating" %}</span>
+</div>
+          </div>
+
+          {% if agent.bio %}
+          <p class="tm-card__bio">{{ agent.bio|truncatewords:18 }}</p>
+          {% endif %}
+
+          <div class="tm-card__contacts">
+            {% if agent.phone %}
+            <a href="tel:{{ agent.phone }}" class="tm-card__contact tm-card__contact--phone"
+               onclick="event.stopPropagation()">
+              <i class="fas fa-phone"></i> {{ agent.phone }}
+            </a>
+            {% endif %}
+            {% if agent.email %}
+            <a href="mailto:{{ agent.email }}" class="tm-card__contact tm-card__contact--email"
+               onclick="event.stopPropagation()">
+              <i class="fas fa-envelope"></i> {{ agent.email }}
+            </a>
+            {% endif %}
+          </div>
+
+          <div class="tm-card__footer">
+            <div class="tm-card__socials">
+              {% if agent.phone %}
+              <a href="https://wa.me/{{ agent.phone }}" target="_blank"
+                 class="tm-social-btn" onclick="event.stopPropagation()" title="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+              {% endif %}
+              {% if agent.instagram %}
+              <a href="{{ agent.instagram }}" target="_blank"
+                 class="tm-social-btn" onclick="event.stopPropagation()" title="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              {% endif %}
+              {% if agent.linkedin %}
+              <a href="{{ agent.linkedin }}" target="_blank"
+                 class="tm-social-btn" onclick="event.stopPropagation()" title="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              {% endif %}
+            </div>
+
+            <a href="{% url 'agent_detail' agent.pk %}" class="ve-btn-primary"
+               onclick="event.stopPropagation()">
+              {% trans "Profili" %} <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+
+    {% else %}
+    <div class="tm-empty">
+      <div class="tm-empty__icon"></div>
+      <h3>{% trans "Nuk ka agjentë momentalisht" %}</h3>
+      <p>{% trans "Shto agjentë nga paneli i administrimit." %}</p>
+      <a href="{% url 'contact' %}" class="ve-btn-primary">{% trans "Na Kontaktoni" %}</a>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="tm-cta">
+  <div class="container tm-cta__inner">
+    <div class="tm-cta__text" data-aos="fade-right">
+      <span class="ve-eyebrow">{% trans "Bashkohu me Ne" %}</span>
+      <h2>{% trans "Jeni agjent imobiliar?" %}</h2>
+      <p>{% trans "Bashkohuni me ekipin tonë dhe rritni karrierën tuaj." %}</p>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="{% static 'properties/js/main.js' %}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    AOS.init({ once: true, duration: 600, easing: 'ease-out-cubic' });
+  });
+</script>
+{% endblock %}

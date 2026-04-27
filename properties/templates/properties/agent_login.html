@@ -1,0 +1,57 @@
+{% load static %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'properties/css/style.css' %}">
+
+{% endblock %}
+
+{% block content %}
+<div class="agent-login">
+  <div class="agent-login__box">
+
+    <div class="agent-login__logo">
+      <img src="{% static 'properties/img/logo.png' %}" alt="ValorEstate"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+      <div style="display:none; font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:700; color:var(--navy);">
+        Valor<span style="color:var(--gold)">Estate</span>
+      </div>
+    </div>
+
+    <div class="agent-login__divider"></div>
+
+    <h1 class="agent-login__title">Portali i Agjentit</h1>
+    <p class="agent-login__sub">Hyni me kredencialet tuaja</p>
+
+    {% if error %}
+    <div class="agent-login__error">
+      <i class="fas fa-exclamation-circle"></i> {{ error }}
+    </div>
+    {% endif %}
+
+    <form method="POST">
+      {% csrf_token %}
+      <div class="agent-login__field">
+        <label class="agent-login__label">Username</label>
+        <input type="text" name="username" class="agent-login__input"
+               placeholder="username juaj" required autofocus>
+      </div>
+      <div class="agent-login__field">
+        <label class="agent-login__label">Fjalëkalimi</label>
+        <input type="password" name="password" class="agent-login__input"
+               placeholder="" required>
+      </div>
+      <button type="submit" class="agent-login__btn">
+        <i class="fas fa-sign-in-alt"></i> Hyr në Dashboard
+      </button>
+    </form>
+
+    <a href="{% url 'home' %}" class="agent-login__back">
+      <i class="fas fa-arrow-left"></i> Kthehu te faqja kryesore
+    </a>
+  </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src="{% static 'properties/js/main.js' %}"></script>
+{% endblock %}
+
+

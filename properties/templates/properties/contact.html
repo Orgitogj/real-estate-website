@@ -1,0 +1,301 @@
+{% extends "properties/base.html" %}
+{% load static i18n %}
+
+{% block title %}ValorEstate — {% trans "Na Kontaktoni" %}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link rel="stylesheet" href="{% static 'properties/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ===================== HERO ===================== -->
+<section class="ct-hero">
+  <div class="ct-hero__bg">
+    <img src="{% static 'properties/img/contact-hero.png' %}" alt="{% trans 'Kontakt' %}" class="ct-hero__img">
+    <div class="ct-hero__overlay"></div>
+    <div class="ct-hero__grain"></div>
+  </div>
+  <div class="container ct-hero__inner">
+    <div class="ct-hero__breadcrumb" data-aos="fade-down">
+      <a href="{% url 'home' %}">{% trans "Kryefaqja" %}</a>
+      <span>/</span>
+      <span>{% trans "Kontakt" %}</span>
+    </div>
+    <h1 class="ct-hero__title" data-aos="fade-up" data-aos-delay="100">
+      {% trans "Na" %} <em class="ct-hero__accent">{% trans "Kontaktoni" %}</em>
+    </h1>
+    <p class="ct-hero__sub" data-aos="fade-up" data-aos-delay="200">
+      {% trans "Jemi gjithmonë të gatshëm t'ju ndihmojmë të gjeni pronën e duhur. Shkruani ose telefononi — do t'ju përgjigjemi brenda 24 orëve." %}
+    </p>
+  </div>
+</section>
+
+<!-- ===================== MAIN CONTENT ===================== -->
+<section class="ct-section">
+  <div class="container">
+    <div class="ct-grid">
+
+      <!-- ── LEFT: Form ── -->
+      <div class="ct-form-wrap" data-aos="fade-right">
+        <div class="ct-form-head">
+          <span class="ve-eyebrow">{% trans "Dërgoni Mesazh" %}</span>
+          <h2 class="ct-heading">{% trans "Si Mund t'ju Ndihmojmë?" %}</h2>
+          <p class="ct-sub">{% trans "Plotësoni formularin dhe një nga agjentët tanë do t'ju kontaktojë sa më shpejt." %}</p>
+        </div>
+
+        {% if success %}
+        <div class="contact-alert contact-alert--success">
+          <div class="contact-alert__icon"><i class="fas fa-check-circle"></i></div>
+          <div>
+            <strong>{% trans "Mesazhi u dërgua me sukses!" %}</strong>
+            <p>{% trans "Faleminderit! Do ju kontaktojmë brenda 24 orëve." %}</p>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if server_error %}
+        <div class="contact-alert contact-alert--error">
+          <div class="contact-alert__icon"><i class="fas fa-server"></i></div>
+          <div>
+            <strong>{% trans "Gabim i serverit!" %}</strong>
+            <p>{% trans "Ndodhi një problem teknik. Provoni përsëri ose na telefononi direkt." %}</p>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if email_warning %}
+        <div class="contact-alert contact-alert--warning">
+          <div class="contact-alert__icon"><i class="fas fa-exclamation-triangle"></i></div>
+          <div>
+            <strong>{% trans "Mesazhi u ruajt, por email-i nuk u dërgua." %}</strong>
+            <p>{% trans "Do ju kontaktojmë manualisht. Për urgjencë, na telefononi direkt." %}</p>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if errors and not success %}
+        <div class="contact-alert contact-alert--error">
+          <div class="contact-alert__icon"><i class="fas fa-exclamation-circle"></i></div>
+          <div>
+            <strong>{% trans "Ju lutem korrigjoni gabimet:" %}</strong>
+            <ul class="contact-alert__list">
+              {% for field, err in errors.items %}
+              <li>{{ err }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if not success %}
+        <form class="ct-form" method="POST" action="{% url 'contact' %}" novalidate id="contactForm">
+          {% csrf_token %}
+          <input type="text" name="website" value="" tabindex="-1" autocomplete="off" class="ct-honeypot">
+
+          <div class="ct-form__row">
+            <div class="ct-field {% if errors.name %}ct-field--error{% endif %}">
+              <label class="ct-field__label" for="name">
+                <i class="fas fa-user"></i> {% trans "Emri i Plotë" %} <span class="ct-req">*</span>
+              </label>
+              <input type="text" id="name" name="name" class="ct-field__input"
+                     placeholder="{% trans 'Emri juaj' %}"
+                     value="{{ form_data.name|default:'' }}" maxlength="100" required>
+              {% if errors.name %}
+              <span class="ct-field__error"><i class="fas fa-times-circle"></i> {{ errors.name }}</span>
+              {% endif %}
+            </div>
+
+            <div class="ct-field {% if errors.email %}ct-field--error{% endif %}">
+              <label class="ct-field__label" for="email">
+                <i class="fas fa-envelope"></i> {% trans "Email" %} <span class="ct-req">*</span>
+              </label>
+              <input type="email" id="email" name="email" class="ct-field__input"
+                     placeholder="x@email.com"
+                     value="{{ form_data.email|default:'' }}" maxlength="254" required>
+              {% if errors.email %}
+              <span class="ct-field__error"><i class="fas fa-times-circle"></i> {{ errors.email }}</span>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="ct-form__row">
+            <div class="ct-field {% if errors.phone %}ct-field--error{% endif %}">
+              <label class="ct-field__label" for="phone">
+                <i class="fas fa-phone"></i> {% trans "Telefon" %}
+              </label>
+              <input type="tel" id="phone" name="phone" class="ct-field__input"
+                     placeholder="+355 69 000 0000"
+                     value="{{ form_data.phone|default:'' }}" maxlength="20">
+              {% if errors.phone %}
+              <span class="ct-field__error"><i class="fas fa-times-circle"></i> {{ errors.phone }}</span>
+              {% endif %}
+            </div>
+
+            <div class="ct-field {% if errors.subject %}ct-field--error{% endif %}">
+              <label class="ct-field__label" for="subject">
+                <i class="fas fa-tag"></i> {% trans "Subjekti" %} <span class="ct-req">*</span>
+              </label>
+              <select id="subject" name="subject" class="ct-field__input ct-field__select" required>
+                <option value="">{% trans "Zgjidhni një opsion..." %}</option>
+                <option value="buy"       {% if form_data.subject == 'buy' %}selected{% endif %}>{% trans "Dua të Blej Pronë" %}</option>
+                <option value="rent"      {% if form_data.subject == 'rent' %}selected{% endif %}>{% trans "Dua të Marr me Qira" %}</option>
+                <option value="sell"      {% if form_data.subject == 'sell' %}selected{% endif %}>{% trans "Dua të Shes Pronën Time" %}</option>
+                <option value="rent_out"  {% if form_data.subject == 'rent_out' %}selected{% endif %}>{% trans "Dua të Jap me Qira" %}</option>
+                <option value="valuation" {% if form_data.subject == 'valuation' %}selected{% endif %}>{% trans "Kërkoj Vlerësim Prone" %}</option>
+                <option value="invest"    {% if form_data.subject == 'invest' %}selected{% endif %}>{% trans "Konsulencë Investimi" %}</option>
+                <option value="other"     {% if form_data.subject == 'other' %}selected{% endif %}>{% trans "Tjetër" %}</option>
+              </select>
+              {% if errors.subject %}
+              <span class="ct-field__error"><i class="fas fa-times-circle"></i> {{ errors.subject }}</span>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="ct-field {% if errors.message %}ct-field--error{% endif %}">
+            <label class="ct-field__label" for="message">
+              <i class="fas fa-comment-alt"></i> {% trans "Mesazhi" %} <span class="ct-req">*</span>
+            </label>
+            <textarea id="message" name="message"
+                      class="ct-field__input ct-field__textarea"
+                      placeholder="{% trans 'Shkruani kërkesën tuaj këtu...' %}"
+                      rows="6" maxlength="5000" required>{{ form_data.message|default:'' }}</textarea>
+            {% if errors.message %}
+            <span class="ct-field__error"><i class="fas fa-times-circle"></i> {{ errors.message }}</span>
+            {% endif %}
+          </div>
+
+          <div class="ct-field ct-field--check {% if errors.privacy %}ct-field--error{% endif %}">
+            <label class="ct-checkbox">
+              <input type="checkbox" name="privacy" required>
+              <span class="ct-checkbox__box"></span>
+              <span class="ct-checkbox__lbl">
+                {% trans "Jam dakord me Politikën e Privatësisë dhe Kushtet e Përdorimit." %}
+              </span>
+            </label>
+            {% if errors.privacy %}
+            <span class="ct-field__error"><i class="fas fa-times-circle"></i> {{ errors.privacy }}</span>
+            {% endif %}
+          </div>
+
+          <button type="submit" class="ct-submit" id="submitBtn">
+            <span>{% trans "Dërgo Mesazhin" %}</span>
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+        {% endif %}
+
+      </div>
+
+      <!-- ── RIGHT: Info ── -->
+      <div class="ct-info-wrap" data-aos="fade-left" data-aos-delay="100">
+        <div class="ct-info-cards">
+
+          <div class="ct-info-card">
+            <div class="ct-info-card__icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <h4>{% trans "Adresa" %}</h4>
+              <p>{% trans "Rruga Myslym Shyri, Nr. 24" %}<br>{% trans "Tiranë, Shqipëri" %}</p>
+            </div>
+          </div>
+
+          <div class="ct-info-card">
+            <div class="ct-info-card__icon"><i class="fas fa-phone-alt"></i></div>
+            <div>
+              <h4>{% trans "Telefon" %}</h4>
+              <p><a href="tel:+355690000000">+355 69 000 0000</a></p>
+              <p><a href="tel:+355690000001">+355 69 000 0001</a></p>
+            </div>
+          </div>
+
+          <div class="ct-info-card">
+            <div class="ct-info-card__icon"><i class="fas fa-envelope-open-text"></i></div>
+            <div>
+              <h4>{% trans "Email" %}</h4>
+              <p><a href="mailto:info@valorestate.com">info@valorestate.com</a></p>
+              <p><a href="mailto:prona@valorestate.com">prona@valorestate.com</a></p>
+            </div>
+          </div>
+
+          <div class="ct-info-card">
+            <div class="ct-info-card__icon"><i class="fas fa-clock"></i></div>
+            <div>
+              <h4>{% trans "Orari" %}</h4>
+              <p>{% trans "E Hënë — E Premte:" %} <strong>09:00 – 18:00</strong></p>
+              <p>{% trans "E Shtunë:" %} <strong>10:00 – 14:00</strong></p>
+              <p>{% trans "E Diel:" %} <strong>{% trans "Mbyllur" %}</strong></p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="ct-social">
+          <span class="ct-social__lbl">{% trans "Na ndiqni" %}</span>
+          <div class="ct-social__links">
+            <a href="#" class="ct-social__btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="ct-social__btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="ct-social__btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="ct-social__btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MAP ===================== -->
+<section class="ct-map-section" data-aos="fade-up">
+  <div class="ct-map-head container">
+    <span class="ve-eyebrow">{% trans "Ku Ndodhemi" %}</span>
+    <h2 class="ct-heading">{% trans "Zyra Jonë në Tiranë" %}</h2>
+  </div>
+  <div class="ct-map-wrap">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.0!2d19.818!3d41.328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDE5JzQxLjAiTiAxOcKwNDknMDQuOCJF!5e0!3m2!1ssq!2sal!4v1620000000000!5m2!1ssq!2sal"
+      allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="{% trans 'ValorEstate Tiranë' %}">
+    </iframe>
+    <div class="ct-map-card">
+      <div class="ct-map-card__icon"><i class="fas fa-building"></i></div>
+      <strong>ValorEstate</strong>
+      <span>{% trans "Rruga Myslym Shyri, Nr. 24" %}</span>
+      <span>{% trans "Tiranë, Shqipëri" %}</span>
+      <a href="https://maps.google.com" target="_blank" class="ct-map-card__link">
+        {% trans "Hap në Google Maps" %} <i class="fas fa-external-link-alt"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== AGENTS CTA ===================== -->
+<section class="ct-agents-cta">
+  <div class="container">
+    <div class="ct-agents-cta__inner" data-aos="fade-up">
+      <div class="ct-agents-cta__text">
+        <span class="ve-eyebrow">{% trans "Ekipi Ynë" %}</span>
+        <h2 class="ct-heading">{% trans "Fol Direkt me një Agjent" %}</h2>
+        <p>{% trans "Nuk preferoni formularin? Kontaktoni direkt agjentin tuaj të preferuar." %}</p>
+      </div>
+      <a href="{% url 'team' %}" class="ct-agents-cta__btn">
+        {% trans "Shiko Gjithë Ekipin" %} <i class="fas fa-arrow-right ms-2"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div id="contactMeta"
+     data-errors="{% if errors and not success %}true{% else %}false{% endif %}"
+     data-success="{% if success %}true{% else %}false{% endif %}">
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="{% static 'properties/js/main.js' %}"></script>
+<script>
+    AOS.init({ once: true, offset: 60, easing: 'ease-out-cubic' });
+</script>
+{% endblock %}

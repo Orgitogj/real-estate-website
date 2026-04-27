@@ -1,0 +1,311 @@
+{% extends "properties/base.html" %}
+{% load static i18n %}
+
+{% block title %}ValorEstate — {% trans "Lista e Pronave" %}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link rel="stylesheet" href="{% static 'properties/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="pl-hero">
+  <div class="pl-hero__bg">
+    <img src="{% static 'properties/img/prona.webp' %}" alt="{% trans 'Prona' %}" class="pl-hero__img">
+    <div class="pl-hero__overlay"></div>
+  </div>
+  <div class="container pl-hero__inner">
+    <div class="pl-hero__breadcrumb" data-aos="fade-down">
+      <a href="{% url 'home' %}">{% trans "Kryefaqja" %}</a>
+      <span>/</span>
+      <span>{% trans "Prona" %}</span>
+    </div>
+    <h1 class="pl-hero__title" data-aos="fade-up" data-aos-delay="100">
+      {% trans "Gjej Pronën" %}<br><em class="pl-hero__accent">{% trans "e Duhur" %}</em>
+    </h1>
+    <div class="pl-hero__count" data-aos="fade-up" data-aos-delay="200">
+      <i class="fas fa-home"></i>
+      <span><strong>{{ total_count }}</strong> {% trans "prona të disponueshme" %}</span>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER PANEL -->
+<div class="fp-wrap" id="fpWrap">
+  <div class="container">
+    <form method="GET" action="{% url 'property_list' %}" id="filterForm">
+
+      <div class="fp-header">
+        <h2 class="fp-title">{% trans "Filtro pronat" %}</h2>
+        <div class="fp-header-actions">
+          <a href="{% url 'property_list' %}" class="fp-clear">
+            {% trans "Pastro të gjithë filtrat" %} <i class="fas fa-sync-alt"></i>
+          </a>
+          
+          <button type="submit" class="fp-search-btn">
+            {% trans "Kërkoni pronat" %} <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Lloji i Pronës -->
+      <div class="fp-section">
+        <h3 class="fp-section__title">{% trans "Lloji i Pronës" %}</h3>
+        <div class="fp-type-grid">
+          <label class="fp-type {% if active_filters.type == 'Villa' %}active{% endif %}">
+            <input type="radio" name="type" value="Villa" {% if active_filters.type == 'Villa' %}checked{% endif %} onchange="this.form.submit()">
+            <i class="fas fa-home fp-type__fa"></i><span>{% trans "Vilë" %}</span>
+          </label>
+          <label class="fp-type {% if active_filters.type == 'apartment' %}active{% endif %}">
+            <input type="radio" name="type" value="apartment" {% if active_filters.type == 'apartment' %}checked{% endif %} onchange="this.form.submit()">
+            <i class="fas fa-building fp-type__fa"></i><span>{% trans "Apartament" %}</span>
+          </label>
+          <label class="fp-type {% if active_filters.type == 'land' %}active{% endif %}">
+            <input type="radio" name="type" value="land" {% if active_filters.type == 'land' %}checked{% endif %} onchange="this.form.submit()">
+            <i class="fas fa-seedling fp-type__fa"></i><span>{% trans "Tokë" %}</span>
+          </label>
+          <label class="fp-type {% if active_filters.type == 'house' %}active{% endif %}">
+            <input type="radio" name="type" value="house" {% if active_filters.type == 'house' %}checked{% endif %} onchange="this.form.submit()">
+            <i class="fas fa-house-user fp-type__fa"></i><span>{% trans "Shtëpi" %}</span>
+          </label>
+          <label class="fp-type {% if active_filters.type == 'commercial' %}active{% endif %}">
+            <input type="radio" name="type" value="commercial" {% if active_filters.type == 'commercial' %}checked{% endif %} onchange="this.form.submit()">
+            <i class="fas fa-city fp-type__fa"></i><span>{% trans "Komercial" %}</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Filtra të tjera -->
+      <div class="fp-section">
+        <h3 class="fp-section__title">{% trans "Filtra të tjerë" %}</h3>
+        <div class="fp-row">
+          <div class="fp-field">
+            <i class="fas fa-search fp-field__icon"></i>
+            <input type="text" name="q" placeholder="{% trans 'ID / Fjalë kyçe' %}" class="fp-input" value="{{ active_filters.q|default:'' }}">
+          </div>
+          <div class="fp-field">
+            <i class="fas fa-tag fp-field__icon"></i>
+            <select name="transaction" class="fp-select">
+              <option value="">{% trans "Lloji" %}</option>
+              <option value="sale" {% if active_filters.transaction == 'sale' %}selected{% endif %}>{% trans "Shitje" %}</option>
+              <option value="rent" {% if active_filters.transaction == 'rent' %}selected{% endif %}>{% trans "Qira" %}</option>
+            </select>
+            <i class="fas fa-chevron-down fp-field__arrow"></i>
+          </div>
+          <div class="fp-field">
+            <i class="fas fa-map-pin fp-field__icon"></i>
+            <select name="city" class="fp-select">
+              <option value="">{% trans "Qyteti" %}</option>
+              {% for city in cities %}
+              <option value="{{ city }}" {% if active_filters.city == city %}selected{% endif %}>{{ city }}</option>
+              {% endfor %}
+            </select>
+            <i class="fas fa-chevron-down fp-field__arrow"></i>
+          </div>
+          <div class="fp-field">
+            <i class="fas fa-map-marked-alt fp-field__icon"></i>
+            <input type="text" name="neighborhood" placeholder="{% trans 'Zona' %}" class="fp-input" value="{{ active_filters.neighborhood|default:'' }}">
+          </div>
+          <div class="fp-field">
+            <i class="fas fa-bed fp-field__icon"></i>
+            <select name="bedrooms" class="fp-select">
+              <option value="">{% trans "Dhoma gjumi" %}</option>
+              <option value="1" {% if active_filters.bedrooms == '1' %}selected{% endif %}>1+</option>
+              <option value="2" {% if active_filters.bedrooms == '2' %}selected{% endif %}>2+</option>
+              <option value="3" {% if active_filters.bedrooms == '3' %}selected{% endif %}>3+</option>
+              <option value="4" {% if active_filters.bedrooms == '4' %}selected{% endif %}>4+</option>
+            </select>
+            <i class="fas fa-chevron-down fp-field__arrow"></i>
+          </div>
+        </div>
+
+        <div class="fp-row fp-row--mt">
+          <div class="fp-field">
+            <i class="fas fa-coins fp-field__icon"></i>
+            <input type="number" name="min_price" placeholder="{% trans 'Çmimi Min' %}" class="fp-input" value="{{ active_filters.min_price|default:'' }}">
+          </div>
+          <div class="fp-field">
+            <i class="fas fa-coins fp-field__icon"></i>
+            <input type="number" name="max_price" placeholder="{% trans 'Çmimi Max' %}" class="fp-input" value="{{ active_filters.max_price|default:'' }}">
+          </div>
+          <div class="fp-field">
+            <i class="fas fa-expand-arrows-alt fp-field__icon"></i>
+            <input type="number" name="min_area" placeholder="{% trans 'Sipërfaqe Min' %}" class="fp-input" value="{{ active_filters.min_area|default:'' }}">
+          </div>
+          <div class="fp-field">
+            <i class="fas fa-expand-arrows-alt fp-field__icon"></i>
+            <input type="number" name="max_area" placeholder="{% trans 'Sipërfaqe Max' %}" class="fp-input" value="{{ active_filters.max_area|default:'' }}">
+          </div>
+          <div class="fp-field">
+            <i class="fas fa-circle fp-field__icon"></i>
+            <select name="status" class="fp-select">
+              <option value="">{% trans "Statusi" %}</option>
+              <option value="available" {% if active_filters.status == 'available' %}selected{% endif %}>{% trans "Disponueshme" %}</option>
+              <option value="sold"      {% if active_filters.status == 'sold' %}selected{% endif %}>{% trans "Shitur" %}</option>
+              <option value="rented"    {% if active_filters.status == 'rented' %}selected{% endif %}>{% trans "Me Qira" %}</option>
+              <option value="reserved"  {% if active_filters.status == 'reserved' %}selected{% endif %}>{% trans "Rezervuar" %}</option>
+            </select>
+            <i class="fas fa-chevron-down fp-field__arrow"></i>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<!-- PROPERTIES -->
+<section class="pl-section">
+  <div class="container">
+
+    <!-- Toolbar -->
+    <div class="pl-toolbar">
+      <p class="pl-toolbar__count">
+        {% trans "Duke shfaqur" %} <strong>{{ properties|length }}</strong> {% trans "nga" %} <strong>{{ total_count }}</strong> {% trans "prona" %}
+      </p>
+      <div class="pl-toolbar__right">
+        <form method="GET" id="sortForm">
+          {% for key, val in active_filters.items %}
+            {% if key != 'sort' and val %}
+            <input type="hidden" name="{{ key }}" value="{{ val }}">
+            {% endif %}
+          {% endfor %}
+          <select name="sort" class="pl-sort-select" onchange="this.form.submit()">
+            <option value="-created_at" {% if active_filters.sort == '-created_at' %}selected{% endif %}>{% trans "Më të Rejat" %}</option>
+            <option value="price_asc"   {% if active_filters.sort == 'price_asc' %}selected{% endif %}>{% trans "Çmimi Rritës" %}</option>
+            <option value="price_desc"  {% if active_filters.sort == 'price_desc' %}selected{% endif %}>{% trans "Çmimi Zbritës" %}</option>
+            <option value="area_asc"    {% if active_filters.sort == 'area_asc' %}selected{% endif %}>{% trans "Sipërfaqe rritese" %}</option>
+          </select>
+        </form>
+        <button class="pl-filter-toggle" onclick="toggleFilter()">
+          <i class="fas fa-sliders-h"></i> {% trans "Filtrat" %}
+        </button>
+      </div>
+    </div>
+
+    <!-- Active filter tags -->
+    {% if active_filters.type or active_filters.transaction or active_filters.city or active_filters.min_price or active_filters.max_price %}
+    <div class="pl-active-tags">
+      {% if active_filters.transaction %}
+      <span class="pl-tag">{{ active_filters.transaction|capfirst }}<a href="?{% if active_filters.type %}type={{ active_filters.type }}&{% endif %}{% if active_filters.city %}city={{ active_filters.city }}{% endif %}"><i class="fas fa-times"></i></a></span>
+      {% endif %}
+      {% if active_filters.type %}
+      <span class="pl-tag">{{ active_filters.type|capfirst }}<a href="?{% if active_filters.transaction %}transaction={{ active_filters.transaction }}&{% endif %}{% if active_filters.city %}city={{ active_filters.city }}{% endif %}"><i class="fas fa-times"></i></a></span>
+      {% endif %}
+      {% if active_filters.city %}
+      <span class="pl-tag">{{ active_filters.city }}<a href="?{% if active_filters.type %}type={{ active_filters.type }}&{% endif %}{% if active_filters.transaction %}transaction={{ active_filters.transaction }}{% endif %}"><i class="fas fa-times"></i></a></span>
+      {% endif %}
+      {% if active_filters.min_price or active_filters.max_price %}
+      <span class="pl-tag">€{{ active_filters.min_price|default:"0" }} — €{{ active_filters.max_price|default:"∞" }}<a href="?{% if active_filters.type %}type={{ active_filters.type }}&{% endif %}{% if active_filters.transaction %}transaction={{ active_filters.transaction }}&{% endif %}{% if active_filters.city %}city={{ active_filters.city }}{% endif %}"><i class="fas fa-times"></i></a></span>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <!-- Grid -->
+    {% if properties %}
+    <div class="pl-grid">
+      {% for property in properties %}
+      <div class="ve-card" data-type="{{ property.type }}" data-transaction="{{ property.transaction }}"
+           data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:'0' }}0">
+
+        <a href="{% url 'property_detail' property.slug %}" class="ve-card__overlay" aria-label="{{ property.title }}"></a>
+
+        <div class="ve-card__img-wrap">
+          {% with property.get_main_image as img %}
+            {% if img %}<img src="{{ img.image.url }}" alt="{{ property.title }}" class="ve-card__img" loading="lazy">
+            {% elif property.image %}<img src="{{ property.image.url }}" alt="{{ property.title }}" class="ve-card__img" loading="lazy">
+            {% else %}<img src="{% static 'properties/img/no-photo.jpg' %}" alt="{% trans 'Pa foto' %}" class="ve-card__img">
+            {% endif %}
+          {% endwith %}
+
+          <div class="ve-card__badges">
+            {% if property.transaction == 'sale' %}<span class="ve-badge ve-badge--sale">{% trans "Shitje" %}</span>
+            {% else %}<span class="ve-badge ve-badge--rent">{% trans "Qira" %}</span>{% endif %}
+            {% if property.is_new %}<span class="ve-badge ve-badge--new">{% trans "I Ri" %}</span>{% endif %}
+            {% if property.is_featured %}<span class="ve-badge ve-badge--featured">Featured</span>{% endif %}
+          </div>
+
+          <button class="ve-card__wish" data-id="{{ property.pk }}" aria-label="{% trans 'Ruaj' %}">
+            <i class="far fa-heart"></i>
+          </button>
+        </div>
+
+        <div class="ve-card__body">
+          <div class="ve-card__price-row">
+            <span class="ve-card__price">
+              €{{ property.price|floatformat:0 }}
+              {% if property.transaction == 'rent' %}<small>/ {% trans "muaj" %}</small>{% endif %}
+            </span>
+          </div>
+          <h3 class="ve-card__title">{{ property.title }}</h3>
+          <p class="ve-card__location"><i class="fas fa-map-marker-alt"></i> {{ property.location }}, {{ property.city }}</p>
+          <div class="ve-card__specs">
+            <span class="ve-card__spec"><i class="fas fa-ruler-combined"></i> {{ property.area_m2 }} m²</span>
+            {% if property.bedrooms %}<span class="ve-card__spec"><i class="fas fa-bed"></i> {{ property.bedrooms }}</span>{% endif %}
+            {% if property.bathrooms %}<span class="ve-card__spec"><i class="fas fa-bath"></i> {{ property.bathrooms }}</span>{% endif %}
+            {% if property.floor %}<span class="ve-card__spec"><i class="fas fa-building"></i> {% trans "Kati" %} {{ property.floor }}</span>{% endif %}
+          </div>
+          <div class="ve-card__footer">
+            <div class="ve-card__agent">
+              {% if property.agent %}
+                {% if property.agent.photo %}<img src="{{ property.agent.photo.url }}" alt="{{ property.agent.full_name }}" class="ve-card__agent-photo">
+                {% else %}<div class="ve-card__agent-photo ve-card__agent-photo--ph"><i class="fas fa-user"></i></div>{% endif %}
+                <span class="ve-card__agent-name">{{ property.agent.full_name }}</span>
+              {% else %}
+                <span class="ve-card__agent-name" style="color:var(--gray);">ValorEstate</span>
+              {% endif %}
+            </div>
+            <a href="{% url 'property_detail' property.slug %}" class="ve-card__cta">
+              {% trans "Shiko" %} <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- PAGINATION -->
+    {% if properties.has_other_pages %}
+    <div class="pl-pagination">
+      <div class="pl-pag__inner">
+        <div class="pl-pag__info">
+          <span>{% trans "Faqja" %}</span>
+          <input type="number" class="pl-pag__input" value="{{ properties.number }}"
+                 min="1" max="{{ properties.paginator.num_pages }}" id="pageInput">
+          <span>{% trans "nga" %} {{ properties.paginator.num_pages }}</span>
+        </div>
+        <div class="pl-pag__arrows">
+          {% if properties.has_previous %}
+          <a href="?{% for key, val in active_filters.items %}{% if val %}{{ key }}={{ val }}&{% endif %}{% endfor %}page={{ properties.previous_page_number }}" class="pl-pag__arrow"><i class="fas fa-arrow-left"></i></a>
+          {% else %}
+          <span class="pl-pag__arrow pl-pag__arrow--disabled"><i class="fas fa-arrow-left"></i></span>
+          {% endif %}
+          {% if properties.has_next %}
+          <a href="?{% for key, val in active_filters.items %}{% if val %}{{ key }}={{ val }}&{% endif %}{% endfor %}page={{ properties.next_page_number }}" class="pl-pag__arrow"><i class="fas fa-arrow-right"></i></a>
+          {% else %}
+          <span class="pl-pag__arrow pl-pag__arrow--disabled"><i class="fas fa-arrow-right"></i></span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% else %}
+    <div class="pl-empty">
+      <h3>{% trans "Nuk u gjetën prona" %}</h3>
+      <p>{% trans "Provoni të ndryshoni filtrat ose të kërkoni në zona të tjera." %}</p>
+      <a href="{% url 'property_list' %}" class="ve-btn-primary">{% trans "Pastro Filtrat" %}</a>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="{% static 'properties/js/main.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,1605 @@
+# ValorEstate — Përkthimet në Anglisht
+# Copyright (C) 2026 ValorEstate
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+
+
+# ───────────────────────────────────────────────────────────────────
+#  INDEX HTML
+# ───────────────────────────────────────────────────────────────────
+
+msgid "Gjej Pronën e Ëndrrave"
+msgstr "Find Your Dream Property"
+
+msgid "Apartamente, shtëpi, toka dhe hapësira komerciale në të gjithë Shqipërinë."
+msgstr "Apartments, houses, land and commercial spaces throughout Albania."
+
+msgid "Lloji"
+msgstr "Type"
+
+msgid "Të gjitha"
+msgstr "All"
+
+msgid "Apartament"
+msgstr "Apartment"
+
+msgid "Shtëpi"
+msgstr "House"
+
+msgid "Tokë"
+msgstr "Land"
+
+msgid "Komerciale"
+msgstr "Commercial"
+
+msgid "Qyteti"
+msgstr "City"
+
+msgid "Tiranë"
+msgstr "Tirana"
+
+msgid "Durrës"
+msgstr "Durres"
+
+msgid "Vlorë"
+msgstr "Vlora"
+
+msgid "Shkodër"
+msgstr "Shkodra"
+
+msgid "Sarandë"
+msgstr "Saranda"
+
+msgid "Tipi"
+msgstr "Deal Type"
+
+msgid "Shitje"
+msgstr "For Sale"
+
+msgid "Qira"
+msgstr "For Rent"
+
+msgid "Kërko"
+msgstr "Search"
+
+msgid "Agjentë"
+msgstr "Agents"
+
+msgid "Eksperiencë"
+msgstr "Experience"
+
+msgid "Portofolio"
+msgstr "Portfolio"
+
+msgid "Pronat e Fundit"
+msgstr "Latest Properties"
+
+msgid "Zgjidh nga koleksioni ynë i pronave premium"
+msgstr "Choose from our collection of premium properties"
+
+msgid "Apartamente"
+msgstr "Apartments"
+
+msgid "Toka"
+msgstr "Land"
+
+msgid "Shiko të Gjitha Pronat"
+msgstr "View All Properties"
+
+msgid "Kategoritë e Pronave"
+msgstr "Property Categories"
+
+msgid "Zgjidh shpejt atë që kërkon"
+msgstr "Quickly find what you're looking for"
+
+
+msgid "Pse ValorEstate"
+msgstr "Why ValorEstate"
+
+msgid "Besimi i Ndërtuar"
+msgstr "Trust Built"
+
+msgid "Mbi Rezultate"
+msgstr "On Results"
+
+msgid "Për 15 vjet kemi ndihmuar mijëra familje dhe investitorë të gjejnë pronën e duhur, me transparencë dhe profesionalizëm të plotë."
+msgstr "For 15 years we have helped thousands of families and investors find the right property, with full transparency and professionalism."
+
+msgid "Mëso Më Shumë"
+msgstr "Learn More"
+
+msgid "Garanci Ligjore"
+msgstr "Legal Guarantee"
+
+msgid "Çdo transaksion i verifikuar dhe i siguruar plotësisht nga ekipi ynë juridik."
+msgstr "Every transaction fully verified and secured by our legal team."
+
+msgid "Shërbim 24/7"
+msgstr "24/7 Service"
+
+msgid "Ekipi ynë është gjithmonë i disponueshëm për çdo pyetje ose vizitë."
+msgstr "Our team is always available for any question or visit."
+
+msgid "Vlerësim Falas"
+msgstr "Free Valuation"
+
+msgid "Vlerësojmë pronën tuaj pa asnjë kosto shtesë, me ekspertizë tregu."
+msgstr "We value your property at no extra cost, with market expertise."
+
+msgid "Negocim Ekspert"
+msgstr "Expert Negotiation"
+
+msgid "Agjentët tanë negociojnë çmimin më të mirë për ju gjithmonë."
+msgstr "Our agents always negotiate the best price for you."
+
+msgid "Ekipi"
+msgstr "Team"
+
+msgid "Agjentët Tanë"
+msgstr "Our Agents"
+
+msgid "Profesionistë me eksperiencë dhe dedikrim të plotë"
+msgstr "Professionals with experience and full dedication"
+
+msgid "shitur"
+msgstr "sold"
+
+msgid "Telefono"
+msgstr "Call"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Profili"
+msgstr "Profile"
+
+msgid "Shiko Gjithë Ekipin"
+msgstr "View Full Team"
+
+msgid "Çfarë thonë klientët tanë"
+msgstr "What our clients say"
+
+msgid "Përshtypje"
+msgstr "Testimonials"
+
+msgid "Lexo më shumë"
+msgstr "Read more"
+
+msgid "Testimoniali i mëparshëm"
+msgstr "Previous testimonial"
+
+msgid "Testimoniali tjetër"
+msgstr "Next testimonial"
+
+msgid "Për"
+msgstr "For"
+
+msgid "Për Pronarët"
+msgstr "For Owners"
+
+msgid "Dëshironi të Shisni ose Jepni me Qira Pronën Tuaj?"
+msgstr "Do You Want to Sell or Rent Your Property?"
+
+msgid "Ekipi ynë ju ndihmon të gjeni blerësin ose qiramarrësin e duhur — shpejt dhe me çmim maksimal."
+msgstr "Our team helps you find the right buyer or tenant — quickly and at maximum price."
+
+msgid "ose"
+msgstr "or"
+
+msgid "Për Blerësit"
+msgstr "For Buyers"
+
+msgid "Kërkoni të Blini ose të Merrni me Qira?"
+msgstr "Looking to Buy or Rent?"
+
+msgid "Shfletoni mbi 120 prona premium dhe gjeni atë që i përshtatet buxhetit dhe stilit tuaj të jetesës."
+msgstr "Browse over 120 premium properties and find the one that suits your budget and lifestyle."
+
+msgid "Prona me Qira"
+msgstr "Rental Properties"
+
+msgid "Agjent Imobiliar"
+msgstr "Real Estate Agent"
+
+
+# ───────────────────────────────────────────────────────────────────
+#  ABOUT US
+# ───────────────────────────────────────────────────────────────────
+
+msgid "Rreth Nesh"
+msgstr "About Us"
+
+msgid "Kryefaqja"
+msgstr "Home"
+
+msgid "Kush Jemi"
+msgstr "Who We Are"
+
+msgid "Ne"
+msgstr "Us"
+
+msgid "15 vjet eksperiencë, mbi 800 klientë të kënaqur dhe pasion të palëkundur për pronësinë e drejtë."
+msgstr "15 years of experience, over 800 satisfied clients and an unwavering passion for fair property ownership."
+
+msgid "Zyra ValorEstate"
+msgstr "ValorEstate Office"
+
+msgid "Historia Jonë"
+msgstr "Our Story"
+
+msgid "Ndërtuar mbi"
+msgstr "Built on"
+
+msgid "Besim & Rezultate"
+msgstr "Trust & Results"
+
+msgid "ValorEstate u themelua në vitin 2009 me një vizion të qartë: të transformojë tregun imobiliar shqiptar duke ofruar shërbime transparente, profesionale dhe të orientuara drejt klientit."
+msgstr "ValorEstate was founded in 2009 with a clear vision: to transform the Albanian real estate market by offering transparent, professional and client-oriented services."
+
+msgid "Sot jemi agjencia kryesore imobiliare në vend, me ekip të specializuar agjentësh, mbi 120 prona aktive dhe prezencë në të gjithë Shqipërinë — nga Tirana deri në Sarandë."
+msgstr "Today we are the leading real estate agency in the country, with a specialized team of agents, over 120 active properties and a presence throughout Albania — from Tirana to Saranda."
+
+msgid "Transparencë e Plotë"
+msgstr "Full Transparency"
+
+msgid "Asnjë kosto të fshehur, asnjë surprizë — vetëm çmime të drejta."
+msgstr "No hidden costs, no surprises — just fair prices."
+
+msgid "Ekip i Licensuar"
+msgstr "Licensed Team"
+
+msgid "Çdo agjent i certifikuar dhe i trajnuar sipas standardeve ndërkombëtare."
+msgstr "Every agent certified and trained according to international standards."
+
+msgid "Mbulim Kombëtar"
+msgstr "National Coverage"
+
+msgid "Prona në Tiranë, Durrës, Vlorë, Shkodër, Sarandë dhe më gjerë."
+msgstr "Properties in Tirana, Durres, Vlora, Shkodra, Saranda and beyond."
+
+msgid "Misioni Ynë"
+msgstr "Our Mission"
+
+msgid "Të ofrojmë shërbimin më të mirë imobiliar në Shqipëri duke ndërtuar marrëdhënie afatgjata me klientët, bazuar në besim, profesionalizëm dhe njohuri të thellë të tregut."
+msgstr "To provide the best real estate service in Albania by building long-term relationships with clients, based on trust, professionalism and deep market knowledge."
+
+msgid "Vizioni Ynë"
+msgstr "Our Vision"
+
+msgid "Të bëhemi platforma imobiliare më e besueshme dhe inovative në rajonin e Ballkanit, duke lidhur klientët me pronën e ëndrrave të tyre nëpërmjet teknologjisë dhe ekspertizës njerëzore."
+msgstr "To become the most trusted and innovative real estate platform in the Balkans, connecting clients with their dream property through technology and human expertise."
+
+msgid "Vlerat Tona"
+msgstr "Our Values"
+
+msgid "Integritet, inovacion dhe partneritet — tre shtyllat mbi të cilat ndërtojmë çdo marrëdhënie me klientët, partnerët dhe komunitetin ku operojmë çdo ditë."
+msgstr "Integrity, innovation and partnership — the three pillars on which we build every relationship with clients, partners and the community where we operate every day."
+
+msgid "Parimet Tona"
+msgstr "Our Principles"
+
+msgid "Çfarë Na Dallon"
+msgstr "What Sets Us Apart"
+
+msgid "Besueshmëri"
+msgstr "Reliability"
+
+msgid "Çdo premtim i mbajtur, çdo transaksion i dokumentuar saktë."
+msgstr "Every promise kept, every transaction accurately documented."
+
+msgid "Inovacion"
+msgstr "Innovation"
+
+msgid "Teknologji moderne, platformë dixhitale dhe vizualizim 3D të pronave."
+msgstr "Modern technology, digital platform and 3D visualization of properties."
+
+msgid "Partneritet"
+msgstr "Partnership"
+
+msgid "Bashkëpunojmë ngushtë me klientin deri në mbylljen e çdo transaksioni."
+msgstr "We work closely with the client until the completion of every transaction."
+
+msgid "Ekselencë"
+msgstr "Excellence"
+
+msgid "Standard i lartë në çdo detaj — nga prezantimi i pronës deri te kontrata."
+msgstr "High standards in every detail — from property presentation to the contract."
+
+msgid "Qëndrueshmëri"
+msgstr "Sustainability"
+
+msgid "Promovim të pronave efiçente dhe ndërtimeve të gjelbra e të qëndrueshme."
+msgstr "Promotion of energy-efficient properties and green sustainable buildings."
+
+msgid "Prona Aktive"
+msgstr "Active Properties"
+
+msgid "Klientë të Kënaqur"
+msgstr "Satisfied Clients"
+
+msgid "Agjentë Profesionistë"
+msgstr "Professional Agents"
+
+msgid "Vjet"
+msgstr "Years"
+
+msgid "Eksperiencë në Treg"
+msgstr "Market Experience"
+
+msgid "Rrugëtimi Ynë"
+msgstr "Our Journey"
+
+msgid "Historia e ValorEstate"
+msgstr "ValorEstate History"
+
+msgid "Themelimi"
+msgstr "Foundation"
+
+msgid "ValorEstate hap dyert e para në Tiranë me 3 agjentë dhe vizionin e qartë për të ndryshuar tregun imobiliar shqiptar."
+msgstr "ValorEstate opens its first doors in Tirana with 3 agents and a clear vision to change the Albanian real estate market."
+
+msgid "Zgjerimi Kombëtar"
+msgstr "National Expansion"
+
+msgid "Hapim zyra në Durrës dhe Vlorë, duke mbuluar tre qytetet kryesore të Shqipërisë dhe duke rritur ekipin në 20 agjentë."
+msgstr "We open offices in Durres and Vlora, covering Albania's three main cities and growing the team to 20 agents."
+
+msgid "Platforma Dixhitale"
+msgstr "Digital Platform"
+
+msgid "Lançojmë platformën tonë online me listim të pronave, kërkim të avancuar dhe vizualizim 3D — e para e tillë në Shqipëri."
+msgstr "We launch our online platform with property listings, advanced search and 3D visualization — the first of its kind in Albania."
+
+msgid "Çmimi i Industrisë"
+msgstr "Industry Award"
+
+msgid "Fitojmë çmimin \"Best Real Estate Agency Albania\" nga Albanian Real Estate Association, njohje e punës sonë 12-vjeçare."
+msgstr "We win the \"Best Real Estate Agency Albania\" award from the Albanian Real Estate Association, recognition of our 12-year work."
+
+msgid "Sot & Tutje"
+msgstr "Today & Beyond"
+
+msgid "Mbi 120 prona aktive, 45+ agjentë dhe ekspansion i ri në Sarandë e Shkodër. Vazhdojmë të rritemi me pasion dhe profesionalizëm."
+msgstr "Over 120 active properties, 45+ agents and new expansion in Saranda and Shkodra. We continue to grow with passion and professionalism."
+
+msgid "Gati të Bashkëpunojmë?"
+msgstr "Ready to Collaborate?"
+
+msgid "Na kontaktoni sot dhe ekipi ynë do t'ju ndihmojë të gjeni pronën e duhur."
+msgstr "Contact us today and our team will help you find the right property."
+
+
+msgid "Shfleto Pronat"
+msgstr "Browse Properties"
+
+
+
+# ───────────────────────────────────────────────────────────────────
+# BASE.HTML — EN
+# ───────────────────────────────────────────────────────────────────
+
+msgid "Toggle navigation"
+msgstr "Toggle navigation"
+
+msgid "Pronat"
+msgstr "Properties"
+
+msgid "Agjentet"
+msgstr "Agents"
+
+msgid "Kontakt"
+msgstr "Contact"
+
+msgid "Karriera"
+msgstr "Careers"
+
+msgid "Vlerëso Pronën"
+msgstr "Evaluate Property"
+
+msgid "Blog"
+msgstr "Blog"
+
+msgid "Agjencia kryesore imobiliare në Shqipëri me mbi 15 vjet eksperiencë dhe mbi 800 klientë të kënaqur."
+msgstr "The leading real estate agency in Albania with over 15 years of experience and over 800 satisfied clients."
+
+msgid "15 Vjet Eksperiencë"
+msgstr "15 Years of Experience"
+
+msgid "Rrjetet Sociale"
+msgstr "Social Networks"
+
+msgid "Shërbimet"
+msgstr "Services"
+
+msgid "Shitje Pronash"
+msgstr "Property Sales"
+
+msgid "Prona Komerciale"
+msgstr "Commercial Properties"
+
+msgid "Vlerësim Prone"
+msgstr "Property Valuation"
+
+msgid "Lidhje të Shpejta"
+msgstr "Quick Links"
+
+msgid "Navigim i shpejtë"
+msgstr "Quick navigation"
+
+msgid "Ekipi Ynë"
+msgstr "Our Team"
+
+msgid "Blog & Lajme"
+msgstr "Blog & News"
+
+msgid "Lër Përshtypjen tënde"
+msgstr "Leave Your Review"
+
+msgid "Rruga Myslym Shyri, Nr. 24"
+msgstr "Myslym Shyri Street, No. 24"
+
+msgid "Tiranë, Shqipëri"
+msgstr "Tirana, Albania"
+
+msgid "© 2026 ValorEstate. Të gjitha të drejtat e rezervuara."
+msgstr "© 2026 ValorEstate. All rights reserved."
+
+# ───────────────────────────────────────────────────────────────────
+# TEAM.HTML — EN
+# ───────────────────────────────────────────────────────────────────
+
+msgid "Ekipi yne"
+msgstr "Our Team"
+
+msgid "Njerëzit Pas"
+msgstr "The People Behind"
+
+msgid "Ekipi ynë i dedikuar punon çdo ditë për të gjetur pronën perfekte për ju."
+msgstr "Our dedicated team works every day to find the perfect property for you."
+
+msgid "Agjentë Aktivë"
+msgstr "Active Agents"
+
+msgid "Vjet Eksperiencë"
+msgstr "Years of Experience"
+
+msgid "Prona të Shitura"
+msgstr "Properties Sold"
+
+msgid "Klientë të kënaqur"
+msgstr "Satisfied Clients"
+
+msgid "Rating"
+msgstr "Rating"
+
+msgid "Nuk ka agjentë momentalisht"
+msgstr "No agents at the moment"
+
+msgid "Shto agjentë nga paneli i administrimit."
+msgstr "Add agents from the administration panel."
+
+msgid "Bashkohu me Ne"
+msgstr "Join Us"
+
+msgid "Jeni agjent imobiliar?"
+msgstr "Are you a real estate agent?"
+
+msgid "Bashkohuni me ekipin tonë dhe rritni karrierën tuaj."
+msgstr "Join our team and grow your career."
+
+
+
+# ───────────────────────────────────────────────────────────────────
+# CONTACT.HTML — EN
+# ───────────────────────────────────────────────────────────────────
+
+msgid "Na Kontaktoni"
+msgstr "Contact Us"
+
+msgid "Na"
+msgstr "Contact"
+
+msgid "Kontaktoni"
+msgstr "Us"
+
+msgid "Telefon"
+msgstr "Phone number"
+
+msgid "Mesazhi"
+msgstr "Message"
+
+msgid "Jemi gjithmonë të gatshëm t'ju ndihmojmë të gjeni pronën e duhur. Shkruani ose telefononi — do t'ju përgjigjemi brenda 24 orëve."
+msgstr "We are always ready to help you find the right property. Write or call — we will respond within 24 hours."
+
+msgid "Dërgoni Mesazh"
+msgstr "Send a Message"
+
+msgid "Si Mund t'ju Ndihmojmë?"
+msgstr "How Can We Help You?"
+
+msgid "Plotësoni formularin dhe një nga agjentët tanë do t'ju kontaktojë sa më shpejt."
+msgstr "Fill in the form and one of our agents will contact you as soon as possible."
+
+msgid "Mesazhi u dërgua me sukses!"
+msgstr "Message sent successfully!"
+
+msgid "Faleminderit! Do ju kontaktojmë brenda 24 orëve."
+msgstr "Thank you! We will contact you within 24 hours."
+
+msgid "Gabim i serverit!"
+msgstr "Server error!"
+
+msgid "Ndodhi një problem teknik. Provoni përsëri ose na telefononi direkt."
+msgstr "A technical problem occurred. Please try again or call us directly."
+
+msgid "Mesazhi u ruajt, por email-i nuk u dërgua."
+msgstr "Message was saved, but email was not sent."
+
+msgid "Do ju kontaktojmë manualisht. Për urgjencë, na telefononi direkt."
+msgstr "We will contact you manually. For urgency, call us directly."
+
+msgid "Ju lutem korrigjoni gabimet:"
+msgstr "Please correct the errors:"
+
+msgid "Emri i Plotë"
+msgstr "Full Name"
+
+msgid "Emri juaj"
+msgstr "Your Name"
+
+msgid "Subjekti"
+msgstr "Subject"
+
+msgid "Zgjidhni një opsion..."
+msgstr "Choose an option..."
+
+msgid "Dua të Blej Pronë"
+msgstr "I Want to Buy Property"
+
+msgid "Dua të Marr me Qira"
+msgstr "I Want to Rent"
+
+msgid "Dua të Shes Pronën Time"
+msgstr "I Want to Sell My Property"
+
+msgid "Dua të Jap me Qira"
+msgstr "I Want to Rent Out"
+
+msgid "Kërkoj Vlerësim Prone"
+msgstr "I Need Property Valuation"
+
+msgid "Konsulencë Investimi"
+msgstr "Investment Consultation"
+
+msgid "Tjetër"
+msgstr "Other"
+
+msgid "Shkruani kërkesën tuaj këtu..."
+msgstr "Write your request here..."
+
+msgid "Jam dakord me Politikën e Privatësisë dhe Kushtet e Përdorimit."
+msgstr "I agree with the Privacy Policy and Terms of Use."
+
+msgid "Dërgo Mesazhin"
+msgstr "Send Message"
+
+msgid "Orari"
+msgstr "Working Hours"
+
+msgid "E Hënë — E Premte:"
+msgstr "Monday — Friday:"
+
+msgid "E Shtunë:"
+msgstr "Saturday:"
+
+msgid "E Diel:"
+msgstr "Sunday:"
+
+msgid "Mbyllur"
+msgstr "Closed"
+
+msgid "Na ndiqni"
+msgstr "Follow Us"
+
+msgid "Ku Ndodhemi"
+msgstr "Where We Are"
+
+msgid "Zyra Jonë në Tiranë"
+msgstr "Our Office in Tirana"
+
+msgid "ValorEstate Tiranë"
+msgstr "ValorEstate Tirana"
+
+msgid "Hap në Google Maps"
+msgstr "Open in Google Maps"
+
+msgid "Fol Direkt me një Agjent"
+msgstr "Talk Directly with an Agent"
+
+msgid "Nuk preferoni formularin? Kontaktoni direkt agjentin tuaj të preferuar."
+msgstr "Don't prefer the form? Contact your preferred agent directly."
+
+# ───────────────────────────────────────────────────────────────────
+# KARRIERA.HTML — EN
+# ───────────────────────────────────────────────────────────────────
+
+msgid "Kreu"
+msgstr "Home"
+
+msgid "Filloni Karrierën"
+msgstr "Start Your Career"
+
+msgid "tuaj të vërtetë!"
+msgstr "the real one!"
+
+msgid "Bashkohuni me ekipin tonë dhe ndërtoni të ardhmen tuaj profesionale në industrinë më dinamike të tregut shqiptar."
+msgstr "Join our team and build your professional future in the most dynamic industry of the Albanian market."
+
+msgid "Apliko Tani"
+msgstr "Apply Now"
+
+msgid "Vite Eksperiencë"
+msgstr "Years of Experience"
+
+msgid "Zyra Globale"
+msgstr "Global Offices"
+
+msgid "Zyra në Ballkan"
+msgstr "Offices in the Balkans"
+
+msgid "Qytete në Shqipëri"
+msgstr "Cities in Albania"
+
+msgid "Pse të na bashkoheni"
+msgstr "Why Join Us"
+
+msgid "APLIKONI SOT PËR TË FILLUAR NJË PUNË TË RE!"
+msgstr "APPLY TODAY TO START A NEW JOB!"
+
+msgid "Bashkohu ValorEstate"
+msgstr "Join ValorEstate"
+
+msgid "Bashkohuni me ValorEstate e cila është pjesë e rrjetit global prej 12,600 zyrash imobiliare që kanë një eksperiencë prej 51 vitesh në industrinë e pasurive të paluajtshme dhe për 23 vite me radhë është njohur si marka më e respektuar dhe më e njohur në këtë industri."
+msgstr "Join ValorEstate which is part of a global network of 12,600 real estate offices with 51 years of experience in the real estate industry, recognized for 23 consecutive years as the most respected and well-known brand in this industry."
+
+msgid "Lider në Ballkan"
+msgstr "Leader in the Balkans"
+
+msgid "Si lider në Ballkan me një rrjet prej 47 zyrash në 6 qytete: Tiranë, Sarandë, Vlorë, Shkodër, Pogradec & Durrës. Ju do të dalloheni përmes standardit tonë të artë duke zhvilluar më tej aftësitë tuaja profesionale në një nga industritë më fitimprurëse."
+msgstr "As a leader in the Balkans with a network of 47 offices in 6 cities: Tirana, Saranda, Vlora, Shkodra, Pogradec & Durres. You will stand out through our gold standard while further developing your professional skills in one of the most profitable industries."
+
+msgid "E ardhmja është me ne"
+msgstr "The Future is With Us"
+
+msgid "Nëse ëndrra juaj është të jeni pronar biznesi, atëherë e ardhmja juaj është me ValorEstate. Investoni kohën dhe ambicien tuaj në ekspertizën tonë dhe aplikoni sot për t'u bërë Agjent imobiliar."
+msgstr "If your dream is to be a business owner, then your future is with ValorEstate. Invest your time and ambition in our expertise and apply today to become a Real Estate Agent."
+
+msgid "Franshizë"
+msgstr "Franchise"
+
+msgid "Mundësitë e"
+msgstr "The Opportunities of"
+
+msgid "ekskluzivitetit"
+msgstr "Exclusivity"
+
+msgid "Eksploroni mundësi të pafundme për shtëpinë tuaj të ëndrrave. Nëse ëndrra juaj është të jeni pronar biznesi, atëherë e ardhmja juaj është me ValorEstate. Investoni kohën dhe ambicien tuaj në ekspertizën tonë dhe aplikoni sot për t'u bërë Agjent imobiliar."
+msgstr "Explore endless opportunities for your dream home. If your dream is to be a business owner, then your future is with ValorEstate. Invest your time and ambition in our expertise and apply today to become a Real Estate Agent."
+
+msgid "Partneritet Ekskluziv"
+msgstr "Exclusive Partnership"
+
+msgid "Zonë ekskluzive operative pa konkurrencë brenda rrjetit."
+msgstr "Exclusive operational zone without competition within the network."
+
+msgid "Trajnim i Plotë"
+msgstr "Full Training"
+
+msgid "Program trajnimi ndërkombëtar me certifikim zyrtar."
+msgstr "International training program with official certification."
+
+msgid "Mbështetje Marketing"
+msgstr "Marketing Support"
+
+msgid "Akses në platformat dhe materialet globale të marketingut."
+msgstr "Access to global marketing platforms and materials."
+
+msgid "Komunitet Global"
+msgstr "Global Community"
+
+msgid "Rrjet i 12,600 zyrash dhe mijëra profesionistësh botërorë."
+msgstr "Network of 12,600 offices and thousands of professionals worldwide."
+
+msgid "Ekipi ValorEstate"
+msgstr "ValorEstate Team"
+
+msgid "Aplikoni Tani"
+msgstr "Apply Now"
+
+msgid "Gati për të ecur përpara drejt ëndrrës tuaj? Plotësoni formularin dhe ekipi ynë do t'ju kontaktojë brenda 48 orëve."
+msgstr "Ready to move forward towards your dream? Fill in the form and our team will contact you within 48 hours."
+
+msgid "Plotësoni formularin"
+msgstr "Fill in the form"
+
+msgid "Dërgoni të dhënat dhe CV-në tuaj"
+msgstr "Send your details and CV"
+
+msgid "Intervista"
+msgstr "Interview"
+
+msgid "Takohemi dhe diskutojmë mundësitë"
+msgstr "We meet and discuss opportunities"
+
+msgid "Filloni karrierën tuaj"
+msgstr "Start your career"
+
+msgid "Bashkohuni me ekipin tonë fitues"
+msgstr "Join our winning team"
+
+msgid "Aplikimi u dërgua me sukses!"
+msgstr "Application sent successfully!"
+
+msgid "Faleminderit! Do ju kontaktojmë brenda 48 orëve."
+msgstr "Thank you! We will contact you within 48 hours."
+
+msgid "Mbiemri"
+msgstr "Last Name"
+
+msgid "Mbiemri juaj"
+msgstr "Your Last Name"
+
+msgid "Telefoni"
+msgstr "Phone"
+
+msgid "Pozicioni për të cilin dëshironi të aplikoni"
+msgstr "Position you wish to apply for"
+
+msgid "Zgjidhni pozicionin"
+msgstr "Choose position"
+
+msgid "Office Manager"
+msgstr "Office Manager"
+
+msgid "Office Assistant"
+msgstr "Office Assistant"
+
+msgid "Real Estate Consultant"
+msgstr "Real Estate Consultant"
+
+msgid "Graphic Designer"
+msgstr "Graphic Designer"
+
+msgid "Marketing Specialist"
+msgstr "Marketing Specialist"
+
+msgid "Social Media Specialist"
+msgstr "Social Media Specialist"
+
+msgid "CV / Dokumenti"
+msgstr "CV / Document"
+
+msgid "Click to upload"
+msgstr "Click to upload"
+
+msgid "or drag and drop"
+msgstr "or drag and drop"
+
+msgid "PNG, JPG, PDF ose DOC (max. 5MB)"
+msgstr "PNG, JPG, PDF or DOC (max. 5MB)"
+
+msgid "Jam dakord me Kushtet e Përdorimit dhe Politikën e Privatësisë."
+msgstr "I agree with the Terms of Use and Privacy Policy."
+
+msgid "Duke dërguar..."
+msgstr "Sending..."
+
+msgid "Gati për të ecur përpara drejt ëndrrës tuaj?"
+msgstr "Ready to move forward towards your dream?"
+
+# ───────────────────────────────────────────────────────────────────
+# TESTIMONIAL_FORM.HTML — EN
+# ───────────────────────────────────────────────────────────────────
+
+msgid "Ndani Përvojën Tuaj"
+msgstr "Share Your Experience"
+
+msgid "Ndani"
+msgstr "Share"
+
+msgid "Përvojën"
+msgstr "Your Experience"
+
+msgid "Tuaj Me Ne"
+msgstr "With Us"
+
+msgid "Mendimi juaj është i çmuar. Ndajeni me ne dhe ndihmoni të tjerët të gjejnë pronën e tyre të ëndrrave."
+msgstr "Your opinion is valuable. Share it with us and help others find their dream property."
+
+msgid "Emri juaj i plotë"
+msgstr "Your full name"
+
+msgid "P.sh. Tiranë"
+msgstr "e.g. Tirana"
+
+msgid "nuk shfaqet publikisht"
+msgstr "not shown publicly"
+
+msgid "Zgjidhni agjentin"
+msgstr "Choose an agent"
+
+msgid "Ndani përvojën tuaj me shërbimin e ValorEstate..."
+msgstr "Share your experience with ValorEstate's service..."
+
+msgid "karaktere"
+msgstr "characters"
+
+msgid "Pranoj që ky testimonial të shfaqet publikisht në faqen e ValorEstate pas aprovimit."
+msgstr "I agree that this testimonial may be published publicly on the ValorEstate website after approval."
+
+msgid "Dërgo Testimonialin"
+msgstr "Submit Testimonial"
+
+msgid "Mbyll"
+msgstr "Close"
+
+msgid "Faleminderit!"
+msgstr "Thank You!"
+
+msgid "Testimoniali juaj u dërgua me sukses dhe do shqyrtohet nga ekipi ynë. Pas aprovimit do shfaqet në faqen kryesore."
+msgstr "Your testimonial was sent successfully and will be reviewed by our team. After approval it will appear on the main page."
+
+msgid "Kthehu te Kreu"
+msgstr "Return to Home"
+
+
+# ───────────────────────────────────────────────────────────────────
+# VLERESIM_PRONE.HTML — EN
+# ───────────────────────────────────────────────────────────────────
+
+msgid "Vlerësoni Pronën Tuaj"
+msgstr "Evaluate Your Property"
+
+msgid "Vlerësoni pronën tuaj"
+msgstr "Evaluate your property"
+
+msgid "Vleresoni pronen tuaj ne vetem 5 hapa"
+msgstr "Evaluate your property in just 5 steps"
+
+msgid "Zbuloni vlerën e pronës tuaj duke marrë një vlerësim fillestar në pak hapa!"
+msgstr "Discover the value of your property by getting an initial valuation in a few steps!"
+
+msgid "Duke përdorur analiza tregu dhe ekspertizë industrie, ne sigurojmë një raport të detajuar të përshtatur me pronën tuaj."
+msgstr "Using market analysis and industry expertise, we provide a detailed report tailored to your property."
+
+msgid "Hapi 1/5"
+msgstr "Step 1/5"
+
+msgid "Cilën pronë do të dëshironit të vlerësonit?"
+msgstr "Which property would you like to evaluate?"
+
+msgid "Vile"
+msgstr "Villa"
+
+msgid "Vazhdo"
+msgstr "Continue"
+
+msgid "Fushat e shënuara me * të detyrueshme për t'u plotësuar."
+msgstr "Fields marked with * are required."
+
+msgid "Sa dhoma ka?"
+msgstr "How many rooms does it have?"
+
+msgid "Sa është sipërfaqja e pronës suaj?"
+msgstr "What is the area of your property?"
+
+msgid "Cila është periudha e ndërtimit të pronës?"
+msgstr "What is the construction period of the property?"
+
+msgid "Para vitit 1970"
+msgstr "Before 1970"
+
+msgid "Midis 1971 dhe 1990"
+msgstr "Between 1971 and 1990"
+
+msgid "Midis 1991 dhe 2010"
+msgstr "Between 1991 and 2010"
+
+msgid "Pas vitit 2010"
+msgstr "After 2010"
+
+msgid "Cila është gjendja e pronës suaj?"
+msgstr "What is the condition of your property?"
+
+msgid "Për të rinovuar"
+msgstr "To be renovated"
+
+msgid "Gjendje mesatare"
+msgstr "Average condition"
+
+msgid "Gjendje e mirë"
+msgstr "Good condition"
+
+msgid "Në gjendje perfekte"
+msgstr "In perfect condition"
+
+msgid "Çfarë lloje parkimi janë në dispozicion?"
+msgstr "What types of parking are available?"
+
+msgid "Nuk ka parkim"
+msgstr "No parking"
+
+msgid "Garazh"
+msgstr "Garage"
+
+msgid "Parking publik"
+msgstr "Public parking"
+
+msgid "Adresa e pronës suaj"
+msgstr "Your property address"
+
+msgid "Eg. Rruga e Durrësit, Apt 13, Tiranë"
+msgstr "Eg. Durrës Street, Apt 13, Tirana"
+
+msgid "Ju lutem shkruani adresën"
+msgstr "Please enter the address"
+
+msgid "Adresë Email"
+msgstr "Email Address"
+
+msgid "Numër Telefoni"
+msgstr "Phone Number"
+
+msgid "E detyrueshme"
+msgstr "Required"
+
+msgid "Email i pavlefshëm"
+msgstr "Invalid email"
+
+msgid "Kërkesa juaj u dërgua me sukses. Do ju kontaktojmë brenda 24 orëve."
+msgstr "Your request was sent successfully. We will contact you within 24 hours."
+
+msgid "Kthehu në faqen kryesore"
+msgstr "Return to Home Page"
+
+msgid "Vlerësimi i Pasurisë"
+msgstr "Property Valuation"
+
+msgid "Pse një vlerësim i pronës?"
+msgstr "Why a property valuation?"
+
+msgid "Për të kuptuar çmimin e vertete te prones tuaj, është e rëndësishme të bëni një analizë gjithëpërfshirëse të vlerës së tregut. Na kontaktoni te zbuloni vleren e prones tuaj!"
+msgstr "To understand the true value of your property, it is important to do a comprehensive market value analysis. Contact us to discover the value of your property!"
+
+msgid "Pa Asnjë Detyrim"
+msgstr "No Obligation"
+
+msgid "Vlerësimi është plotësisht falas. Vendimi përfundimtar është gjithmonë i juaji."
+msgstr "The valuation is completely free. The final decision is always yours."
+
+msgid "Raport i Personalizuar"
+msgstr "Personalized Report"
+
+msgid "Merrni raport të detajuar të përshtatur me karakteristikat unike të pronës tuaj."
+msgstr "Receive a detailed report tailored to the unique characteristics of your property."
+
+
+# ───────────────────────────────────────────────────────────────────
+# PROPERTY_LIST.HTML — EN
+# ───────────────────────────────────────────────────────────────────
+
+msgid "Lista e Pronave"
+msgstr "Property List"
+
+msgid "Gjej Pronën"
+msgstr "Find the Property"
+
+msgid "e Duhur"
+msgstr "You Need"
+
+msgid "prona të disponueshme"
+msgstr "available properties"
+
+msgid "Filtro pronat"
+msgstr "Filter properties"
+
+msgid "Pastro të gjithë filtrat"
+msgstr "Clear all filters"
+
+msgid "Shiko në Hartë"
+msgstr "View on Map"
+
+msgid "Kërkoni pronat"
+msgstr "Search properties"
+
+msgid "Lloji i Pronës"
+msgstr "Property Type"
+
+msgid "Vilë"
+msgstr "Villa"
+
+msgid "Komercial"
+msgstr "Commercial"
+
+msgid "Filtra të tjerë"
+msgstr "Other Filters"
+
+msgid "ID / Fjalë kyçe"
+msgstr "ID / Keyword"
+
+msgid "Zona"
+msgstr "Area"
+
+msgid "Dhoma gjumi"
+msgstr "Bedrooms"
+
+msgid "Çmimi Min"
+msgstr "Min Price"
+
+msgid "Çmimi Max"
+msgstr "Max Price"
+
+msgid "Sipërfaqe Min"
+msgstr "Min Area"
+
+msgid "Sipërfaqe Max"
+msgstr "Max Area"
+
+msgid "Statusi"
+msgstr "Status"
+
+msgid "Disponueshme"
+msgstr "Available"
+
+msgid "Rezervuar"
+msgstr "Reserved"
+
+msgid "Duke shfaqur"
+msgstr "Showing"
+
+msgid "nga"
+msgstr "of"
+
+msgid "prona"
+msgstr "properties"
+
+msgid "Më të Rejat"
+msgstr "Newest"
+
+msgid "Çmimi Rritës"
+msgstr "Price Ascending"
+
+msgid "Çmimi Zbritës"
+msgstr "Price Descending"
+
+msgid "Sipërfaqe rritese"
+msgstr "Area Ascending"
+
+msgid "Filtrat"
+msgstr "Filters"
+
+msgid "Pa foto"
+msgstr "No photo"
+
+msgid "I Ri"
+msgstr "New"
+
+msgid "Ruaj"
+msgstr "Save"
+
+msgid "muaj"
+msgstr "month"
+
+msgid "Kati"
+msgstr "Floor"
+
+msgid "Shiko"
+msgstr "View"
+
+msgid "Faqja"
+msgstr "Page"
+
+msgid "Nuk u gjetën prona"
+msgstr "No properties found"
+
+msgid "Provoni të ndryshoni filtrat ose të kërkoni në zona të tjera."
+msgstr "Try changing the filters or searching in other areas."
+
+msgid "Pastro Filtrat"
+msgstr "Clear Filters"
+
+# ───────────────────────────────────────────────────────────────────
+# WISHLIST.HTML — EN
+# ───────────────────────────────────────────────────────────────────
+
+msgid "Lista e Dëshirave"
+msgstr "Wishlist"
+
+msgid "Lista e pronave te ruajtura"
+msgstr "Saved properties list"
+
+msgid "Lista e"
+msgstr "List of"
+
+msgid "Pronave te ruajtura"
+msgstr "Saved Properties"
+
+msgid "Prona të ruajtura"
+msgstr "Saved properties"
+
+msgid "prona në listën tuaj"
+msgstr "properties in your list"
+
+msgid "Krahaso të zgjedhurat"
+msgstr "Compare selected"
+
+msgid "Pastro listën"
+msgstr "Clear list"
+
+msgid "Lista juaj është bosh"
+msgstr "Your list is empty"
+
+msgid "Nuk keni ruajtur asnjë pronë ende."
+msgstr "You haven't saved any properties yet."
+
+msgid "Hiq nga lista"
+msgstr "Remove from list"
+
+msgid "Krahaso"
+msgstr "Compare"
+
+msgid "Krahasimi i Pronave"
+msgstr "Property Comparison"
+
+msgid "Pastro listën?"
+msgstr "Clear the list?"
+
+msgid "Të gjitha pronat e ruajtura do të hiqen nga lista juaj."
+msgstr "All saved properties will be removed from your list."
+
+msgid "Anulo"
+msgstr "Cancel"
+
+# ───────────────────────────────────────────────────────────────────
+# PROPERTY_DETAIL.HTML — EN
+# ───────────────────────────────────────────────────────────────────
+
+msgid "Shpërnda"
+msgstr "Share"
+
+msgid "Sipërfaqe"
+msgstr "Area"
+
+msgid "Dhoma Gjumi"
+msgstr "Bedrooms"
+
+msgid "Banjo"
+msgstr "Bathrooms"
+
+msgid "Viti Ndërtimit"
+msgstr "Year Built"
+
+msgid "Mobilimi"
+msgstr "Furnishing"
+
+msgid "Përshkrimi"
+msgstr "Description"
+
+msgid "Veçoritë"
+msgstr "Features"
+
+msgid "Parking"
+msgstr "Parking"
+
+msgid "Ballkon"
+msgstr "Balcony"
+
+msgid "Ashensor"
+msgstr "Elevator"
+
+msgid "Pishinë"
+msgstr "Pool"
+
+msgid "Kopesht"
+msgstr "Garden"
+
+msgid "Depo"
+msgstr "Storage"
+
+msgid "Kondicionim"
+msgstr "Air Conditioning"
+
+msgid "Ngrohje Qendrore"
+msgstr "Central Heating"
+
+msgid "Pamje Deti"
+msgstr "Sea View"
+
+msgid "Pamje Mali"
+msgstr "Mountain View"
+
+msgid "Detajet e Pronës"
+msgstr "Property Details"
+
+msgid "Transaksioni"
+msgstr "Transaction"
+
+msgid "Zona/Lagja"
+msgstr "Area/Neighborhood"
+
+msgid "Negociueshëm"
+msgstr "Negotiable"
+
+msgid "Ref. ID"
+msgstr "Ref. ID"
+
+msgid "Publikuar"
+msgstr "Published"
+
+msgid "Lokacioni"
+msgstr "Location"
+
+msgid "Kalkulatori i Kredisë"
+msgstr "Mortgage Calculator"
+
+msgid "Llogaritni këstin mujor dhe totalin e interesit"
+msgstr "Calculate the monthly payment and total interest"
+
+msgid "Çmimi i Shitjes"
+msgstr "Sale Price"
+
+msgid "Parapagim"
+msgstr "Down Payment"
+
+msgid "Afati i Kredisë"
+msgstr "Loan Term"
+
+msgid "max 40 vite"
+msgstr "max 40 years"
+
+msgid "vite"
+msgstr "years"
+
+msgid "Norma e Interesit"
+msgstr "Interest Rate"
+
+msgid "sa % interes doni te paguani"
+msgstr "what % interest do you want to pay"
+
+msgid "Llogarit Këstin"
+msgstr "Calculate Payment"
+
+msgid "Rezultati i Llogaritjes"
+msgstr "Calculation Result"
+
+msgid "Kësti Mujor"
+msgstr "Monthly Payment"
+
+msgid "Totali i Interesit"
+msgstr "Total Interest"
+
+msgid "Totali i Pagesës"
+msgstr "Total Payment"
+
+msgid "Llogaritja është orientuese dhe nuk përbën ofertë bankare."
+msgstr "The calculation is indicative and does not constitute a bank offer."
+
+msgid "Çmim i negociueshëm"
+msgstr "Negotiable price"
+
+msgid "Agjenti Juaj"
+msgstr "Your Agent"
+
+msgid "Cakto një Vizitë"
+msgstr "Schedule a Visit"
+
+msgid "Emri juaj *"
+msgstr "Your name *"
+
+msgid "Emaili juaj *"
+msgstr "Your email *"
+
+msgid "Numri i telefonit *"
+msgstr "Phone number *"
+
+msgid "Mesazhi (opsional)"
+msgstr "Message (optional)"
+
+msgid "Dërgo Kërkesën"
+msgstr "Send Request"
+
+msgid "Shiko edhe"
+msgstr "Also View"
+
+msgid "Prona të Ngjashme"
+msgstr "Similar Properties"
+
+msgid "I ri"
+msgstr "New"
+
+# ───────────────────────────────────────────────────────────────────
+# BLOG.HTML — EN
+# ───────────────────────────────────────────────────────────────────
+
+msgid "Lajme &"
+msgstr "News &"
+
+msgid "Këshilla"
+msgstr "Tips"
+
+msgid "Tregu i pronave, këshilla investimi dhe lajme nga ekipi ValorEstate."
+msgstr "The property market, investment tips and news from the ValorEstate team."
+
+msgid "Kërko artikuj..."
+msgstr "Search articles..."
+
+msgid "artikuj"
+msgstr "articles"
+
+msgid "për"
+msgstr "for"
+
+msgid "në kategorinë"
+msgstr "in category"
+
+msgid "Lexo"
+msgstr "Read"
+
+msgid "Nuk u gjetën artikuj"
+msgstr "No articles found"
+
+msgid "Provoni të ndryshoni filtrat ose fjalën kyçe."
+msgstr "Try changing the filters or keyword."
+
+msgid "Shiko të gjitha"
+msgstr "View all"
+
+msgid "Artikujt e Fundit"
+msgstr "Latest Articles"
+
+msgid "Kategoritë"
+msgstr "Categories"
+
+msgid "Keni pyetje?"
+msgstr "Have questions?"
+
+msgid "Agjentët tanë janë të disponueshëm për ju çdo ditë."
+msgstr "Our agents are available for you every day."
+
+
+# ───────────────────────────────────────────────────────────────────
+# BLOG_DETAIL.HTML — EN
+# ───────────────────────────────────────────────────────────────────
+
+msgid "shikime"
+msgstr "views"
+
+msgid "komente"
+msgstr "comments"
+
+msgid "Kategoria:"
+msgstr "Category:"
+
+msgid "Shpërndaje:"
+msgstr "Share:"
+
+msgid "Kopjo linkun"
+msgstr "Copy link"
+
+msgid "Autori"
+msgstr "Author"
+
+msgid "Komente"
+msgstr "Comments"
+
+msgid "Komenti u dërgua!"
+msgstr "Comment submitted!"
+
+msgid "Nuk ka komente ende."
+msgstr "No comments yet."
+
+msgid "Lini një Koment"
+msgstr "Leave a Comment"
+
+msgid "Komenti"
+msgstr "Comment"
+
+msgid "Shkruani komentin tuaj..."
+msgstr "Write your comment..."
+
+msgid "Dërgo Komentin"
+msgstr "Submit Comment"
+
+msgid "Artikuj të Ngjashëm"
+msgstr "Related Articles"
+
+msgid "Kthehu te Blogu"
+msgstr "Back to Blog"
+
+msgid "Emri"
+msgstr "Name"
+
+
+msgid "Politika e Privatësisë"
+msgstr "Privacy Policy"
+
+msgid "Si mbledhim, përdorim dhe mbrojmë të dhënat tuaja personale."
+msgstr "How we collect, use and protect your personal data."
+
+msgid "Hyrje"
+msgstr "Introduction"
+
+msgid "ValorEstate është e përkushtuar në mbrojtjen e privatësisë dhe të dhënave personale të përdoruesve të saj. Kjo politikë privatësie përshkruan mënyrën se si mbledhim, përdorim dhe mbrojmë informacionin tuaj kur vizitoni faqen tonë të internetit dhe përdorni shërbimet tona."
+msgstr "ValorEstate is committed to protecting the privacy and personal data of its users. This privacy policy describes how we collect, use and protect your information when you visit our website and use our services."
+
+msgid "Të dhënat që mbledhim"
+msgstr "Data We Collect"
+
+msgid "Mbledhim të dhënat e mëposhtme kur ndërveproni me faqen tonë:"
+msgstr "We collect the following data when you interact with our website:"
+
+msgid "Informacione personale si emër, mbiemër, numër telefoni ose adresë email-i — vetëm nëse i jepni vetë."
+msgstr "Personal information such as name, surname, phone number or email address — only if you provide it yourself."
+
+msgid "Aktiviteti dhe veprimtaritë e përdoruesit gjatë vizitës në faqe."
+msgstr "User activity and actions during the site visit."
+
+msgid "Adresa IP dhe të dhëna teknike të pajisjes suaj."
+msgstr "IP address and technical data of your device."
+
+msgid "Të dhëna nga cookies dhe teknologji të ngjashme për qëllime statistikore."
+msgstr "Data from cookies and similar technologies for statistical purposes."
+
+msgid "Cookies"
+msgstr "Cookies"
+
+msgid "Faqja jonë përdor cookies për të përmirësuar përvojën tuaj. Cookies janë skedarë të vegjël që ruhen në pajisjen tuaj dhe na ndihmojnë të kuptojmë si e përdorni faqen tonë. Mund të kontrolloni ose çaktivizoni cookies nga cilësimet e shfletuesit tuaj."
+msgstr "Our website uses cookies to improve your experience. Cookies are small files stored on your device that help us understand how you use our site. You can control or disable cookies from your browser settings."
+
+msgid "Si i përdorim të dhënat"
+msgstr "How We Use Your Data"
+
+msgid "ValorEstate kryen përpunimin e ligjshëm të të dhënave personale duke respektuar të drejtat dhe liritë themelore të individit. Të dhënat tuaja përdoren për:"
+msgstr "ValorEstate carries out lawful processing of personal data while respecting fundamental rights and freedoms. Your data is used for:"
+
+msgid "Ofrimin e shërbimeve të kërkuara dhe komunikimin me ju."
+msgstr "Providing requested services and communicating with you."
+
+msgid "Përmirësimin e faqes dhe shërbimeve tona."
+msgstr "Improving our website and services."
+
+msgid "Qëllime statistikore dhe studimore të brendshme."
+msgstr "Internal statistical and research purposes."
+
+msgid "Respektimin e detyrimeve ligjore."
+msgstr "Compliance with legal obligations."
+
+msgid "Ndarja me palë të treta"
+msgstr "Sharing with Third Parties"
+
+msgid "ValorEstate garanton mos-shpërndarjen e të dhënave tuaja personale tek palë të treta, me përjashtim të rasteve kur kjo kërkohet me ligj ose kur ju keni dhënë pëlqimin tuaj shprehimisht."
+msgstr "ValorEstate guarantees not to share your personal data with third parties, except where required by law or where you have given your explicit consent."
+
+msgid "Të drejtat tuaja"
+msgstr "Your Rights"
+
+msgid "Çdo individ rezervon të drejtat e mëposhtme pa pagesë:"
+msgstr "Every individual reserves the following rights free of charge:"
+
+msgid "E drejta e aksesit — të dini çfarë të dhënash mbajmë për ju."
+msgstr "Right of access — to know what data we hold about you."
+
+msgid "E drejta e korrigjimit — të korrigjoni të dhëna të pasakta."
+msgstr "Right of rectification — to correct inaccurate data."
+
+msgid "E drejta e fshirjes — të kërkoni fshirjen e të dhënave tuaja."
+msgstr "Right of erasure — to request deletion of your data."
+
+msgid "E drejta e kundërshtimit — të kundërshtoni përpunimin e të dhënave."
+msgstr "Right to object — to object to the processing of your data."
+
+msgid "Për të ushtruar këto të drejta, dërgoni email tek:"
+msgstr "To exercise these rights, please send an email to:"
+
+msgid "Siguria e të dhënave"
+msgstr "Data Security"
+
+msgid "Marrim masa teknike dhe organizative të përshtatshme për të mbrojtur të dhënat tuaja personale nga aksesi i paautorizuar, ndryshimi, shpalosja ose shkatërrimi. Megjithatë, asnjë metodë transmetimi nëpërmjet internetit nuk është 100% e sigurt."
+msgstr "We take appropriate technical and organisational measures to protect your personal data from unauthorised access, alteration, disclosure or destruction. However, no method of transmission over the internet is 100% secure."
+
+msgid "Ndryshimet e politikës"
+msgstr "Policy Changes"
+
+msgid "ValorEstate rezervon të drejtën e modifikimit dhe përditësimit të kësaj politike në çdo moment, në përputhje me legjislacionin në fuqi. Ndryshimet hyjnë në fuqi menjëherë pas publikimit në faqe."
+msgstr "ValorEstate reserves the right to modify and update this policy at any time, in accordance with applicable legislation. Changes take effect immediately upon publication on the site."
+
+msgid "Për çdo pyetje rreth kësaj politike privatësie:"
+msgstr "For any questions about this privacy policy:"
+
+msgid "Rruga Myslym Shyri, Nr. 24, Tiranë, Shqipëri"
+msgstr "Rruga Myslym Shyri, Nr. 24, Tirana, Albania"
+
+msgid "Kushtet e Përdorimit"
+msgstr "Terms of Use"
+
+msgid "Kushtet dhe rregullat që rregullojnë përdorimin e shërbimeve tona."
+msgstr "The terms and rules governing the use of our services."
+
+msgid "Pranimi i Kushteve"
+msgstr "Acceptance of Terms"
+
+msgid "Duke përdorur faqen e internetit të ValorEstate, pranoni plotësisht këto kushte përdorimi. Nëse nuk jeni dakord me to, ju lutemi mos përdorni shërbimet tona."
+msgstr "By using the ValorEstate website, you fully accept these terms of use. If you do not agree with them, please do not use our services."
+
+msgid "Shërbimet tona"
+msgstr "Our Services"
+
+msgid "ValorEstate ofron shërbime imobiliare duke përfshirë listimin e pronave, ndërmjetësimin në blerje/shitje dhe qira, vlerësimin e pronave dhe konsulencë. Informacioni i paraqitur është vetëm për qëllime informative dhe nuk përbën ofertë juridike të detyrueshme."
+msgstr "ValorEstate provides real estate services including property listings, mediation in buying/selling and renting, property valuation and consultancy. The information presented is for informational purposes only and does not constitute a legally binding offer."
+
+msgid "Detyrimet e Përdoruesit"
+msgstr "User Obligations"
+
+msgid "Duke përdorur faqen tonë, ju merrni përsipër:"
+msgstr "By using our website, you undertake:"
+
+msgid "Të mos përdorni faqen për qëllime të paligjshme ose të dëmshme."
+msgstr "Not to use the site for illegal or harmful purposes."
+
+msgid "Të mos ndërhyni në funksionimin normal të faqes."
+msgstr "Not to interfere with the normal functioning of the site."
+
+msgid "Të jepni informacione të sakta dhe të vërteta gjatë kontaktit me ne."
+msgstr "To provide accurate and truthful information when contacting us."
+
+msgid "Të respektoni të drejtat e pronësisë intelektuale të ValorEstate."
+msgstr "To respect ValorEstate's intellectual property rights."
+
+msgid "Pronësia Intelektuale"
+msgstr "Intellectual Property"
+
+msgid "Të gjitha materialet e faqes — tekste, imazhe, logo, dizajn — janë pronë e ValorEstate dhe mbrohen nga ligjet e pronësisë intelektuale. Riprodhimi i tyre pa leje të shkruar është i ndaluar."
+msgstr "All site materials — texts, images, logos, design — are the property of ValorEstate and are protected by intellectual property laws. Reproduction without written permission is prohibited."
+
+msgid "Kufizimi i Përgjegjësisë"
+msgstr "Limitation of Liability"
+
+msgid "ValorEstate nuk mban përgjegjësi për dëme direkte ose indirekte që rrjedhin nga përdorimi i faqes ose besimi në informacionin e publikuar. Çdo vendim i marrë bazuar në informacionin e faqes është përgjegjësi e plotë e përdoruesit."
+msgstr "ValorEstate is not liable for direct or indirect damages arising from use of the site or reliance on published information. Any decision made based on the site's information is the full responsibility of the user."
+
+msgid "Lidhjet me Faqe të Tjera"
+msgstr "Links to Other Websites"
+
+msgid "Faqja mund të përmbajë lidhje drejt faqeve të palëve të treta. ValorEstate nuk mban përgjegjësi për përmbajtjen apo politikat e privatësisë të këtyre faqeve."
+msgstr "The site may contain links to third-party websites. ValorEstate is not responsible for the content or privacy policies of these sites."
+
+msgid "Ndryshimet e Kushteve"
+msgstr "Changes to Terms"
+
+msgid "ValorEstate rezervon të drejtën të ndryshojë këto kushte në çdo kohë. Ndryshimet hyjnë në fuqi menjëherë pas publikimit. Përdorimi i vazhdueshëm i faqes pas ndryshimeve nënkupton pranimin e tyre."
+msgstr "ValorEstate reserves the right to change these terms at any time. Changes take effect immediately upon publication. Continued use of the site after changes implies acceptance of them."
+
+msgid "Ligji i Zbatueshëm"
+msgstr "Applicable Law"
+
+msgid "Këto kushte rregullohen nga legjislacioni i Republikës së Shqipërisë. Çdo mosmarrëveshje do të zgjidhet nga gjykatat kompetente shqiptare."
+msgstr "These terms are governed by the legislation of the Republic of Albania. Any dispute will be resolved by the competent Albanian courts."
+
+msgid "Për çdo pyetje rreth kushteve të përdorimit:"
+msgstr "For any questions about the terms of use:"
+
+msgid "Politika e"
+msgstr "Privacy"
+
+msgid "Privatësisë"
+msgstr "Policy"
+
+msgid "Kushtet e"
+msgstr "Terms of"
+
+msgid "Përdorimit"
+msgstr "Use"

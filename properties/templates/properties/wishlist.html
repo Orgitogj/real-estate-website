@@ -1,0 +1,171 @@
+{% extends "properties/base.html" %}
+{% load static i18n %}
+
+{% block title %}{% trans "Lista e Dëshirave" %} — ValorEstate{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link rel="stylesheet" href="{% static 'properties/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ══ HERO ══ -->
+<section class="wl-hero">
+  <div class="wl-hero__bg"></div>
+  <div class="container wl-hero__inner">
+    <nav class="wl-breadcrumb" data-aos="fade-down">
+      <a href="{% url 'home' %}">{% trans "Kryefaqja" %}</a>
+      <span>/</span>
+      <span>{% trans "Lista e pronave te ruajtura" %}</span>
+    </nav>
+    <div class="wl-hero__content">
+      <div class="wl-hero__icon"><i class="fas fa-heart"></i></div>
+      <div>
+        <h1 class="wl-hero__title" data-aos="fade-up" data-aos-delay="100">
+          {% trans "Lista e" %} <em class="wl-hero__accent">{% trans "Pronave te ruajtura" %}</em>
+        </h1>
+      </div>
+      <div class="wl-hero__count-wrap" data-aos="fade-up" data-aos-delay="300">
+        <span class="wl-hero__count" id="wlHeroCount">0</span>
+        <span class="wl-hero__count-lbl">{% trans "Prona të ruajtura" %}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TOOLBAR ══ -->
+<div class="wl-toolbar">
+  <div class="container wl-toolbar__inner">
+    <p class="wl-toolbar__info">
+      <span id="wlToolbarCount">0</span> {% trans "prona në listën tuaj" %}
+    </p>
+    <div class="wl-toolbar__actions">
+      <button class="wl-toolbar__btn wl-toolbar__btn--compare" id="wlCompareBtn" style="display:none;">
+        <i class="fas fa-columns"></i> {% trans "Krahaso të zgjedhurat" %}
+        <span class="wl-compare-count" id="wlCompareCount">0</span>
+      </button>
+      <button class="wl-toolbar__btn wl-toolbar__btn--clear" id="wlClearBtn">
+        <i class="fas fa-trash-alt"></i> {% trans "Pastro listën" %}
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CONTENT ══ -->
+<section class="wl-section">
+  <div class="container">
+
+    <!-- Empty state -->
+    <div class="wl-empty" id="wlEmpty" style="display:none;">
+      <div class="wl-empty__icon">
+        <i class="far fa-heart"></i>
+      </div>
+      <h2 class="wl-empty__title">{% trans "Lista juaj është bosh" %}</h2>
+      <p class="wl-empty__text">
+        {% trans "Nuk keni ruajtur asnjë pronë ende." %}<br>
+      </p>
+      <a href="{% url 'property_list' %}" class="ve-btn-primary">
+        <i class="fas fa-search"></i> {% trans "Shfleto Pronat" %}
+      </a>
+    </div>
+
+    <!-- Loading state -->
+    <div class="wl-loading" id="wlLoading">
+      <div class="wl-skeleton-grid">
+        {% for i in "123456" %}
+        <div class="ve-card ve-card--skeleton">
+          <div class="ve-card__skel-img"></div>
+          <div class="ve-card__body">
+            <div class="ve-skel-line" style="height:24px;width:60%;margin-bottom:10px;"></div>
+            <div class="ve-skel-line" style="height:16px;width:80%;margin-bottom:8px;"></div>
+            <div class="ve-skel-line" style="height:16px;width:40%;"></div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Properties grid -->
+    <div class="wl-grid" id="wlGrid" style="display:none;"></div>
+
+    <template id="property-card-template">
+      <div class="ve-card wl-card" data-id="">
+        <div class="ve-card__img-wrap">
+          <img class="ve-card__img" src="" alt="">
+          <div class="ve-card__badges"></div>
+          <button class="ve-card__wish active wl-wish-btn" title="{% trans 'Hiq nga lista' %}">
+            <i class="fas fa-heart"></i>
+          </button>
+          <label class="wl-compare-check">
+            <input type="checkbox" class="wl-compare-input">
+            <span class="wl-compare-check__box"><i class="fas fa-check"></i></span>
+            <span class="wl-compare-check__lbl">{% trans "Krahaso" %}</span>
+          </label>
+        </div>
+
+        <div class="ve-card__body">
+          <div class="ve-card__price-row">
+            <span class="ve-card__price"></span>
+            <span class="ve-card__type-icon"></span>
+          </div>
+          <h3 class="ve-card__title">
+            <a href=""></a>
+          </h3>
+          <p class="ve-card__location"></p>
+          <div class="ve-card__specs"></div>
+          <div class="ve-card__footer">
+            <div class="ve-card__agent">
+              <img class="ve-card__agent-photo" src="">
+              <span class="ve-card__agent-name"></span>
+            </div>
+            <a class="ve-card__cta" href="#">
+              {% trans "Shiko" %} <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </template>
+
+  </div>
+</section>
+
+<!-- ══ MODALI I KRAHASIMIT ══ -->
+<div class="wl-compare-modal" id="wlCompareModal" style="display:none;">
+  <div class="wl-compare-modal__backdrop" onclick="closeCompare()"></div>
+  <div class="wl-compare-modal__inner">
+    <div class="wl-compare-modal__head">
+      <h3>{% trans "Krahasimi i Pronave" %}</h3>
+      <button class="wl-compare-modal__close" onclick="closeCompare()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="wl-compare-modal__body" id="wlCompareBody">
+    </div>
+  </div>
+</div>
+
+<!-- ══ CONFIRM MODAL ══ -->
+<div class="wl-confirm" id="wlConfirm" style="display:none;">
+  <div class="wl-confirm__backdrop"></div>
+  <div class="wl-confirm__box">
+    <div class="wl-confirm__icon"><i class="fas fa-trash-alt"></i></div>
+    <h3>{% trans "Pastro listën?" %}</h3>
+    <p>{% trans "Të gjitha pronat e ruajtura do të hiqen nga lista juaj." %}</p>
+    <div class="wl-confirm__btns">
+      <button class="wl-confirm__cancel" onclick="closeConfirm()">{% trans "Anulo" %}</button>
+      <button class="wl-confirm__ok" onclick="confirmClear()">{% trans "Vazhdo" %}</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TOAST ══ -->
+<div class="wl-toast" id="wlToast"></div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>AOS.init({ once: true, duration: 600, easing: 'ease-out-cubic' });</script>
+<script src="{% static 'properties/js/main.js' %}"></script>
+{% endblock %}

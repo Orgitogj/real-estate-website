@@ -1,0 +1,188 @@
+{% extends "properties/base.html" %}
+{% load static i18n %}
+
+{% block title %}{% trans "Ndani Përvojën Tuaj" %} — ValorEstate{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'properties/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'properties/css/testimonial_form.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="tf-hero">
+  <div class="tf-hero__grain"></div>
+  <div class="container tf-hero__inner">
+
+    <div class="ct-hero__breadcrumb">
+      <a href="{% url 'home' %}">{% trans "Kryefaqja" %}</a>
+      <span>/</span>
+      <span>{% trans "Përshtypje" %}</span>
+    </div>
+
+    <h1 class="tf-hero__title">
+      {% trans "Ndani" %} <em class="tf-hero__accent">{% trans "Përvojën" %}</em><br>{% trans "Tuaj Me Ne" %}
+    </h1>
+
+    <p class="tf-hero__sub">
+      {% trans "Mendimi juaj është i çmuar. Ndajeni me ne dhe ndihmoni të tjerët të gjejnë pronën e tyre të ëndrrave." %}
+    </p>
+  </div>
+</section>
+
+<!-- FORMA -->
+<section class="tf-section">
+  <div class="container">
+    <div class="tf-form-wrap">
+
+      <div class="tf-form-head">
+        <h2 class="tf-form-title">{% trans "Plotësoni Formularin" %}</h2>
+      </div>
+
+      {% if form.non_field_errors %}
+      <div class="tf-alert tf-alert--error">
+        <i class="fas fa-exclamation-circle" style="font-size:1.1rem;flex-shrink:0;margin-top:1px"></i>
+        <div>{% for e in form.non_field_errors %}<p style="margin:0">{{ e }}</p>{% endfor %}</div>
+      </div>
+      {% endif %}
+
+      <form method="POST" class="tf-form" id="testiForm" novalidate>
+        {% csrf_token %}
+        <div style="display:none">{{ form.honeypot }}</div>
+
+        <div class="tf-row">
+          <div class="tf-field">
+            <label class="tf-label" for="{{ form.client_name.id_for_label }}">
+              {% trans "Emri juaj" %} <span>*</span>
+            </label>
+            <input type="text" name="{{ form.client_name.html_name }}"
+                   id="{{ form.client_name.id_for_label }}"
+                   value="{{ form.client_name.value|default:'' }}"
+                   class="tf-input{% if form.client_name.errors %} tf-input--error{% endif %}"
+                   placeholder="{% trans 'Emri juaj i plotë' %}" required>
+            {% if form.client_name.errors %}
+              <span class="tf-error"><i class="fas fa-exclamation-circle"></i> {{ form.client_name.errors.0 }}</span>
+            {% endif %}
+          </div>
+          <div class="tf-field">
+            <label class="tf-label" for="{{ form.client_city.id_for_label }}">{% trans "Qyteti" %}</label>
+            <input type="text" name="{{ form.client_city.html_name }}"
+                   id="{{ form.client_city.id_for_label }}"
+                   value="{{ form.client_city.value|default:'' }}"
+                   class="tf-input" placeholder="{% trans 'P.sh. Tiranë' %}">
+          </div>
+        </div>
+
+        <div class="tf-field">
+          <label class="tf-label" for="{{ form.client_email.id_for_label }}">
+            {% trans "Email" %} <small>— {% trans "nuk shfaqet publikisht" %}</small>
+          </label>
+          <input type="email" name="{{ form.client_email.html_name }}"
+                 id="{{ form.client_email.id_for_label }}"
+                 value="{{ form.client_email.value|default:'' }}"
+                 class="tf-input{% if form.client_email.errors %} tf-input--error{% endif %}"
+                 placeholder="email@juaj.com">
+          {% if form.client_email.errors %}
+            <span class="tf-error"><i class="fas fa-exclamation-circle"></i> {{ form.client_email.errors.0 }}</span>
+          {% endif %}
+        </div>
+
+        <div class="tf-field">
+          <label class="tf-label" for="{{ form.agent.id_for_label }}">
+            {% trans "Zgjidhni Agjentin" %} <span>*</span>
+          </label>
+          <div class="tf-select-wrap">
+            <select name="{{ form.agent.html_name }}" id="{{ form.agent.id_for_label }}"
+                    class="tf-input tf-select{% if form.agent.errors %} tf-input--error{% endif %}">
+              <option value="">{% trans "Zgjidhni agjentin" %}</option>
+              {% for agent in form.fields.agent.queryset %}
+                <option value="{{ agent.pk }}"
+                  {% if form.agent.value == agent.pk|stringformat:"s" %}selected{% endif %}>
+                  {{ agent.full_name }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+          {% if form.agent.errors %}
+            <span class="tf-error"><i class="fas fa-exclamation-circle"></i> {{ form.agent.errors.0 }}</span>
+          {% endif %}
+        </div>
+
+        <div class="tf-field">
+          <span class="tf-label">{% trans "Vlerësimi" %} <span>*</span></span>
+          <div class="tf-rating-wrap" id="ratingWrap">
+            <div class="tf-rating" id="starRating">
+              {% for value, label in form.fields.rating.choices %}
+              <input type="radio" name="{{ form.rating.html_name }}"
+                     id="star{{ value }}" value="{{ value }}"
+                     {% if form.rating.value == value|stringformat:"s" %}checked{% endif %}>
+              <label for="star{{ value }}" title="{{ label }}">★</label>
+              {% endfor %}
+            </div>
+            <span class="tf-rating-hint" id="ratingHint"></span>
+          </div>
+          {% if form.rating.errors %}
+            <span class="tf-error"><i class="fas fa-exclamation-circle"></i> {{ form.rating.errors.0 }}</span>
+          {% endif %}
+        </div>
+
+        <div class="tf-field">
+          <label class="tf-label" for="{{ form.message.id_for_label }}">
+            {% trans "Mesazhi juaj" %} <span>*</span>
+          </label>
+          <textarea name="{{ form.message.html_name }}" id="{{ form.message.id_for_label }}"
+                    class="tf-input tf-input--textarea{% if form.message.errors %} tf-input--error{% endif %}"
+                    rows="5"
+                    placeholder="{% trans 'Ndani përvojën tuaj me shërbimin e ValorEstate...' %}"
+                    required>{{ form.message.value|default:'' }}</textarea>
+          <span class="tf-char" id="msgChar">0 {% trans "karaktere" %}</span>
+          {% if form.message.errors %}
+            <span class="tf-error"><i class="fas fa-exclamation-circle"></i> {{ form.message.errors.0 }}</span>
+          {% endif %}
+        </div>
+
+        <div class="tf-consent" id="consentWrap">
+          <label class="tf-checkbox">
+            <input type="checkbox" id="consentCheck" required>
+            <span class="tf-checkbox__box"></span>
+            <span class="tf-checkbox__lbl">
+              {% trans "Pranoj që ky testimonial të shfaqet publikisht në faqen e ValorEstate pas aprovimit." %}
+            </span>
+          </label>
+        </div>
+
+        <div class="tf-submit-row">
+          <button type="submit" class="tf-submit" id="testiSubmit">
+            <i class="fas fa-paper-plane"></i>
+            <span>{% trans "Dërgo Testimonialin" %}</span>
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="tf-modal-overlay" id="tfModalOverlay" role="dialog" aria-modal="true" aria-labelledby="tfModalTitle">
+  <div class="tf-modal">
+    <button class="tf-modal__close" id="tfModalClose" type="button" aria-label="{% trans 'Mbyll' %}">
+      <i class="fas fa-times"></i>
+    </button>
+    <div class="tf-modal__icon"><i class="fas fa-check"></i></div>
+    <h3 class="tf-modal__title" id="tfModalTitle">{% trans "Faleminderit!" %}</h3>
+    <span class="tf-modal__stars" id="modalStars">★★★★★</span>
+    <span class="tf-modal__name" id="modalName"></span>
+    <p class="tf-modal__text">{% trans "Testimoniali juaj u dërgua me sukses dhe do shqyrtohet nga ekipi ynë. Pas aprovimit do shfaqet në faqen kryesore." %}</p>
+    <a href="{% url 'home' %}" class="tf-modal__btn">
+      <i class="fas fa-home"></i> {% trans "Kthehu te Kreu" %}
+    </a>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'properties/js/main.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,214 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}ValorEstate{% endblock %}</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'properties/css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+    <div class="container">
+
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'properties/img/logo.jpeg' %}" alt="ValorEstate" class="navbar-logo">
+        </a>
+        <a class="navbar-brand" href="{% url 'home' %}">ValorEstate</a>
+
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="{% trans 'Toggle navigation' %}">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+                       href="{% url 'home' %}">{% trans "Kryefaqja" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'property_list' %}active{% endif %}"
+                       href="{% url 'property_list' %}">{% trans "Pronat" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'team' %}active{% endif %}"
+                       href="{% url 'team' %}">{% trans "Agjentet" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+                       href="{% url 'about' %}">{% trans "Rreth Nesh" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
+                       href="{% url 'contact' %}">{% trans "Kontakt" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'karriera' %}active{% endif %}"
+                       href="{% url 'karriera' %}">{% trans "Karriera" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'vleresim_prone' %}active{% endif %}"
+                       href="{% url 'vleresim_prone' %}">{% trans "Vlerëso Pronën" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'blog' %}active{% endif %}"
+                       href="{% url 'blog' %}">{% trans "Blog" %}</a>
+                </li>
+                
+
+                <!-- Language Switcher -->
+<li class="nav-item lang-switcher">
+    {% get_current_language as CURRENT_LANGUAGE %}
+    <a class="nav-link d-flex align-items-center gap-2" href="#" id="langToggle"
+       aria-expanded="false" aria-haspopup="true">
+        <img src="{% static 'properties/img/flags/' %}{{ CURRENT_LANGUAGE }}.png"
+             alt="{{ CURRENT_LANGUAGE }}" class="flag-icon">
+        <span class="lang-label">{{ CURRENT_LANGUAGE|upper }}</span>
+        <i class="fas fa-chevron-down lang-arrow"></i>
+    </a>
+    <ul class="lang-dropdown" id="langDropdownMenu">
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages_info %}
+        {% for lang in languages_info %}
+        <li>
+          <form action="/i18n/set_language/" method="post" class="lang-form">
+                {% csrf_token %}
+                <input type="hidden" name="language" value="{{ lang.code }}">
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <button type="button"
+                        class="dropdown-item {% if lang.code == CURRENT_LANGUAGE %}active-lang{% endif %}"
+                        onclick="this.closest('form').submit()">
+                    <img src="{% static 'properties/img/flags/' %}{{ lang.code }}.png"
+                         alt="{{ lang.name }}" class="flag-icon">
+                    <span class="lang-name">{{ lang.name_local|capfirst }}</span>
+                    <span class="lang-native">{{ lang.code }}</span>
+                </button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ================= PAGE CONTENT ================= -->
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+
+  <div class="footer-main">
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand-col">
+          <a href="{% url 'home' %}" class="footer-brand-link">
+            <img src="{% static 'properties/img/logo.jpeg' %}" alt="ValorEstate Logo" class="footer-logo">
+          </a>
+          <p class="footer-bio">
+            {% trans "Agjencia kryesore imobiliare në Shqipëri me mbi 15 vjet eksperiencë dhe mbi 800 klientë të kënaqur." %}
+          </p>
+          <div class="footer-badge">
+            <i class="fas fa-award"></i>
+            <span>{% trans "15 Vjet Eksperiencë" %}</span>
+          </div>
+          <div class="footer-socials" aria-label="{% trans 'Rrjetet Sociale' %}">
+            <a href="#" class="footer-social" aria-label="Facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="footer-social" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="footer-social" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="footer-social" aria-label="YouTube" title="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <!-- Shërbimet -->
+        <div class="footer-col">
+          <h5 class="footer-col__title">{% trans "Shërbimet" %}</h5>
+          <nav aria-label="{% trans 'Shërbimet tona' %}">
+            <ul class="footer-links">
+              <li><a href="{% url 'property_list' %}?transaction=sale"><i class="fas fa-chevron-right"></i> {% trans "Shitje Pronash" %}</a></li>
+              <li><a href="{% url 'property_list' %}?transaction=rent"><i class="fas fa-chevron-right"></i> {% trans "Prona me Qira" %}</a></li>
+               <li><a href="{% url 'property_list' %}?transaction=sale"><i class="fas fa-chevron-right"></i> {% trans "Prona per shitje" %}</a></li>
+
+              <li><a href="{% url 'property_list' %}?type=commercial"><i class="fas fa-chevron-right"></i> {% trans "Prona Komerciale" %}</a></li>
+              <li><a href="{% url 'vleresim_prone' %}"><i class="fas fa-chevron-right"></i> {% trans "Vlerësim Prone" %}</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Linket -->
+        <div class="footer-col">
+          <h5 class="footer-col__title">{% trans "Lidhje të Shpejta" %}</h5>
+          <nav aria-label="{% trans 'Navigim i shpejtë' %}">
+            <ul class="footer-links">
+              <li><a href="{% url 'home' %}"><i class="fas fa-chevron-right"></i> {% trans "Kryefaqja" %}</a></li>
+              <li><a href="{% url 'about' %}"><i class="fas fa-chevron-right"></i> {% trans "Rreth Nesh" %}</a></li>
+              <li><a href="{% url 'contact' %}"><i class="fas fa-chevron-right"></i> {% trans "Kontakt" %}</a></li>
+              <li><a href="{% url 'team' %}"><i class="fas fa-chevron-right"></i> {% trans "Ekipi Ynë" %}</a></li>
+              <li><a href="{% url 'blog' %}"><i class="fas fa-chevron-right"></i> {% trans "Blog & Lajme" %}</a></li>
+              <li><a href="{% url 'karriera' %}"><i class="fas fa-chevron-right"></i> {% trans "Karriera" %}</a></li>
+              <li><a href="{% url 'vleresim_prone' %}"><i class="fas fa-chevron-right"></i> {% trans "Vlerësim Prone" %}</a></li>
+              <li><a href="{% url 'testimonial_submit' %}"><i class="fas fa-chevron-right"></i> {% trans "Lër Përshtypjen tënde" %}</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Kontakt -->
+        <div class="footer-col">
+          <ul class="footer-contact">
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>{% trans "Rruga Myslym Shyri, Nr. 24" %}<br>{% trans "Tiranë, Shqipëri" %}</span>
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <a href="tel:+355690000000">+355 69 296 3205</a>
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i>
+              <a href="mailto:info@valorestate.com">info@valorestate.com</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+<!-- Footer bottom -->
+<div class="footer-bottom">
+  <div class="container footer-bottom__inner">
+    <span>{% trans "© 2026 ValorEstate. Të gjitha të drejtat e rezervuara." %}</span>
+    <div class="footer-bottom__links">
+      <a href="{% url 'privacy_policy' %}">{% trans "Politika e Privatësisë" %}</a>
+      <span class="footer-bottom__sep">·</span>
+      <a href="{% url 'terms_of_use' %}">{% trans "Kushtet e Përdorimit" %}</a>
+    </div>
+  </div>
+</div>
+
+</footer>
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'properties/js/main.js' %}"></script>
+{% endblock %}
+
+</body>
+</html>
